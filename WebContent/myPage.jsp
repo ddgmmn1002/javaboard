@@ -7,13 +7,17 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<h1>Nickname' Page</h1>
+	<h1>${userInfo.getNickname()}님의 마이페이지</h1>
 	<ul>
 		<li>
 			<a href="prepareUpdateUser">회원정보 수정</a>
 		</li>
-		<li>내 활동</li>
-		<li>회원탈퇴</li>
+		<li>
+			내 활동
+		</li>
+		<li>
+			<a href="userDelete.jsp">회원탈퇴</a>
+		</li>
 	</ul>
 </body>
 </html>

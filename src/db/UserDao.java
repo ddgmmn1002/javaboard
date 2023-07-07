@@ -132,4 +132,52 @@ public class UserDao {
 		
 		return false;
 	}
+	
+	public boolean updateUser(String phone, String email, String pw, String nickname, String id) {
+		boolean result = false;
+		DBcon db = new DBcon();
+		
+		Connection conn = null;
+		PreparedStatement stmt = null;
+		try {
+			conn = db.getConnection();
+			String query = "UPDATE tbl_user"
+					+ " SET phone = ?, email = ?, user_pw = ?, nickname = ?"
+					+ " WHERE user_id = ?";
+			stmt = conn.prepareStatement(query);
+			stmt.setString(1, phone);
+			stmt.setString(2, email);
+			stmt.setString(3, pw);
+			stmt.setString(4, nickname);
+			stmt.setString(5, id);
+			if (stmt.executeUpdate() == 1) {
+				result = true;
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return result;
+	}
+	
+	public boolean deleteUser(String id, String pw) {
+		boolean result = false;
+		DBcon db = new DBcon();
+		
+		Connection conn = null;
+		PreparedStatement stmt = null;
+		try {
+			conn = db.getConnection();
+			String query = "DELETE FROM tbl_user WHERE user_id = ? AND user_pw = ?";
+			stmt = conn.prepareStatement(query);
+			stmt.setString(1, id);
+			stmt.setString(2, pw);
+			if (stmt.executeUpdate() == 1) {
+				result = true;
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return result;
+	}
 }

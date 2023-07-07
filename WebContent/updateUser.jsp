@@ -36,9 +36,10 @@
 </style>
 </head>
 <body>
+<h1>회원 정보 업데이트</h1>
 <div class="flex-box">
 		<div class="form-wrap">
-			<form action="signUp" method="post" class="signup-form" id="signup-form" data-duplicateCheck="fail">
+			<form action="updateUser" method="post" class="signup-form" id="signup-form">
 				
 				<div class="inner-area">
 						<label class="inner-label">연락처</label>
@@ -55,7 +56,7 @@
 				<div class="inner-area">
 					<label class="inner-label">Email</label>
 					<input type="text" class="" name="email" placeholder="이메일">
-					<select class="" name="email">
+					<select name="email">
 						<option value="@naver.com">naver.com</option>
 						<option value="@daum.net">daum.net</option>
 						<option value="@gmail.com">gmail.com</option>
@@ -65,18 +66,18 @@
 				
 				<div class="inner-area">
 					<label class="inner-label">비밀번호</label>
-					<input type="text" class="input-text" id="pw" name="pw" placeholder="비밀번호" value="${userInfo.getPw() }">
+					<input type="text" class="input-text" name="pw" placeholder="비밀번호" value="${userInfo.getPw() }">
 				</div>
 				<hr>				
 				<div class="inner-area">
 					<label class="inner-label">닉네임</label>
-					<input type="text" class="input-text" id="nickname" name="nickname" placeholder="닉네임" value="${userInfo.getNickname() }">
+					<input type="text" class="input-text" name="nickname" placeholder="닉네임" value="${userInfo.getNickname() }">
 				</div>
 				<hr>
 				
 				<div class="inner-area">
-					<input type="button" id="btn-submit" class="button-submit" value="회원 정보 수정하기">
-					<input type="button" id="btn-cancel" class="button-cancel" value="취소">
+					<input type="submit" class="button-submit" value="회원 정보 수정하기">
+					<input type="button" class="button-cancel" value="취소">
 				</div>
 			</form>
 		</div>
