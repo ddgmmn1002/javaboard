@@ -6,6 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<script src="js/jquery-3.7.0.js"></script>
 </head>
 <body>
 	<form action="insertPost" method="post">
@@ -15,7 +16,7 @@
 			</tr>
 			<tr>
 				<td>
-					<textarea rows="30" cols="50" name="content" placeholder="글 본문 작성"></textarea>
+					<textarea class="" name="content" placeholder="글 본문 작성"></textarea>
 				</td>
 			</tr>
 			<tr>
@@ -23,5 +24,7 @@
 			</tr>
 		</table>
 	</form>
+<script>
+</script>
 </body>
 </html>

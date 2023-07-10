@@ -23,6 +23,6 @@ public class PrepareUpdatePostServlet extends HttpServlet {
 		PostVO post = dao.selectPostOne(pno);
 		
 		request.setAttribute("post", post);
-		request.getRequestDispatcher("updateForm.jsp").forward(request, response);
+		request.getRequestDispatcher("updatePostForm.jsp").forward(request, response);
 	}
 }

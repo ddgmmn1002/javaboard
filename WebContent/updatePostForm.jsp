@@ -5,6 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+
 </head>
 <body>
 	<form action="updatePost" method="post">
@@ -13,5 +14,8 @@
 		<textarea name="content">${post.getContent() }</textarea>
 		<button type="submit">수정하기</button>
 	</form>
+<script>
+
+</script>
 </body>
 </html>
