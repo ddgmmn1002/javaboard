@@ -8,16 +8,16 @@
 </head>
 <body>
 	<h1>${userInfo.getNickname()}님의 마이페이지</h1>
-	<ul>
-		<li>
-			<a href="prepareUpdateUser">회원정보 수정</a>
-		</li>
-		<li>
+	<div>
+		<span>
+			<a href="updateUser.jsp?">회원정보 수정</a>
+		</span>
+		<span>
 			내 활동
-		</li>
-		<li>
-			<a href="userDelete.jsp">회원탈퇴</a>
-		</li>
-	</ul>
+		</span>
+		<span>
+			<a href="deleteUser.jsp">회원탈퇴</a>
+		</span>
+	</div>
 </body>
 </html>

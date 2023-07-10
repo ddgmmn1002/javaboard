@@ -1,7 +1,7 @@
 <%@page import="java.util.HashMap"%>
-<%@ page language="java" contentType="text/html; charset=UTF-8"
+<%@page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib prefix="core" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@taglib prefix="core" uri="http://java.sun.com/jsp/jstl/core" %>
 <%
 	HashMap<String, String> countries = new HashMap<>();
 	countries.put("KR", "한국");
@@ -68,14 +68,7 @@
 					<select class="select-box" name="country" id="country">
 						<option disabled="disabled" selected="selected">국가 선택</option>
 						<core:forEach var="country" items="${countries}">
-							<core:choose>
-								<core:when test="${country.key.equals(\"KR\") }">
-									<option value="${country.key}" selected>${country.value}</option>														
-								</core:when>
-								<core:otherwise>
-									<option value="${country.key}">${country.value}</option>							
-								</core:otherwise>
-							</core:choose>
+							<option value="${country.key}">${country.value}</option>
 						</core:forEach>
 					</select>
 				</div>
