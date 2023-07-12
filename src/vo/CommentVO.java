@@ -6,13 +6,13 @@ import lombok.Data;
 
 @Data
 public class CommentVO {
-	int cno;
-	String image;
-	int post;
-	String title;
-	String writer;
-	String content;
-	Timestamp created_at;
-	Timestamp updated_at;
-	String nickname;
+	private int cno;
+	private String image;
+	private int post;
+	private String title;
+	private String writer;
+	private String content;
+	private Timestamp created_at;
+	private Timestamp updated_at;
+	private String nickname;
 }

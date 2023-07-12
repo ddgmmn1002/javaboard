@@ -5,42 +5,24 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<style>
-	.flex-box {
-		height: 100vh;
-		display: flex;
-		justify-content: center;
-		align-items: center;
-	}
-	.form-wrap {
-		border: 1px solid black;
-		border-radius: 10px;
-		box-shadow: 3px 3px 1px gray;
-		padding: 10px;
-	}
-	.submit-button-area {
-		display:flex;
-		justify-content: center;
-		align-items: center;
-		margin: 1%;
-		margin-top: 3%;
-	}
-</style>
 </head>
 <body>
-	<div class="flex-box">
-		<div class="form-wrap">
-			<form action="signIn" method="post">
-				<div>
-					<input type="text" name="id" placeholder="ID">
-				</div>
-				<div>
-					<input type="text" name="pw" placeholder="비밀번호">
-				</div>
-				<div class="submit-button-area">
-					<input type="submit" value="log in">
-				</div>
-			</form>
+<jsp:include page="header.jsp"></jsp:include>
+	<div class="container shadow-lg p-3 mb-5 bg-body rounded">
+		<div class="row">
+			<div class="col-3">		
+				<form action="signIn" method="post">
+					<div class="form-floating">
+						<input class="form-control" type="text" name="id" placeholder="ID">
+						<label for="id">ID</label>
+					</div>
+					<div class="form-floating">
+						<input class="form-control" type="text" name="pw" placeholder="비밀번호">
+						<label for="pw">Password</label>
+					</div>
+					<button class="btn btn-primary" type="submit">log in</button>
+				</form>
+			</div>
 		</div>
 	</div>
 </body>

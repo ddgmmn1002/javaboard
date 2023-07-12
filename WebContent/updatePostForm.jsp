@@ -8,6 +8,7 @@
 
 </head>
 <body>
+<jsp:include page="header.jsp"></jsp:include>
 	<form action="updatePost" method="post">
 		<input type="hidden" value="${post.getPno() }" name="pno">
 		<input type="text" value="${post.getTitle() }" name="title">

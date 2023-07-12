@@ -10,15 +10,15 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class UserVO {
-	String id;
-	String pw;
-	String name;
-	Date birth_date;
-	String country;
-	String phone;
-	String email;
-	String gender;
-	Date signup_date;
-	String nickname;
-	String grade;
+	private String id;
+	private String pw;
+	private String name;
+	private Date birth_date;
+	private String country;
+	private String phone;
+	private String email;
+	private String gender;
+	private Date signup_date;
+	private String nickname;
+	private String grade;
 }

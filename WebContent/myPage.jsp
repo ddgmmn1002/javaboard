@@ -7,17 +7,20 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<h1>${userInfo.getNickname()}님의 마이페이지</h1>
-	<div>
-		<span>
-			<a href="updateUser.jsp?">회원정보 수정</a>
-		</span>
-		<span>
-			내 활동
-		</span>
-		<span>
-			<a href="deleteUser.jsp">회원탈퇴</a>
-		</span>
+	<jsp:include page="header.jsp"></jsp:include>
+	<div class="container">
+		<h1>${userInfo.getNickname()}님의 마이페이지</h1>
+		<div>
+			<span>
+				<a href="updateUser.jsp?">회원정보 수정</a>
+			</span>
+			<span>
+				내 활동
+			</span>
+			<span>
+				<a href="deleteUser.jsp">회원탈퇴</a>
+			</span>
+		</div>
 	</div>
 </body>
 </html>

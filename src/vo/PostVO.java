@@ -6,13 +6,16 @@ import lombok.Data;
 
 @Data
 public class PostVO {
-	int pno;
-	String writer;
-	String title;
-	Timestamp created_at;
-	Timestamp updated_ap;
-	String content;
-	String nickname;
-	String grade;
-	
+	private int pno;
+	private String writer;
+	private String title;
+	private Timestamp created_at;
+	private Timestamp updated_ap;
+	private String content;
+	private String nickname;
+	private String grade;
+	private int viewCount;
+	private int commentCount;
+	private int likeCount;
+	private int dislikeCount;
 }

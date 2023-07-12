@@ -14,8 +14,9 @@
 <title>Insert title here</title>
 <script src="js/jquery-3.7.0.js"></script>
 </head>
+<jsp:include page="header.jsp"></jsp:include>
 <body>
-	<div>
+	<div class="container">
 		<h1>${post.getTitle() }</h1>
 		<h3>작성자: ${post.getNickname() }</h3>
 		<p>${post.getContent()}</p>
@@ -86,7 +87,7 @@
 	                	type: "post",
 	                	data: {
 	                    	cno: cno,	
-	                    	content: updateContent,
+	                    	content: updateContent
 	                	},
 	                	success: function () {
 	                		updateDiv.parent().children()[2].innerText = updateContent;

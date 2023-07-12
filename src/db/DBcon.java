@@ -12,7 +12,7 @@ public class DBcon {
 		
 		try {
 			Class.forName("org.mariadb.jdbc.Driver");
-			conn = DriverManager.getConnection("jdbc:mariadb://localhost:3306/likerating", "root", "1234");
+			conn = DriverManager.getConnection("jdbc:mariadb://localhost:3306/board", "root", "1234");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

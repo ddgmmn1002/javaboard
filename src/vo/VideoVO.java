@@ -10,19 +10,19 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class VideoVO {
-	int vno;
-	String title;
-	String[] genre;
-	String director;
-	String[] cast;
-	String plot;
-	Date release_date;
-	int runtime;
-	String film_rating;
-	String country;
-	String[] language;
-	String image;
-	String[] category;
-	int episodes_count;
-	String[] series;
+	private int vno;
+	private String title;
+	private String[] genre;
+	private String director;
+	private String[] cast;
+	private String plot;
+	private Date release_date;
+	private int runtime;
+	private String film_rating;
+	private String country;
+	private String[] language;
+	private String image;
+	private String[] category;
+	private int episodes_count;
+	private String[] series;
 }

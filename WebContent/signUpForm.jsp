@@ -19,110 +19,90 @@
 <meta charset="UTF-8">
 <title>Sign up</title>
 <script src="js/jquery-3.7.0.js"></script>
-<style>
-	.flex-box {
-		height: 100vh;
-		display: flex;
-		justify-content: center;
-		align-items: center;
-	}
-	.form-wrap {
-		border-radius: 10px;
-		padding: 10px;
-		
-		box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24)
-	}
-	.inner-area {
-		margin: 1%;
-	}
-	.input-phone {
-		width: 20%;
-	}
-	.input-birthdate{
-		width: 20%;
-	}
-	.duplicate::placeholder{
-		color: red;
-		font-weight: bold;
-	}
-</style>
 </head>
 <body>
-	<div class="flex-box">
-		<div class="form-wrap">
-			<form action="signUp" method="post" class="signup-form" id="signup-form" data-duplicateCheck="fail">
-			
-				<div class="inner-area">
-					<input type="text" class="input-text" name="name" id="name" placeholder="이름">
+<jsp:include page="header.jsp"></jsp:include>
+	<div>
+		<div class="container shadow-lg p-3 mb-5 bg-body rounded">
+			<form action="signUp" method="post" id="signup-form" data-duplicateCheck="fail">
+				<div class="form-floating">
+					<input class="form-control" type="text" name="name" id="name" placeholder="이름">
+					<label for="name">이름</label>
 				</div>
-				<hr>
-				<div class="inner-area">
-					<label class="inner-label">생년월일</label>
-					<input type="text" class="input-birthdate" name="birth" placeholder="연도">
-					<input type="text" class="input-birthdate" name="birth" placeholder="월">
-					<input type="text" class="input-birthdate" name="birth" placeholder="일">
+				<br>
+				<div class="input-group">
+					<span class="input-group-text">생년월일</span>
+					<input class="form-control" type="text" name="birth" placeholder="연도">
+					<input class="form-control" type="text" name="birth" placeholder="월">
+					<input class="form-control" type="text" name="birth" placeholder="일">
 				</div>
-				<hr>
-				
-				<div class="inner-area">
-					<select class="select-box" name="country" id="country">
+				<br>
+				<div>
+					<select class="form-select" name="country" id="country">
 						<option disabled="disabled" selected="selected">국가 선택</option>
 						<core:forEach var="country" items="${countries}">
 							<option value="${country.key}">${country.value}</option>
 						</core:forEach>
 					</select>
 				</div>
-				<hr>
-				
-				<div class="inner-area">
-						<label class="inner-label">연락처</label>
-						<select class="select-box" name="phone">
-							<option value="010">010</option>
-							<option value="051">051</option>
-							<option value="052">052</option>
-							<option value="02">02</option>
-						</select>		
-						<input type="text" class="input-phone" name="phone">
-						<input type="text" class="input-phone" name="phone">
+				<br>
+				<div class="input-group">
+					<span class="input-group-text">연락처</span>
+					<select class="form-select" name="phone">
+						<option value="010">010</option>
+						<option value="051">051</option>
+						<option value="052">052</option>
+						<option value="02">02</option>
+					</select>		
+					<input class="form-control" type="text" name="phone">
+					<input class="form-control" type="text" name="phone">
 				</div>
-				<hr>
-				
-				<div class="inner-area">
-					<label class="inner-label">Email</label>
-					<input type="text" class="" name="email">
-					<select class="" name="email">
+				<br>
+				<div class="input-group">
+					<span class="input-group-text">Email</span>
+					<input class="form-control" type="text" name="email">
+					<select class="form-select" name="email">
 						<option value="@naver.com">naver.com</option>
 						<option value="@daum.net">daum.net</option>
 						<option value="@gmail.com">gmail.com</option>
 					</select>
 				</div>
-				<hr>
-				
-				<div class="inner-area">
-					<input class="" type="radio" name="gender" value="m">
-					<label class="">남성</label>
-					<input class="" type="radio" name="gender" value="f">
-					<label class="">여성</label>
+				<br>
+				<div class="container">
+					<div class="row">
+						<div class="form-check col">
+							<input class="form-check-input" type="radio" name="gender" value="m" id="male">
+							<label class="form-check-label" for="male">남성</label>
+						</div>
+						<div class="form-check col">
+							<input class="form-check-input" type="radio" name="gender" value="f" id="female">
+							<label class="form-check-label" for="female">여성</label>
+						</div>
+					</div>
 				</div>
-				<hr>
-				
-				<div class="inner-area">
-					<input type="text" class="input-text" id="id" name="id" placeholder="ID">
-					<button id="id-check">중복 검사</button>
+				<br>
+				<div class="row">
+					<div class="form-floating col-11">
+						<input class="form-control" type="text" id="id" name="id" placeholder="ID">
+						<label for="id">ID</label>
+					</div>
+					<div class="col-1">
+						<button class="btn btn-outline-dark btn-sm" id="id-check">중복 검사</button>
+					</div>
 				</div>
-				<hr>				
-				
-				<div class="inner-area">
-					<input type="text" class="input-text" id="pw" name="pw" placeholder="비밀번호">
+				<br>
+				<div class="form-floating">
+					<input class="form-control" type="text" class="input-text" id="pw" name="pw" placeholder="비밀번호">
+					<label for="pw">비밀번호</label>
 				</div>
-				<hr>				
-				<div class="inner-area">
-					<input type="text" class="input-text" id="nickname" name="nickname" placeholder="닉네임">
+				<br>				
+				<div class="form-floating">
+					<input class="form-control" type="text" id="nickname" name="nickname" placeholder="닉네임">
+					<label for="nickname">닉네임</label>
 				</div>
-				<hr>				
-				
-				<div class="inner-area">
-					<input type="button" id="btn" class="button-submit" value="회원가입">
+				<br>
+				<div>
+					<input type="button" id="btn" value="회원가입">
 				</div>
 			</form>
 		</div>
@@ -141,12 +121,12 @@
 			success: function (resp) {
 				if (resp == "true") {
 					inputId.val("");
-					inputId.addClass("duplicate");
-					inputId.attr("placeholder", "이미 존재하는 ID입니다.");
+					inputId.addClass("is-invalid");
+					inputId.siblings()[0].innerText = "이미 존재하는 ID입니다.";
 					form.attr("data-duplicateCheck", "fail");
 				} else {
-					inputId.removeClass("duplicate");
-					inputId.attr("placeholder", "ID");
+					inputId.removeClass("is-invalid");
+					inputId.siblings()[0].innerText = "ID";
 					form.attr("data-duplicateCheck", "pass");
 				}
 			}
@@ -162,7 +142,9 @@
 		if (form.attr("data-duplicateCheck") == "pass") {
 			form.submit();
 		}else {
-			alert("ID 중복확인 해주세요.")
+			inputId.addClass("is-invalid");
+			inputId.siblings()[0].innerText = "ID 중복 검사를 해주세요."
+			inputId.focus();
 		}
 	});
 </script>
