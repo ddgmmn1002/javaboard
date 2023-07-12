@@ -58,10 +58,14 @@ public class PostDao {
 		ResultSet rs = null;
 		try {
 			conn = db.getConnection();
-			String query = "SELECT p.pno, p.title, p.created_at, p.writer, u.nickname, u.grade"
-					+ " FROM tbl_post AS p, tbl_user AS u"
-					+ " WHERE p.writer = u.user_id"
-					+ " ORDER BY created_at DESC";
+			String query = "SELECT p.pno, p.writer, u.nickname, p.title, p.created_at, p.updated_at, u.grade," + 
+					" COUNT(DISTINCT i.interaction_id) AS view_count, COUNT(DISTINCT c.cno) AS comment_count," + 
+					" COUNT(DISTINCT case when i.like_status = 1 then i.interaction_id END) AS like_count" + 
+					" FROM tbl_post AS p JOIN tbl_user AS u ON p.writer = u.user_id" + 
+					" LEFT JOIN tbl_interaction AS i ON p.pno = i.pno" + 
+					" LEFT JOIN tbl_comment AS c ON c.post = p.pno" + 
+					" GROUP BY p.pno" + 
+					" ORDER BY created_at DESC";
 			stmt = conn.prepareStatement(query);
 			rs = stmt.executeQuery();
 			while (rs.next()) {
@@ -69,8 +73,12 @@ public class PostDao {
 				post.setPno(rs.getInt("pno"));
 				post.setWriter(rs.getString("writer"));
 				post.setTitle(rs.getString("title"));
-				post.setCreated_at(rs.getTimestamp("created_at"));
+				post.setCreatedAt(rs.getTimestamp("created_at"));
+				post.setUpdatedAt(rs.getTimestamp("updated_at"));
 				post.setNickname(rs.getString("nickname"));
+				post.setViewCount(rs.getInt("view_count"));
+				post.setCommentCount(rs.getInt("comment_count"));
+				post.setLikeCount(rs.getInt("like_count"));
 				post.setGrade(rs.getString("grade"));
 				list.add(post);
 			}
@@ -98,21 +106,29 @@ public class PostDao {
 		ResultSet rs = null;
 		try {
 			conn = db.getConnection();
-			String query = "SELECT p.pno, p.title, p.created_at, p.writer, p.content, u.nickname, u.grade"
-					+ " FROM tbl_post AS p, tbl_user AS u"
-					+ " WHERE p.writer = u.user_id AND pno = ?";
+			String query = "SELECT p.*, u.nickname, u.grade," + 
+					" COUNT(DISTINCT i.interaction_id) AS view_count," + 
+					" COUNT(DISTINCT case when i.like_status = 1 then i.interaction_id END) AS like_count," + 
+					" COUNT(DISTINCT case when i.dislike_status = 1 then i.interaction_id END) AS dislike_count" + 
+					" FROM tbl_post AS p JOIN tbl_user AS u ON p.writer = u.user_id" + 
+					" LEFT JOIN tbl_interaction AS i ON i.pno = p.pno" + 
+					" WHERE p.pno = ?";
 			stmt = conn.prepareStatement(query);
 			stmt.setInt(1, pno);
 			rs = stmt.executeQuery();
 			rs.next();
 			
 			post.setPno(rs.getInt("pno"));
+			post.setWriter(rs.getString("writer"));
 			post.setTitle(rs.getString("title"));
+			post.setCreatedAt(rs.getTimestamp("created_at"));
+			post.setUpdatedAt(rs.getTimestamp("updated_at"));
 			post.setContent(rs.getString("content"));
 			post.setNickname(rs.getString("nickname"));
-			post.setCreated_at(rs.getTimestamp("created_at"));
-			post.setWriter(rs.getString("writer"));
 			post.setGrade(rs.getString("grade"));
+			post.setViewCount(rs.getInt("view_count"));
+			post.setLikeCount(rs.getInt("like_count"));
+			post.setDislikeCount(rs.getInt("dislike_count"));
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {

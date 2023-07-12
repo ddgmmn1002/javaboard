@@ -31,7 +31,15 @@
 						<td>${post.getPno()}</td>
 						<td>${post.getNickname() }</td>
 						<td>${post.getTitle() }</td>
-						<td>${post.getCreated_at() }</td>
+						<core:choose>
+							<core:when test="${not empty post.getUpdatedAt()}">
+								<td>${post.getUpdatedAt() } [수정됨]</td>
+							</core:when>
+							<core:otherwise>
+								<td>${post.getCreatedAt() }</td>						
+							</core:otherwise>
+						</core:choose>
+						<td>${post.getViewCount() }, ${post.getLikeCount() }, ${post.getCommentCount() }</td>
 					</tr>
 				</core:forEach>
 			</tbody>		

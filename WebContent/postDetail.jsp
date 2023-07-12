@@ -17,10 +17,25 @@
 <jsp:include page="header.jsp"></jsp:include>
 <body>
 	<div class="container">
+		<div>		
+			<span>작성자: ${post.getNickname() }</span>
+			<core:choose>
+				<core:when test="${not empty post.getUpdatedAt() }">
+					<span>수정일: ${post.getUpdatedAt() }</span>
+				</core:when>
+				<core:otherwise>
+					<span>작성일: ${post.getCreatedAt() }</span>
+				</core:otherwise>
+			</core:choose>
+			<span>조회수: ${post.getViewCount() }</span>
+		</div>
 		<h1>${post.getTitle() }</h1>
-		<h3>작성자: ${post.getNickname() }</h3>
 		<p>${post.getContent()}</p>
-	
+		
+		<div>
+			<span>좋아요: ${post.getLikeCount() }</span>
+			<span>싫어요: ${post.getDislikeCount() }</span>
+		</div>
 		<core:if test="${not empty userInfo}">
 			<core:if test="${userInfo.getId().equals(post.getWriter()) }">				
 				<a href="prepareUpdatePost?pno=${post.getPno() }">수정</a>

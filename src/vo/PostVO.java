@@ -9,8 +9,8 @@ public class PostVO {
 	private int pno;
 	private String writer;
 	private String title;
-	private Timestamp created_at;
-	private Timestamp updated_ap;
+	private Timestamp createdAt;
+	private Timestamp updatedAt;
 	private String content;
 	private String nickname;
 	private String grade;
