@@ -14,7 +14,7 @@
 	<div class="container shadow p-3 mb-5 bg-body rounded">
 	<core:if test="${not empty userInfo }">
 		<a class="btn btn-primary" href="postForm.jsp">게시글 작성</a>
-		<br>
+		<br><br>
 	</core:if>
 		<table class="table table-hover">
 			<thead>

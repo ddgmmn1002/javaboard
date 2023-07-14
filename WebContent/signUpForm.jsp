@@ -81,14 +81,12 @@
 					</div>
 				</div>
 				<br>
-				<div class="row">
-					<div class="form-floating col-11">
+				<div>
+					<div class="form-floating">
 						<input class="form-control" type="text" id="id" name="id" placeholder="ID">
 						<label for="id">ID</label>
 					</div>
-					<div class="col-1">
-						<button class="btn btn-outline-dark btn-sm" id="id-check">중복 검사</button>
-					</div>
+					<button class="btn btn-secondary btn-sm" id="id-check">중복 검사</button>
 				</div>
 				<br>
 				<div class="form-floating">
@@ -102,7 +100,7 @@
 				</div>
 				<br>
 				<div>
-					<input type="button" id="btn" value="회원가입">
+					<input type="button" id="btn-submit" value="회원가입" class="btn btn-primary">
 				</div>
 			</form>
 		</div>
@@ -137,7 +135,7 @@
 		form.attr("data-duplicateCheck", 'fail');
 	});
 	
-	$("#btn").on("click", function(event){
+	$("#btn-submit").on("click", function(event){
 		event.preventDefault();
 		if (form.attr("data-duplicateCheck") == "pass") {
 			form.submit();
