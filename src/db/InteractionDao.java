@@ -80,4 +80,35 @@ public class InteractionDao {
 		}
 		return result;
 	}
+	
+	public boolean deleteInteractionAll(int pno) {
+		DBcon db = new DBcon();
+		boolean result = false;
+		
+		Connection conn = null;
+		PreparedStatement stmt = null;
+		
+		try {
+			conn = db.getConnection();
+			String query = "DELETE FROM tbl_interaction WHERE pno = ?";
+			stmt = conn.prepareStatement(query);
+			stmt.setInt(1, pno);
+			if (stmt.executeUpdate() == 1) {
+				result = true;
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				stmt.close();
+				conn.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		
+		return result;
+	}
+	
+	
 }

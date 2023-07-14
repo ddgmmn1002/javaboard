@@ -16,117 +16,118 @@
 <script src="https://cdn.tiny.cloud/1/qin272fijzzkwqe5r2qk9myu4pr5qfybcdh0cmqj8eq5pwvz/tinymce/6/tinymce.min.js" referrerpolicy="origin"></script>
 </head>
 <jsp:include page="header.jsp"></jsp:include>
-<body>
-	<div class="container shadow p-3 mb-3 bg-body rounded d-grid gap-3">
+<body class="bg-dark">
+	<div class="container shadow-lg p-3 mb-3 bg-light rounded">
 	
-		<div class="row">
-			<div class="col">
-				<span>[작성자: ${post.getNickname() }]</span>
-				<core:choose>
-					<core:when test="${not empty post.getUpdatedAt() }">
-						<span>[수정일: ${post.getUpdatedAt() }]</span>
-					</core:when>
-					<core:otherwise>
-						<span>[작성일: ${post.getCreatedAt() }]</span>
-					</core:otherwise>
-				</core:choose>
-				<span>[조회수: ${post.getViewCount() }]</span>
-				
+		<div class="shadow-lg p-3 mb-5 bg-light rounded">
+			<div class="row">
+				<div class="col">
+					[작성자: ${post.getNickname() }]
+					<core:choose>
+						<core:when test="${not empty post.getUpdatedAt() }">
+							[수정일: ${post.getUpdatedAt() }]
+						</core:when>
+						<core:otherwise>
+							[작성일: ${post.getCreatedAt() }]
+						</core:otherwise>
+					</core:choose>
+					[조회수: ${post.getViewCount() }]
+				</div>
+			</div>
+		
+			<div class="row">
+				<div class="col m-3">
+					<h1>${post.getTitle() }</h1>
+				</div>
+			</div>
+		
+			<div class="row">
+				<div class="col m-5">
+					${post.getContent()}
+				</div>
+			</div>		
+		
+			<div class="row">
+				<div class="col d-flex justify-content-center">
+					<div class="d-flex gap-3">
+						<span>좋아요😎: ${post.getLikeCount() }</span>
+						<span>싫어요🤬: ${post.getDislikeCount() }</span>
+					</div>
+				</div>
+			</div>
+		
+			<div class="row">
+				<div class="col mt-5 d-flex justify-content-end">
+					<div>
+						<core:if test="${not empty userInfo}">
+							<core:if test="${userInfo.getId().equals(post.getWriter()) }">				
+									<a class="btn btn-outline-secondary" href="prepareUpdatePost?pno=${post.getPno() }">수정</a>
+									<a class="btn btn-outline-danger" href="deletePost?pno=${post.getPno() }">삭제</a>		
+							</core:if>
+						</core:if>
+					</div>
+				</div>
 			</div>
 		</div>
 		
-		<div class="row">
-			<div class="col ms-3">
-				<h1>${post.getTitle() }</h1>
-			</div>
-		</div>
-		
-		<div class="row">
-			<div class="col">
-				${post.getContent()}
-			</div>
-		</div>		
-		
-		<div class="row">
-			<div class="col d-flex justify-content-center">
-				<span>좋아요: ${post.getLikeCount() }</span>
-				<span>싫어요: ${post.getDislikeCount() }</span>
-			</div>
-		</div>
-		
-		<div class="row">
-			<div class="col d-flex flex-row-reverse">
-				<core:if test="${not empty userInfo}">
-					<core:if test="${userInfo.getId().equals(post.getWriter()) }">				
-							<a class="btn btn-outline-danger" href="deletePost?pno=${post.getPno() }">삭제</a>		
-							<a class="btn btn-outline-secondary me-1" href="prepareUpdatePost?pno=${post.getPno() }">수정</a>
-					</core:if>
-				</core:if>
-			</div>
-		</div>
-		<div class="row">
+		<div class="row mb-2">
 			<div class="col">
 				<core:if test="${not empty userInfo }">
 					<form action="insertComment" method="post" class="form-floating">
-						<input type="hidden" name="pno" value="${post.getPno() }">
-						<input id="comment-input" type="text" name="content" class="form-control mb-1">
-						<label for="comment-input">댓글 작성</label>
-						<div class="d-flex flex-row-reverse">
-							<button type="submit" class="btn btn-outline-primary btn-sm">댓글 추가</button>
+						<div class="d-flex flex-column gap-2 shadow p-3 bg-body rounded">
+							<input type="hidden" name="pno" value="${post.getPno() }">
+							<input id="comment-tinyeditor" type="text" name="content" class="form-control">
+							<div class="d-flex justify-content-end">
+								<button type="submit" class="btn btn-primary btn-sm">댓글 추가</button>
+							</div>
 						</div>
 					</form>
 				</core:if>
 			</div>
 		</div>			
-
+		
 		<div class="row">
 			<div class="col">
 				<core:if test="${commentList.size() ne 0 }">
 					<core:forEach var="comment" items="${commentList }" varStatus="status">
-						<div id="comment-${comment.getCno() } " class="container shadow-sm p-3 mb-1 bg-body rounded d-grid gap-1">
+						<div id="comment-${comment.getCno() } " class="container shadow p-3 mb-1 bg-body rounded d-grid gap-1">
 							<div class="row">
 								<div class="col">
-									<span>${comment.getCno() }</span>
-									<span>
-										[${comment.getNickname()}]
-										<core:if test="${comment.getWriter() eq post.getWriter()}">
-											<span>(작성자)</span>
-										</core:if>
-									</span>
-									
+									${comment.getCno() }
+									[${comment.getNickname()}]
+									<core:if test="${comment.getWriter() eq post.getWriter()}">
+										(작성자)
+									</core:if>
+								</div>
+							</div>
+							<div class="row">
+								<div class="col m-2">
+									${comment.getContent()}
 								</div>
 							</div>
 							<div class="row">
 								<div class="col">
-									<span>${comment.getContent()}</span>
-								</div>
-							</div>				
-							
-							<div class="row">
-								<div class="col">
 									<core:choose>
 										<core:when test="${not empty comment.getUpdated_at() }">
-											<span>${comment.getUpdated_at() }</span>
-											<span>(수정됨)</span>
+											${comment.getUpdated_at() }
+											(수정됨)
 										</core:when>
 										<core:otherwise>
-											<span>${comment.getCreated_at() }</span>
+											${comment.getCreated_at() }
 										</core:otherwise>
 									</core:choose>
 								</div>
-								<div class="col">
-									<core:choose>
-										<core:when test="${comment.getWriter() eq userInfo.getId() }">
-										<div class="d-flex justify-content-end">
-											<a class="update-comment btn btn-outline-secondary" style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;">수정</a>
-											<a class="btn btn-outline-danger" href="deleteComment?cno=${comment.getCno() }&pno=${post.getPno() }" style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;">삭제</a>													
-										</div>
-										</core:when>
-									</core:choose>
+								<div class="col d-flex justify-content-end">
+									<div>
+										<core:choose>
+											<core:when test="${comment.getWriter() eq userInfo.getId() }">
+												<a class="update-comment btn btn-outline-secondary" style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;">수정</a>
+												<a class="btn btn-outline-danger" href="deleteComment?cno=${comment.getCno() }&pno=${post.getPno() }" style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;">삭제</a>													
+											</core:when>
+										</core:choose>
+									</div>
 								</div>
-							</div>			
-							
-							
+							</div>		
 						</div>
 					</core:forEach>			
 				</core:if>
@@ -135,10 +136,9 @@
 
 	</div>
 <script>
-/* 	tinymce.init({
-		selector: 'input#tiny',
+ 	tinymce.init({
+		selector: '#comment-tinyeditor',
 		  language: 'ko_KR',
-		  width: 500,
 		  height: 200,
 		  menubar: false,
 		  plugins: [
@@ -148,7 +148,7 @@
 		  ],
 		  toolbar: 'bold italic underline strikethrough | forecolor backcolor | bullist numlist | outdent indent | charmap emoticons',
 		  content_style: 'body { font-family:Helvetica,Arial,sans-serif; font-size:16px }'
-	}); */
+	});
 
 
 	$('.update-comment').on('click', function(event){

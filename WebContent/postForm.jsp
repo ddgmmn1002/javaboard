@@ -15,14 +15,14 @@
 			<label for="title" class="form-label">제목</label>
 			<input id="title" type="text" name="title" class="form-control">
 			<br>
-			<label for="tinyeditor" class="form-label">본문</label>
-			<textarea id="tinyeditor" name="content" placeholder="글 본문 작성"></textarea>
+			<label for="post-tinyeditor" class="form-label">본문</label>
+			<textarea id="post-tinyeditor" name="content" placeholder="글 본문 작성"></textarea>
 			<button type="submit">게시글 작성하기</button>
 		</form>
 	</div>
 <script type="text/javascript">
 	tinymce.init({
-		selector: 'textarea#tinyeditor',
+		selector: '#post-tinyeditor',
 		  language: 'ko_KR',
 		  height: 700,
 		  plugins: [

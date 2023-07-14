@@ -9,16 +9,16 @@
 <meta charset="UTF-8">
 <title>게시글 목록</title>
 </head>
-<body>
+<body class="bg-dark">
 	<jsp:include page="header.jsp"></jsp:include>
-	<div class="container shadow p-3 mb-5 bg-body rounded">
+	<div class="container shadow-lg p-3 mb-5 bg-light rounded">
 	<core:if test="${not empty userInfo }">
 		<a class="btn btn-primary" href="postForm.jsp">게시글 작성</a>
 		<br><br>
 	</core:if>
-		<table class="table table-hover">
+		<table class="table table-hover bg-white rounded">
 			<thead>
-				<tr>
+				<tr class="shadow-sm p-3 mb-1">
 					<td>게시글 번호</td>
 					<td>작성자</td>
 					<td>제목</td>
@@ -27,7 +27,7 @@
 			</thead>
 			<tbody>
 				<core:forEach var="post" items="${list}">
-					<tr onclick="postIsClicked(${post.getPno()})">
+					<tr class="shadow-sm p-3 mb-1" onclick="postIsClicked(${post.getPno()})">
 						<td>${post.getPno()}</td>
 						<td>${post.getNickname() }</td>
 						<td>${post.getTitle() }</td>
