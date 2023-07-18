@@ -26,7 +26,7 @@
 	
 		<form action="signUp" method="post" id="signup-form" data-duplicateCheck="fail">
 			<div class="d-grid gap-3">
-			
+				
 				<div class="row">
 					<div class="col">
 						<div class="form-floating">

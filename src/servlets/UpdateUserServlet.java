@@ -28,20 +28,14 @@ public class UpdateUserServlet extends HttpServlet {
 		String password = request.getParameter("pw");
 		String nickname = request.getParameter("nickname");
 		
-		System.out.println(id);
-		System.out.println(phone);
-		System.out.println(email);
-		System.out.println(password);
-		System.out.println(nickname);
-		
 		boolean userIsUpdated = dao.updateUser(phone, email, password, nickname, id);
 		
 		if (userIsUpdated) {
 			System.out.println("user 정보 업데이트 성공");
-			response.sendRedirect("myPage.jsp");
+			response.sendRedirect("home.jsp");
 		} else {
 			System.out.println("user 정보 업데이트 실패");
-			response.sendRedirect("myPage.jsp");
+			response.sendRedirect("home.jsp");
 		}
 	}
 	

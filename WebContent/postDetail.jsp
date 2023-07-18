@@ -42,6 +42,15 @@
 			</div>
 		
 			<div class="row">
+				<div class="col">
+					<div class="d-flex justify-content-center">
+						<div id="videoplayer"></div>
+						<iframe width="960" height="540" src="https://www.youtube.com/embed/Ac7j_wLYJ9Y" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+					</div>
+				</div>
+			</div>
+		
+			<div class="row">
 				<div class="col m-5">
 					${post.getContent()}
 				</div>
@@ -149,8 +158,8 @@
 		  toolbar: 'bold italic underline strikethrough | forecolor backcolor | bullist numlist | outdent indent | charmap emoticons',
 		  content_style: 'body { font-family:Helvetica,Arial,sans-serif; font-size:16px }'
 	});
-
-
+ 	
+ 	
 	$('.update-comment').on('click', function(event){
 		const cno = $(event.target).siblings()[0].innerText;
 		const content = $(event.target).siblings()[2].innerText;

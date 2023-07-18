@@ -28,7 +28,9 @@
 			<tbody>
 				<core:forEach var="post" items="${list}">
 					<tr class="shadow-sm p-3 mb-1" onclick="postIsClicked(${post.getPno()})">
+						
 						<td>${post.getPno()}</td>
+						
 						<td>${post.getNickname() }</td>
 						<td>${post.getTitle() }</td>
 						<core:choose>
@@ -66,7 +68,6 @@
 										${post.getLikeCount() }
 									</div>
 								</div>
-
 							</div>
 						</td>
 					</tr>
