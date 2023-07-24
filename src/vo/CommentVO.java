@@ -8,9 +8,9 @@ import lombok.Data;
 public class CommentVO {
 	private int cno;
 	private String image;
-	private int post;
+	private int pno;
 	private String title;
-	private String writer;
+	private String user_id;
 	private String content;
 	private Timestamp created_at;
 	private Timestamp updated_at;

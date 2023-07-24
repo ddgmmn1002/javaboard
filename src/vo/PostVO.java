@@ -7,7 +7,7 @@ import lombok.Data;
 @Data
 public class PostVO {
 	private int pno;
-	private String writer;
+	private String user_id;
 	private String title;
 	private Timestamp createdAt;
 	private Timestamp updatedAt;
@@ -18,4 +18,5 @@ public class PostVO {
 	private int commentCount;
 	private int likeCount;
 	private int dislikeCount;
+	private String Trailer;
 }

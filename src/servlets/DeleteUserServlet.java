@@ -19,13 +19,14 @@ public class DeleteUserServlet extends HttpServlet {
 		HttpSession session = request.getSession();
 		UserDao dao = UserDao.getInstance();
 		UserVO user = (UserVO) session.getAttribute("userInfo");
-		String id = user.getId();
+		String user_id = user.getId();
 		String pw = request.getParameter("pw");
 		
-		boolean userIsDeleted = dao.deleteUser(id, pw);
+		boolean userIsDeleted = dao.deleteUser(user_id, pw);
 		
 		if (userIsDeleted) {
 			System.out.println("user 정보 삭제 성공");
+			session.removeAttribute("userInfo");
 			response.sendRedirect("home.jsp");
 		} else {
 			System.out.println("user 정보 삭제 실패");

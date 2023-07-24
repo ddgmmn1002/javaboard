@@ -23,7 +23,6 @@
 					<td>작성자</td>
 					<td>제목</td>
 					<td>작성일</td>
-					<td></td>
 				</tr>
 			</thead>
 			<tbody>

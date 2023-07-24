@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import db.PostDao;
+import vo.PostVO;
 import vo.UserVO;
 
 @WebServlet("/insertPost")
@@ -23,12 +24,19 @@ public class InsertPostServlet extends HttpServlet {
 		
 		String title = request.getParameter("title");
 		String content = request.getParameter("content");
-		String writer = user.getId();
-				
-		boolean postIsInserted = dao.insertPost(writer, title, content);
+		String trailer = request.getParameter("trailer");
+		String userId = user.getId();
+		
+		PostVO post = new PostVO();
+		post.setUser_id(userId);
+		post.setTitle(title);
+		post.setContent(content);
+		post.setTrailer(trailer);
+		
+		boolean postIsInserted = dao.insertPost(post);
 		
 		if (postIsInserted) {
-			int pno = dao.findPno(writer, title);
+			int pno = dao.findPno(userId, title);
 			response.sendRedirect("postDetail?pno=" + pno);
 		} else {
 			response.sendRedirect("postList");

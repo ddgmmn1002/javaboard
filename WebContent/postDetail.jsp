@@ -44,8 +44,13 @@
 			<div class="row">
 				<div class="col">
 					<div class="d-flex justify-content-center">
-						<div id="videoplayer"></div>
-						<iframe width="960" height="540" src="https://www.youtube.com/embed/Ac7j_wLYJ9Y" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+						<core:choose>
+							<core:when test="${not empty post.getTrailer() }">
+								<div id="player" data-videoid="${post.getTrailer() }"></div>
+							</core:when>
+							<core:otherwise>
+							</core:otherwise>
+						</core:choose>
 					</div>
 				</div>
 			</div>
@@ -69,7 +74,7 @@
 				<div class="col mt-5 d-flex justify-content-end">
 					<div>
 						<core:if test="${not empty userInfo}">
-							<core:if test="${userInfo.getId().equals(post.getWriter()) }">				
+							<core:if test="${userInfo.getId().equals(post.getUser_id()) }">				
 									<a class="btn btn-outline-secondary" href="prepareUpdatePost?pno=${post.getPno() }">수정</a>
 									<a class="btn btn-outline-danger" href="deletePost?pno=${post.getPno() }">삭제</a>		
 							</core:if>
@@ -85,7 +90,7 @@
 					<form action="insertComment" method="post" class="form-floating">
 						<div class="d-flex flex-column gap-2 shadow p-3 bg-body rounded">
 							<input type="hidden" name="pno" value="${post.getPno() }">
-							<input id="comment-tinyeditor" type="text" name="content" class="form-control">
+							<input id="comment-tinyeditor" type="text" name="content" class="form-control comment-tinyeditor">
 							<div class="d-flex justify-content-end">
 								<button type="submit" class="btn btn-primary btn-sm">댓글 추가</button>
 							</div>
@@ -101,10 +106,12 @@
 					<core:forEach var="comment" items="${commentList }" varStatus="status">
 						<div id="comment-${comment.getCno() } " class="container shadow p-3 mb-1 bg-body rounded d-grid gap-1">
 							<div class="row">
+								${comment.getCno() }
+							</div>
+							<div class="row">
 								<div class="col">
-									${comment.getCno() }
 									[${comment.getNickname()}]
-									<core:if test="${comment.getWriter() eq post.getWriter()}">
+									<core:if test="${comment.getUser_id() eq post.getUser_id()}">
 										(작성자)
 									</core:if>
 								</div>
@@ -129,7 +136,7 @@
 								<div class="col d-flex justify-content-end">
 									<div>
 										<core:choose>
-											<core:when test="${comment.getWriter() eq userInfo.getId() }">
+											<core:when test="${comment.getUser_id() eq userInfo.getId() }">
 												<a class="update-comment btn btn-outline-secondary" style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;">수정</a>
 												<a class="btn btn-outline-danger" href="deleteComment?cno=${comment.getCno() }&pno=${post.getPno() }" style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;">삭제</a>													
 											</core:when>
@@ -145,8 +152,33 @@
 
 	</div>
 <script>
+
+	//비디어 플레이어 객체
+	var tag = document.createElement('script');
+	tag.src = "https://www.youtube.com/iframe_api";
+	var firstScriptTag = document.getElementsByTagName('script')[0];
+	firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+
+	var player;
+	function onYouTubeIframeAPIReady() {
+		player = new YT.Player('player', {
+			height: '540',
+			width: '960',
+			videoId: document.querySelector("#player").getAttribute("data-videoid"),
+			playerVars: {
+				'rel': 0,
+				'controls': 0,
+				'autoplay' : 1,
+				'mute' : 1,
+				'playsinline' : 1    //iOS환경에서 전체화면으로 재생하지 않게
+			}
+		});
+	}
+	
+	
+	//댓글용 텍스트 에디터 객체
  	tinymce.init({
-		selector: '#comment-tinyeditor',
+		selector: '.comment-tinyeditor',
 		  language: 'ko_KR',
 		  height: 200,
 		  menubar: false,
@@ -160,17 +192,19 @@
 	});
  	
  	
+	// 댓글 수정 요청 처리 AJAX
 	$('.update-comment').on('click', function(event){
-		const cno = $(event.target).siblings()[0].innerText;
-		const content = $(event.target).siblings()[2].innerText;
-
-		if ($("#update-div").length) {	        
+		
+		const cno = $(event.target).parent().parent().parent().siblings()[0].innerText;
+		const content = $(event.target).parent().parent().parent().siblings()[2].innerHTML;
+		
+		if ($("#update-div").length) {
 			$("#update-div").remove();
 		} else {
-	        const updateDiv = $("<div>").prop("id", "update-div")
-	        const updateInput = $("<input>").attr("type", "text").val(content);
+	        const updateDiv = $("<div>").prop("id", "update-div");
+	        const updateInput = $("<input>").prop("id", "update-input").val(content);
 	        const updateButton = $("<button>").prop("id", "update-button")
-	        	.text("확인")
+				.text("수정")
 	        	.click(function(event){
 	        		const updateContent = $(event.target).siblings()[0].value;
 	                $.ajax({
@@ -181,21 +215,22 @@
 	                    	content: updateContent
 	                	},
 	                	success: function () {
-	                		updateDiv.parent().children()[2].innerText = updateContent;
+	                		updateDiv.parent().siblings()[2].innerText = updateContent;
 	                		updateDiv.remove();
 	                	},
 	        		});
 	        	});
+	        updateButton.addClass("update-comment btn btn-outline-secondary");
 	        const cancelButton = $("<button>")
 	        	.text("취소")
 	        	.click(function(event){
 	        		updateDiv.remove();
 	        	});
-	        
+	        cancelButton.addClass("btn btn-outline-danger");
 	        updateDiv.append(updateInput);
 	        updateDiv.append(updateButton);
 	        updateDiv.append(cancelButton);
-	        $(this).parent().append(updateDiv);
+	        $(this).parent().parent().parent().append(updateDiv);
 		}
 	});
 </script>

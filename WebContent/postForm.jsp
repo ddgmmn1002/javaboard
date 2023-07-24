@@ -12,12 +12,31 @@
 <jsp:include page="header.jsp"></jsp:include>
 	<div class="container shadow p-3 mb-5 bg-body rounded">
 		<form action="insertPost" method="post">
-			<label for="title" class="form-label">제목</label>
-			<input id="title" type="text" name="title" class="form-control">
-			<br>
-			<label for="post-tinyeditor" class="form-label">본문</label>
-			<textarea id="post-tinyeditor" name="content" placeholder="글 본문 작성"></textarea>
-			<button type="submit">게시글 작성하기</button>
+			<div class="d-grid gap-3">
+				<div class="row">
+					<div class="col">
+						<label for="title" class="form-label">제목</label>
+						<input id="title" type="text" name="title" class="form-control">
+					</div>
+				</div>
+				<div class="row">
+					<div class="col">
+						<label for="trailer" class="form-label">동영상ID(유튜브)</label>
+						<input id="trailer" type="text" name="trailer" class="form-control">
+					</div>
+				</div>
+				<div class="row">
+					<div class="col">
+						<label for="post-tinyeditor" class="form-label">본문</label>
+						<textarea id="post-tinyeditor" name="content" placeholder="글 본문 작성"></textarea>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col d-flex justify-content-end">
+						<button type="submit" class="btn btn-primary">게시하기</button>
+					</div>
+				</div>
+			</div>
 		</form>
 	</div>
 <script type="text/javascript">

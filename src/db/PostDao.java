@@ -19,19 +19,20 @@ public class PostDao {
 	}
 	
 	
-	public boolean insertPost(String user, String title, String content) {
+	public boolean insertPost(PostVO post) {
 		DBcon db = new DBcon();
 		Connection conn = null;
 		PreparedStatement stmt = null;
 		boolean result = false;
 		try {
 			conn = db.getConnection();
-			String query = "INSERT INTO tbl_post(writer, title, created_at, content)"
-					+ " VALUES (?, ?, CURRENT_TIMESTAMP(), ?)";
+			String query = "INSERT INTO tbl_post(user_id, title, created_at, content, trailer)"
+					+ " VALUES (?, ?, CURRENT_TIMESTAMP(), ?, ?)";
 			stmt = conn.prepareStatement(query);
-			stmt.setString(1, user);
-			stmt.setString(2, title);
-			stmt.setString(3, content);
+			stmt.setString(1, post.getUser_id());
+			stmt.setString(2, post.getTitle());
+			stmt.setString(3, post.getContent());
+			stmt.setString(4, post.getTrailer());
 			if (stmt.executeUpdate() == 1) {
 				result = true;
 			}
@@ -58,12 +59,12 @@ public class PostDao {
 		ResultSet rs = null;
 		try {
 			conn = db.getConnection();
-			String query = "SELECT p.pno, p.writer, u.nickname, p.title, p.created_at, p.updated_at, u.grade," + 
+			String query = "SELECT p.pno, p.user_id, u.nickname, p.title, p.created_at, p.updated_at, u.grade," + 
 					" COUNT(DISTINCT i.interaction_id) AS view_count, COUNT(DISTINCT c.cno) AS comment_count," + 
 					" COUNT(DISTINCT case when i.like_status = 1 then i.interaction_id END) AS like_count" + 
-					" FROM tbl_post AS p JOIN tbl_user AS u ON p.writer = u.user_id" + 
+					" FROM tbl_post AS p JOIN tbl_user AS u ON p.user_id = u.user_id" + 
 					" LEFT JOIN tbl_interaction AS i ON p.pno = i.pno" + 
-					" LEFT JOIN tbl_comment AS c ON c.post = p.pno" + 
+					" LEFT JOIN tbl_comment AS c ON c.pno = p.pno" + 
 					" GROUP BY p.pno" + 
 					" ORDER BY created_at DESC";
 			stmt = conn.prepareStatement(query);
@@ -71,7 +72,7 @@ public class PostDao {
 			while (rs.next()) {
 				PostVO post = new PostVO();
 				post.setPno(rs.getInt("pno"));
-				post.setWriter(rs.getString("writer"));
+				post.setUser_id(rs.getString("user_id"));
 				post.setTitle(rs.getString("title"));
 				post.setCreatedAt(rs.getTimestamp("created_at"));
 				post.setUpdatedAt(rs.getTimestamp("updated_at"));
@@ -110,7 +111,7 @@ public class PostDao {
 					" COUNT(DISTINCT i.interaction_id) AS view_count," + 
 					" COUNT(DISTINCT case when i.like_status = 1 then i.interaction_id END) AS like_count," + 
 					" COUNT(DISTINCT case when i.dislike_status = 1 then i.interaction_id END) AS dislike_count" + 
-					" FROM tbl_post AS p JOIN tbl_user AS u ON p.writer = u.user_id" + 
+					" FROM tbl_post AS p JOIN tbl_user AS u ON p.user_id = u.user_id" + 
 					" LEFT JOIN tbl_interaction AS i ON i.pno = p.pno" + 
 					" WHERE p.pno = ?";
 			stmt = conn.prepareStatement(query);
@@ -119,7 +120,7 @@ public class PostDao {
 			rs.next();
 			
 			post.setPno(rs.getInt("pno"));
-			post.setWriter(rs.getString("writer"));
+			post.setUser_id(rs.getString("user_id"));
 			post.setTitle(rs.getString("title"));
 			post.setCreatedAt(rs.getTimestamp("created_at"));
 			post.setUpdatedAt(rs.getTimestamp("updated_at"));
@@ -129,6 +130,7 @@ public class PostDao {
 			post.setViewCount(rs.getInt("view_count"));
 			post.setLikeCount(rs.getInt("like_count"));
 			post.setDislikeCount(rs.getInt("dislike_count"));
+			post.setTrailer(rs.getString("trailer"));
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
@@ -173,7 +175,7 @@ public class PostDao {
 		return result;
 	}
 	
-	public boolean updatePost(int pno, String title, String content) {
+	public boolean updatePost(int pno, String title, String content, String trailer) {
 		DBcon db = new DBcon();
 		boolean result = false;
 		
@@ -183,12 +185,13 @@ public class PostDao {
 		try {
 			conn = db.getConnection();
 			String query = "UPDATE tbl_post"
-					+ " SET title = ?, content = ?, updated_at = CURRENT_TIMESTAMP()"
+					+ " SET title = ?, content = ?, updated_at = CURRENT_TIMESTAMP(), trailer = ?"
 					+ " WHERE pno = ?";
 			stmt = conn.prepareStatement(query);
 			stmt.setString(1, title);
 			stmt.setString(2, content);
-			stmt.setInt(3, pno);
+			stmt.setString(3, trailer);
+			stmt.setInt(4, pno);
 			if (stmt.executeUpdate() == 1) {
 				result = true;
 			}
@@ -206,7 +209,7 @@ public class PostDao {
 		return result;
 	}
 	
-	public int findPno(String writer, String title) {
+	public int findPno(String user, String title) {
 		int result = -1;
 		
 		DBcon db = new DBcon();
@@ -218,10 +221,10 @@ public class PostDao {
 		try {
 			conn = db.getConnection();
 			String query = "SELECT pno from tbl_post"
-					+ " WHERE writer = ? AND title= ?"
+					+ " WHERE user_id = ? AND title= ?"
 					+ " order by pno DESC;";
 			stmt = conn.prepareStatement(query);
-			stmt.setString(1, writer);
+			stmt.setString(1, user);
 			stmt.setString(2, title);
 			rs = stmt.executeQuery();
 			
