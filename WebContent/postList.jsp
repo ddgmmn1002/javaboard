@@ -7,7 +7,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>게시글 목록</title>
+<title>post list</title>
 </head>
 <body class="bg-dark">
 	<jsp:include page="header.jsp"></jsp:include>

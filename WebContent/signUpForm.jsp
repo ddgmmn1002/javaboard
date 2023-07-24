@@ -17,7 +17,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Sign up</title>
+<title>sign up</title>
 <script src="js/jquery-3.7.0.js"></script>
 </head>
 <body class="bg-dark">
