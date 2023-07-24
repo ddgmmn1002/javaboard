@@ -6,11 +6,13 @@ import lombok.Data;
 
 @Data
 public class InteractionVO {
+	int interactionId;
 	int pno;
-	String user_id;
-	boolean like_status;
-	boolean dislike_status;
-	boolean view_status;
-	boolean comment_status;
-	Timestamp interacted_at;
+	String userId;
+	boolean likeStatus;
+	boolean dislikeStatus;
+	boolean viewStatus;
+	boolean commentStatus;
+	Timestamp interactedAt;
+	String title;
 }

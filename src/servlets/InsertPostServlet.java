@@ -28,7 +28,7 @@ public class InsertPostServlet extends HttpServlet {
 		String userId = user.getId();
 		
 		PostVO post = new PostVO();
-		post.setUser_id(userId);
+		post.setUserId(userId);
 		post.setTitle(title);
 		post.setContent(content);
 		post.setTrailer(trailer);

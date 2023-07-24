@@ -28,7 +28,7 @@ public class RewriteCommentServlet extends HttpServlet {
 		
 		JSONObject jsonObj = new JSONObject();
 		jsonObj.put("cno", comment.getCno());
-		jsonObj.put("updated_at", comment.getUpdated_at());
+		jsonObj.put("updated_at", comment.getUpdatedAt());
 		jsonObj.put("content", comment.getContent());
 		
 		System.out.println(jsonObj.toString());

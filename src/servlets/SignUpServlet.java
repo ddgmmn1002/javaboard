@@ -34,7 +34,7 @@ public class SignUpServlet extends HttpServlet {
 		
 		UserVO user = new UserVO();
 		user.setName(name);
-		user.setBirth_date(Date.valueOf(birthDate));
+		user.setBirthDate(Date.valueOf(birthDate));
 		user.setCountry(country);
 		user.setPhone(phone);
 		user.setEmail(email);

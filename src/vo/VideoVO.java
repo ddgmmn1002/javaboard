@@ -16,13 +16,13 @@ public class VideoVO {
 	private String director;
 	private String[] cast;
 	private String plot;
-	private Date release_date;
+	private Date releaseDate;
 	private int runtime;
-	private String film_rating;
+	private String filmRating;
 	private String country;
 	private String[] language;
 	private String image;
 	private String[] category;
-	private int episodes_count;
+	private int episodesCount;
 	private String[] series;
 }

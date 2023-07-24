@@ -71,11 +71,11 @@ public class CommentDao {
 			if (rs.next()) {
 				comment.setCno(rs.getInt("cno"));
 				comment.setContent(rs.getString("content"));
-				comment.setCreated_at(rs.getTimestamp("created_at"));
+				comment.setCreatedAt(rs.getTimestamp("created_at"));
 				comment.setNickname(rs.getString("nickname"));
 				comment.setPno(rs.getInt("pno"));
-				comment.setUpdated_at(rs.getTimestamp("updated_at"));
-				comment.setUser_id(rs.getString("user_id"));
+				comment.setUpdatedAt(rs.getTimestamp("updated_at"));
+				comment.setUserId(rs.getString("user_id"));
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -106,11 +106,51 @@ public class CommentDao {
 				CommentVO comment = new CommentVO();
 				comment.setCno(rs.getInt("cno"));
 				comment.setPno(rs.getInt("pno"));
-				comment.setUser_id(rs.getString("user_id"));
+				comment.setUserId(rs.getString("user_id"));
 				comment.setContent(rs.getString("content"));
-				comment.setCreated_at(rs.getTimestamp("created_at"));
-				comment.setUpdated_at(rs.getTimestamp("updated_at"));
+				comment.setCreatedAt(rs.getTimestamp("created_at"));
+				comment.setUpdatedAt(rs.getTimestamp("updated_at"));
 				comment.setNickname(rs.getString("nickname"));
+				list.add(comment);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				rs.close();
+				stmt.close();
+				conn.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		
+		return list;
+	}
+	
+	public ArrayList<CommentVO> selectCommentListById(String userId){
+		DBcon db = new DBcon();
+		Connection conn = null;
+		PreparedStatement stmt = null;
+		ResultSet rs = null;
+		ArrayList<CommentVO> list = new ArrayList<>();
+		try {
+			conn = db.getConnection();
+			String query = "SELECT c.cno, p.pno, p.title, c.created_at, c.updated_at" + 
+					" FROM tbl_comment AS c, tbl_post AS p" + 
+					" WHERE c.pno = p.pno AND c.user_id = ?" +
+					" ORDER BY c.created_at DESC";
+			stmt = conn.prepareStatement(query);
+			stmt.setString(1, userId);
+			rs = stmt.executeQuery();
+			while(rs.next()) {
+				CommentVO comment = new CommentVO();
+				comment.setCno(rs.getInt("cno"));
+				comment.setPno(rs.getInt("pno"));
+				comment.setTitle(rs.getString("title"));
+				comment.setCreatedAt(rs.getTimestamp("created_at"));
+				comment.setUpdatedAt(rs.getTimestamp("updated_at"));
+				
 				list.add(comment);
 			}
 		} catch (Exception e) {

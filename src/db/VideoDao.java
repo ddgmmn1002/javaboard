@@ -37,14 +37,14 @@ public class VideoDao {
 			stmt.setString(3, video.getDirector());
 			stmt.setString(4, String.join(", ", video.getCast()));
 			stmt.setString(5, video.getPlot());
-			stmt.setDate(6, video.getRelease_date());
+			stmt.setDate(6, video.getReleaseDate());
 			stmt.setInt(7, video.getRuntime());
-			stmt.setString(8, video.getFilm_rating());
+			stmt.setString(8, video.getFilmRating());
 			stmt.setString(9, video.getCountry());
 			stmt.setString(10, String.join(", ", video.getLanguage()));
 			stmt.setNString(11, video.getImage());
 			stmt.setString(12, String.join(", ", video.getCategory()));
-			stmt.setInt(13, video.getEpisodes_count());
+			stmt.setInt(13, video.getEpisodesCount());
 			stmt.setString(14, String.join(", ", video.getSeries()));
 			
 			if (stmt.executeUpdate() == 1) {
@@ -84,14 +84,14 @@ public class VideoDao {
 				video.setDirector(rs.getString("director"));
 				video.setCast(rs.getString("cast").split(", "));
 				video.setPlot(rs.getString("plot"));
-				video.setRelease_date(rs.getDate("release_date"));
+				video.setReleaseDate(rs.getDate("release_date"));
 				video.setRuntime(rs.getInt("runtime"));
-				video.setFilm_rating(rs.getString("film_rating"));
+				video.setFilmRating(rs.getString("film_rating"));
 				video.setCountry(rs.getString("country"));
 				video.setLanguage(rs.getString("language").split(", "));
 				video.setImage(rs.getString("image"));
 				video.setCategory(rs.getString("category").split(", "));
-				video.setEpisodes_count(rs.getInt("episodes_count"));
+				video.setEpisodesCount(rs.getInt("episodes_count"));
 				video.setSeries(rs.getString("series").split(", "));
 				
 				list.add(video);
@@ -132,14 +132,14 @@ public class VideoDao {
 			video.setDirector(rs.getString("director"));
 			video.setCast(rs.getString("cast").split(", "));
 			video.setPlot(rs.getString("plot"));
-			video.setRelease_date(rs.getDate("release_date"));
+			video.setReleaseDate(rs.getDate("release_date"));
 			video.setRuntime(rs.getInt("runtime"));
-			video.setFilm_rating(rs.getString("film_rating"));
+			video.setFilmRating(rs.getString("film_rating"));
 			video.setCountry(rs.getString("country"));
 			video.setLanguage(rs.getString("language").split(", "));
 			video.setImage(rs.getString("image"));
 			video.setCategory(rs.getString("category").split(", "));
-			video.setEpisodes_count(rs.getInt("episodes_count"));
+			video.setEpisodesCount(rs.getInt("episodes_count"));
 			video.setSeries(rs.getString("series").split(", "));
 			
 		} catch (Exception e) {

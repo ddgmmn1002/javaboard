@@ -74,7 +74,7 @@
 				<div class="col mt-5 d-flex justify-content-end">
 					<div>
 						<core:if test="${not empty userInfo}">
-							<core:if test="${userInfo.getId().equals(post.getUser_id()) }">				
+							<core:if test="${userInfo.getId().equals(post.getUserId()) }">				
 									<a class="btn btn-outline-secondary" href="prepareUpdatePost?pno=${post.getPno() }">수정</a>
 									<a class="btn btn-outline-danger" href="deletePost?pno=${post.getPno() }">삭제</a>		
 							</core:if>
@@ -111,7 +111,7 @@
 							<div class="row">
 								<div class="col">
 									[${comment.getNickname()}]
-									<core:if test="${comment.getUser_id() eq post.getUser_id()}">
+									<core:if test="${comment.getUserId() eq post.getUserId()}">
 										(작성자)
 									</core:if>
 								</div>
@@ -124,19 +124,19 @@
 							<div class="row">
 								<div class="col">
 									<core:choose>
-										<core:when test="${not empty comment.getUpdated_at() }">
-											${comment.getUpdated_at() }
+										<core:when test="${not empty comment.getUpdatedAt() }">
+											${comment.getUpdatedAt() }
 											(수정됨)
 										</core:when>
 										<core:otherwise>
-											${comment.getCreated_at() }
+											${comment.getCreatedAt() }
 										</core:otherwise>
 									</core:choose>
 								</div>
 								<div class="col d-flex justify-content-end">
 									<div>
 										<core:choose>
-											<core:when test="${comment.getUser_id() eq userInfo.getId() }">
+											<core:when test="${comment.getUserId() eq userInfo.getId() }">
 												<a class="update-comment btn btn-outline-secondary" style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;">수정</a>
 												<a class="btn btn-outline-danger" href="deleteComment?cno=${comment.getCno() }&pno=${post.getPno() }" style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;">삭제</a>													
 											</core:when>

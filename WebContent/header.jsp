@@ -8,7 +8,7 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
 
-	<nav class="navbar navbar-expand-lg bg-light shadow-sm">
+	<nav class="navbar navbar-expand-lg bg-light shadow-sm mb-5">
 		<div class="container-fluid">
 		    <a class="navbar-brand" href="home.jsp">서비스 로고가 들어갈 자리</a>
 		    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -22,7 +22,7 @@
 	  							<path d="M8.707 1.5a1 1 0 0 0-1.414 0L.646 8.146a.5.5 0 0 0 .708.708L8 2.207l6.646 6.647a.5.5 0 0 0 .708-.708L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293L8.707 1.5Z"/>
 	  							<path d="m8 3.293 6 6V13.5a1.5 1.5 0 0 1-1.5 1.5h-9A1.5 1.5 0 0 1 2 13.5V9.293l6-6Z"/>
 							</svg>
-		        			Home
+		        			홈 화면
 		        		</a>
 		        	</li>
 		        	<li class="nav-item ">
@@ -45,7 +45,7 @@
 								</a>
 								<ul class="dropdown-menu">
 									<li><a class="dropdown-item" href="updateUser.jsp">회원정보 수정</a></li>
-	    							<li><a class="dropdown-item" href="#">내 활동</a></li>
+	    							<li><a class="dropdown-item" href="history">내 활동</a></li>
 									<li><a class="dropdown-item" href="deleteUser.jsp">회원탈퇴</a></li>
 									<li><a class="dropdown-item" href="signOut">로그아웃</a></li>
 								</ul>
@@ -73,4 +73,3 @@
 			</div>
 		</div>
 	</nav>
-	<br>

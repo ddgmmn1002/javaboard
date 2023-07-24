@@ -18,7 +18,6 @@ public class PostDao {
 		return instance;
 	}
 	
-	
 	public boolean insertPost(PostVO post) {
 		DBcon db = new DBcon();
 		Connection conn = null;
@@ -29,7 +28,7 @@ public class PostDao {
 			String query = "INSERT INTO tbl_post(user_id, title, created_at, content, trailer)"
 					+ " VALUES (?, ?, CURRENT_TIMESTAMP(), ?, ?)";
 			stmt = conn.prepareStatement(query);
-			stmt.setString(1, post.getUser_id());
+			stmt.setString(1, post.getUserId());
 			stmt.setString(2, post.getTitle());
 			stmt.setString(3, post.getContent());
 			stmt.setString(4, post.getTrailer());
@@ -72,7 +71,7 @@ public class PostDao {
 			while (rs.next()) {
 				PostVO post = new PostVO();
 				post.setPno(rs.getInt("pno"));
-				post.setUser_id(rs.getString("user_id"));
+				post.setUserId(rs.getString("user_id"));
 				post.setTitle(rs.getString("title"));
 				post.setCreatedAt(rs.getTimestamp("created_at"));
 				post.setUpdatedAt(rs.getTimestamp("updated_at"));
@@ -98,6 +97,58 @@ public class PostDao {
 		return list;
 	}
 	
+	public ArrayList<PostVO> selectPostListById(String userId) {
+		DBcon db = new DBcon();
+		Connection conn = null;
+		PreparedStatement stmt = null;
+		ResultSet rs = null;
+		
+		ArrayList<PostVO> list = new ArrayList<>();
+		try {
+			conn = db.getConnection();
+			String query = "SELECT p.pno, p.user_id, u.nickname, p.title, p.created_at, p.updated_at, u.grade, " + 
+					" COUNT(DISTINCT i.interaction_id) AS view_count, COUNT(DISTINCT c.cno) AS comment_count, " + 
+					" COUNT(DISTINCT case when i.like_status = 1 then i.interaction_id END) AS like_count " + 
+					" FROM tbl_post AS p JOIN tbl_user AS u ON p.user_id = u.user_id " + 
+					" LEFT JOIN tbl_interaction AS i ON p.pno = i.pno " + 
+					" LEFT JOIN tbl_comment AS c ON c.pno = p.pno " + 
+					" WHERE p.user_id = ? " +
+					" GROUP BY p.pno " + 
+					" ORDER BY created_at DESC";
+			stmt = conn.prepareStatement(query);
+			stmt.setString(1, userId);
+			rs = stmt.executeQuery();
+			
+			while (rs.next()) {
+				PostVO post = new PostVO();
+				post.setPno(rs.getInt("pno"));
+				post.setUserId(rs.getString("user_id"));
+				post.setNickname(rs.getString("nickname"));
+				post.setTitle(rs.getString("title"));
+				post.setCreatedAt(rs.getTimestamp("created_at"));
+				post.setUpdatedAt(rs.getTimestamp("updated_at"));
+				post.setGrade(rs.getString("grade"));
+				post.setViewCount(rs.getInt("view_count"));
+				post.setCommentCount(rs.getInt("comment_count"));
+				post.setLikeCount(rs.getInt("like_count"));
+				
+				list.add(post);
+			}
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				rs.close();
+				stmt.close();
+				conn.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return list;
+	}
+
 	public PostVO selectPostOne(int pno) {
 		PostVO post = new PostVO();
 		
@@ -120,7 +171,7 @@ public class PostDao {
 			rs.next();
 			
 			post.setPno(rs.getInt("pno"));
-			post.setUser_id(rs.getString("user_id"));
+			post.setUserId(rs.getString("user_id"));
 			post.setTitle(rs.getString("title"));
 			post.setCreatedAt(rs.getTimestamp("created_at"));
 			post.setUpdatedAt(rs.getTimestamp("updated_at"));

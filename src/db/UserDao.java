@@ -34,7 +34,7 @@ public class UserDao {
 			stmt.setString(1, user.getId());
 			stmt.setString(2, user.getPw());
 			stmt.setString(3, user.getName());
-			stmt.setDate(4, user.getBirth_date());
+			stmt.setDate(4, user.getBirthDate());
 			stmt.setString(5, user.getCountry());
 			stmt.setString(6, user.getPhone());
 			stmt.setString(7, user.getEmail());
@@ -78,12 +78,12 @@ public class UserDao {
 				user.setId(id);
 				user.setPw(pw);
 				user.setName(rs.getString("name"));
-				user.setBirth_date(rs.getDate("birth_date"));
+				user.setBirthDate(rs.getDate("birth_date"));
 				user.setCountry(rs.getString("country"));
 				user.setPhone(rs.getString("phone"));
 				user.setEmail(rs.getString("email"));
 				user.setGender(rs.getString("gender"));
-				user.setSignup_date(rs.getDate("signup_date"));
+				user.setSignupDate(rs.getDate("signup_date"));
 				user.setNickname(rs.getString("nickname"));
 				user.setGrade(rs.getString("grade"));
 			}

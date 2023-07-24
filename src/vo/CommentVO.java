@@ -10,9 +10,9 @@ public class CommentVO {
 	private String image;
 	private int pno;
 	private String title;
-	private String user_id;
+	private String userId;
 	private String content;
-	private Timestamp created_at;
-	private Timestamp updated_at;
+	private Timestamp createdAt;
+	private Timestamp updatedAt;
 	private String nickname;
 }

@@ -7,7 +7,7 @@ import lombok.Data;
 @Data
 public class PostVO {
 	private int pno;
-	private String user_id;
+	private String userId;
 	private String title;
 	private Timestamp createdAt;
 	private Timestamp updatedAt;
