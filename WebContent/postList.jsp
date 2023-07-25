@@ -13,8 +13,9 @@
 	<jsp:include page="header.jsp"></jsp:include>
 	<div class="container shadow-lg p-3 mb-5 bg-light rounded">
 	<core:if test="${not empty userInfo }">
-		<a class="btn btn-primary" href="postForm.jsp">게시글 작성</a>
-		<br><br>
+		<div class="d-flex mb-3 justify-content-end">
+			<a class="btn btn-primary" href="postForm.jsp">게시글 작성</a>
+		</div>
 	</core:if>
 		<table class="table table-hover bg-white rounded">
 			<thead>

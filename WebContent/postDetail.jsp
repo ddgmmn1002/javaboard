@@ -64,8 +64,14 @@
 			<div class="row">
 				<div class="col d-flex justify-content-center">
 					<div class="d-flex gap-3">
-						<span>좋아요😎: ${post.getLikeCount() }</span>
-						<span>싫어요🤬: ${post.getDislikeCount() }</span>
+						<div>
+							<input type="checkbox" checked>
+							<span>좋아요 😎: ${post.getLikeCount() }</span>
+						</div>
+						<div>
+							<span>싫어요 🤬: ${post.getDislikeCount() }</span>
+							<input type="checkbox" checked>
+						</div>
 					</div>
 				</div>
 			</div>
@@ -215,7 +221,7 @@
 	                    	content: updateContent
 	                	},
 	                	success: function () {
-	                		updateDiv.parent().siblings()[2].innerText = updateContent;
+	                		updateDiv.parent().siblings()[2].innerHTML = updateContent;
 	                		updateDiv.remove();
 	                	},
 	        		});

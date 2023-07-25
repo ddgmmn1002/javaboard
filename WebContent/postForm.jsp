@@ -8,7 +8,7 @@
 <title>write new post</title>
 <script src="https://cdn.tiny.cloud/1/qin272fijzzkwqe5r2qk9myu4pr5qfybcdh0cmqj8eq5pwvz/tinymce/6/tinymce.min.js" referrerpolicy="origin"></script>
 </head>
-<body>
+<body class="bg-dark">
 <jsp:include page="header.jsp"></jsp:include>
 	<div class="container shadow p-3 mb-5 bg-body rounded">
 		<form action="insertPost" method="post">

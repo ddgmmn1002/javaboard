@@ -29,7 +29,7 @@ public class UserDao {
 			conn = db.getConnection();
 			String query = "INSERT INTO tbl_user"
 					+ " (user_id, user_pw, name, birth_date, country, phone, email, gender, signup_date, nickname, grade)"
-					+ " VALUES (?, ?, ?, ?, ?, ?, ?, ?, CURDATE(), ?, 'green')";
+					+ " VALUES (?, ?, ?, ?, ?, ?, ?, ?, CURDATE(), ?, 'regular')";
 			stmt = conn.prepareStatement(query);
 			stmt.setString(1, user.getId());
 			stmt.setString(2, user.getPw());

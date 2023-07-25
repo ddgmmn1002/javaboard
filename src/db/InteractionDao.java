@@ -50,6 +50,36 @@ public class InteractionDao {
 		return result;
 	}
 	
+	public boolean insertInteractionWithIp(int pno, String addr) {
+		DBcon db = new DBcon();
+		boolean result = false;
+		
+		Connection conn = null;
+		PreparedStatement stmt = null;
+		try {
+			conn = db.getConnection();
+			String query = "INSERT INTO tbl_interaction(pno, ip_address, interacted_at)" + 
+					" VALUES (?, ?, CURRENT_TIMESTAMP())";
+			stmt = conn.prepareStatement(query);
+			stmt.setInt(1, pno);
+			stmt.setString(2, addr);
+			if (stmt.executeUpdate() == 1) {
+				result = true;
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				stmt.close();
+				conn.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		
+		return result;
+	}
+	
 	public boolean isAlreadyViewed(int pno, String id) {
 		DBcon db = new DBcon();
 		boolean result = false;
@@ -64,6 +94,39 @@ public class InteractionDao {
 			stmt = conn.prepareStatement(query);
 			stmt.setInt(1, pno);
 			stmt.setString(2, id);
+			rs = stmt.executeQuery();
+			
+			if (rs.next()) {
+				result = true;
+			} 
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				rs.close();
+				stmt.close();
+				conn.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return result;
+	}
+	
+	public boolean isAlreadyViewedWithIp(int pno, String addr) {
+		DBcon db = new DBcon();
+		boolean result = false;
+		
+		Connection conn = null;
+		PreparedStatement stmt = null;
+		ResultSet rs = null;
+		try {
+			conn = db.getConnection();
+			String query = "SELECT interaction_id FROM tbl_interaction" + 
+					" WHERE pno = ? AND ip_address = ?";
+			stmt = conn.prepareStatement(query);
+			stmt.setInt(1, pno);
+			stmt.setString(2, addr);
 			rs = stmt.executeQuery();
 			
 			if (rs.next()) {
@@ -152,5 +215,43 @@ public class InteractionDao {
 		}
 		
 		return list;
+	}
+	
+	public InteractionVO selectInteractionOne(String userId, int pno) {
+		DBcon db = new DBcon();
+		Connection conn = null;
+		PreparedStatement stmt = null;
+		ResultSet rs = null;
+		
+		InteractionVO interaction = new InteractionVO();
+		try {
+			conn = db.getConnection();
+			String query = "SELECT * FROM tbl_interaction" + 
+						" WHERE user_id = ? AND pno = ?";
+			stmt = conn.prepareStatement(query);
+			stmt.setString(1, userId);
+			stmt.setInt(2, pno);
+			rs = stmt.executeQuery();
+			if (rs.next()) {
+				interaction.setInteractionId(rs.getInt("interaction_id"));
+				interaction.setInteractedAt(rs.getTimestamp("interacted_at"));
+				interaction.setUserId(rs.getString("user_id"));
+				interaction.setPno(rs.getInt("pno"));
+				interaction.setLikeStatus(rs.getBoolean("like_status"));
+				interaction.setDislikeStatus(rs.getBoolean("dislike_status"));
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				rs.close();
+				stmt.close();
+				conn.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		
+		return interaction;
 	}
 }
