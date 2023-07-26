@@ -1,6 +1,8 @@
 package servlets;
 
 import java.io.IOException;
+import java.io.PrintWriter;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -16,6 +18,7 @@ public class SignInServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		PrintWriter out = response.getWriter();
 		UserDao dao = UserDao.getInstance();
 		HttpSession session = request.getSession();
 		
@@ -26,10 +29,10 @@ public class SignInServlet extends HttpServlet {
 		
 		if(user.getId() == null) {
 			session.setAttribute("signInFail", true);
-			response.sendRedirect("signInForm.jsp");
+			out.print(0);
 		} else {
 			session.setAttribute("userInfo", user);
-			response.sendRedirect("postList");
+			out.print(1);
 		}
 	}
 

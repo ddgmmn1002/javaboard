@@ -24,8 +24,8 @@
 				<div class="row">
 					<div class="col">
 						<div class="form-floating">
-							<input class="form-control" type="text" value="${post.getTrailer() }" name="trailer">
-							<label for="trailer">동영상ID(유튜브)</label>
+							<input class="form-control" type="text" value="${post.getVideo() }" name="video">
+							<label for="video">동영상ID(유튜브)</label>
 						</div>
 					</div>
 				</div>

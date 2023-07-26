@@ -25,13 +25,13 @@ public class PostDao {
 		boolean result = false;
 		try {
 			conn = db.getConnection();
-			String query = "INSERT INTO tbl_post(user_id, title, created_at, content, trailer)"
+			String query = "INSERT INTO tbl_post(user_id, title, created_at, content, video_link)"
 					+ " VALUES (?, ?, CURRENT_TIMESTAMP(), ?, ?)";
 			stmt = conn.prepareStatement(query);
 			stmt.setString(1, post.getUserId());
 			stmt.setString(2, post.getTitle());
 			stmt.setString(3, post.getContent());
-			stmt.setString(4, post.getTrailer());
+			stmt.setString(4, post.getVideo());
 			if (stmt.executeUpdate() == 1) {
 				result = true;
 			}
@@ -181,7 +181,8 @@ public class PostDao {
 			post.setViewCount(rs.getInt("view_count"));
 			post.setLikeCount(rs.getInt("like_count"));
 			post.setDislikeCount(rs.getInt("dislike_count"));
-			post.setTrailer(rs.getString("trailer"));
+			post.setVideo(rs.getString("video_link"));
+			post.setImage(rs.getString("img_link"));
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
@@ -226,7 +227,7 @@ public class PostDao {
 		return result;
 	}
 	
-	public boolean updatePost(int pno, String title, String content, String trailer) {
+	public boolean updatePost(int pno, String title, String content, String video) {
 		DBcon db = new DBcon();
 		boolean result = false;
 		
@@ -236,12 +237,12 @@ public class PostDao {
 		try {
 			conn = db.getConnection();
 			String query = "UPDATE tbl_post"
-					+ " SET title = ?, content = ?, updated_at = CURRENT_TIMESTAMP(), trailer = ?"
+					+ " SET title = ?, content = ?, updated_at = CURRENT_TIMESTAMP(), video_link = ?"
 					+ " WHERE pno = ?";
 			stmt = conn.prepareStatement(query);
 			stmt.setString(1, title);
 			stmt.setString(2, content);
-			stmt.setString(3, trailer);
+			stmt.setString(3, video);
 			stmt.setInt(4, pno);
 			if (stmt.executeUpdate() == 1) {
 				result = true;

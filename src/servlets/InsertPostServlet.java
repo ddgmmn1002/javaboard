@@ -24,14 +24,14 @@ public class InsertPostServlet extends HttpServlet {
 		
 		String title = request.getParameter("title");
 		String content = request.getParameter("content");
-		String trailer = request.getParameter("trailer");
+		String video = request.getParameter("video");
 		String userId = user.getId();
 		
 		PostVO post = new PostVO();
 		post.setUserId(userId);
 		post.setTitle(title);
 		post.setContent(content);
-		post.setTrailer(trailer);
+		post.setVideo(video);
 		
 		boolean postIsInserted = dao.insertPost(post);
 		
