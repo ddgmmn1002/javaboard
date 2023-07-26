@@ -20,7 +20,6 @@
 <div style="
 	background:url('${post.getImage()}');
 	background-size: cover;
-	background-repeat: no-repeat;
 	background-position: center center;
 	background-attachment: fixed;
 ">
