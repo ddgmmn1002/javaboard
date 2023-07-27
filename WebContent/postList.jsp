@@ -11,7 +11,7 @@
 </head>
 <body class="bg-dark">
 	<jsp:include page="header.jsp"></jsp:include>
-	<div class="container shadow-lg p-3 mb-5 bg-light rounded">
+	<div class="container p-3 mt-5 mb-5 bg-light rounded">
 	<core:if test="${not empty userInfo }">
 		<div class="d-flex mb-3 justify-content-end">
 			<a class="btn btn-primary" href="postForm.jsp">게시글 작성</a>
@@ -19,7 +19,7 @@
 	</core:if>
 		<table class="table table-hover bg-white rounded">
 			<thead>
-				<tr class="shadow-sm p-3 mb-1">
+				<tr class="table-dark shadow-sm p-3 mb-1">
 					<td>게시글 번호</td>
 					<td>작성자</td>
 					<td>제목</td>

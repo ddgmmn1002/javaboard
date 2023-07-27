@@ -8,7 +8,7 @@
 </head>
 <body class="bg-dark">
 	<jsp:include page="header.jsp"></jsp:include>
-	<div class="container shadow p-3 mb-5 bg-body rounded">
+	<div class="container p-3 mt-5 mb-5 bg-light rounded">
 		<div class="row">
 			<div class="col">
 				<h3>회원 탈퇴하시겠습니까?</h3>

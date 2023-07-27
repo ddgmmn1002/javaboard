@@ -25,13 +25,14 @@ public class PostDao {
 		boolean result = false;
 		try {
 			conn = db.getConnection();
-			String query = "INSERT INTO tbl_post(user_id, title, created_at, content, video_link)"
-					+ " VALUES (?, ?, CURRENT_TIMESTAMP(), ?, ?)";
+			String query = "INSERT INTO tbl_post(user_id, title, created_at, content, trailer, poster)"
+					+ " VALUES (?, ?, CURRENT_TIMESTAMP(), ?, ?, ?)";
 			stmt = conn.prepareStatement(query);
 			stmt.setString(1, post.getUserId());
 			stmt.setString(2, post.getTitle());
 			stmt.setString(3, post.getContent());
-			stmt.setString(4, post.getVideo());
+			stmt.setString(4, post.getTrailer());
+			stmt.setString(5, post.getPoster());
 			if (stmt.executeUpdate() == 1) {
 				result = true;
 			}
@@ -66,6 +67,55 @@ public class PostDao {
 					" LEFT JOIN tbl_comment AS c ON c.pno = p.pno" + 
 					" GROUP BY p.pno" + 
 					" ORDER BY created_at DESC";
+			stmt = conn.prepareStatement(query);
+			rs = stmt.executeQuery();
+			while (rs.next()) {
+				PostVO post = new PostVO();
+				post.setPno(rs.getInt("pno"));
+				post.setUserId(rs.getString("user_id"));
+				post.setTitle(rs.getString("title"));
+				post.setCreatedAt(rs.getTimestamp("created_at"));
+				post.setUpdatedAt(rs.getTimestamp("updated_at"));
+				post.setNickname(rs.getString("nickname"));
+				post.setViewCount(rs.getInt("view_count"));
+				post.setCommentCount(rs.getInt("comment_count"));
+				post.setLikeCount(rs.getInt("like_count"));
+				post.setGrade(rs.getString("grade"));
+				list.add(post);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				rs.close();
+				stmt.close();
+				conn.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		
+		return list;
+	}
+	
+	public ArrayList<PostVO> selectPostListByPage(int start, int count) {
+		ArrayList<PostVO> list = new ArrayList<>();
+		
+		DBcon db = new DBcon();
+		Connection conn = null;
+		PreparedStatement stmt = null;
+		ResultSet rs = null;
+		try {
+			conn = db.getConnection();
+			String query = "SELECT p.pno, p.user_id, u.nickname, p.title, p.created_at, p.updated_at, u.grade," + 
+					" COUNT(DISTINCT i.interaction_id) AS view_count, COUNT(DISTINCT c.cno) AS comment_count," + 
+					" COUNT(DISTINCT case when i.like_status = 1 then i.interaction_id END) AS like_count" + 
+					" FROM tbl_post AS p JOIN tbl_user AS u ON p.user_id = u.user_id" + 
+					" LEFT JOIN tbl_interaction AS i ON p.pno = i.pno" + 
+					" LEFT JOIN tbl_comment AS c ON c.pno = p.pno" + 
+					" GROUP BY p.pno" + 
+					" ORDER BY created_at DESC" +
+					" LIMIT " + start + ", " + count;
 			stmt = conn.prepareStatement(query);
 			rs = stmt.executeQuery();
 			while (rs.next()) {
@@ -181,8 +231,8 @@ public class PostDao {
 			post.setViewCount(rs.getInt("view_count"));
 			post.setLikeCount(rs.getInt("like_count"));
 			post.setDislikeCount(rs.getInt("dislike_count"));
-			post.setVideo(rs.getString("video_link"));
-			post.setImage(rs.getString("img_link"));
+			post.setTrailer(rs.getString("trailer"));
+			post.setPoster(rs.getString("poster"));
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
@@ -227,7 +277,7 @@ public class PostDao {
 		return result;
 	}
 	
-	public boolean updatePost(int pno, String title, String content, String video) {
+	public boolean updatePost(int pno, String title, String content, String poster, String trailer) {
 		DBcon db = new DBcon();
 		boolean result = false;
 		
@@ -237,13 +287,14 @@ public class PostDao {
 		try {
 			conn = db.getConnection();
 			String query = "UPDATE tbl_post"
-					+ " SET title = ?, content = ?, updated_at = CURRENT_TIMESTAMP(), video_link = ?"
+					+ " SET title = ?, content = ?, updated_at = CURRENT_TIMESTAMP(), poster = ?, trailer = ?"
 					+ " WHERE pno = ?";
 			stmt = conn.prepareStatement(query);
 			stmt.setString(1, title);
 			stmt.setString(2, content);
-			stmt.setString(3, video);
-			stmt.setInt(4, pno);
+			stmt.setString(3, poster);
+			stmt.setString(4, trailer);
+			stmt.setInt(5, pno);
 			if (stmt.executeUpdate() == 1) {
 				result = true;
 			}

@@ -12,17 +12,16 @@ import lombok.NoArgsConstructor;
 public class VideoVO {
 	private int vno;
 	private String title;
-	private String[] genre;
+	private String genre;
 	private String director;
-	private String[] cast;
+	private String cast;
 	private String plot;
 	private Date releaseDate;
 	private int runtime;
 	private String filmRating;
 	private String country;
-	private String[] language;
-	private String image;
-	private String[] category;
-	private int episodesCount;
-	private String[] series;
+	private String language;
+	private String category;
+	private String poster;
+	private String trailer;
 }

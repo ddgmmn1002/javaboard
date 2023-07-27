@@ -9,10 +9,11 @@
 </head>
 <body class="bg-dark">
 <jsp:include page="header.jsp"></jsp:include>
-	<div class="container shadow-lg p-5 mb-5 bg-body rounded">
+	<div class="container p-5 mt-5 mb-5 bg-light rounded">
 		<form action="updatePost" method="post">
 			<div class="d-grid gap-3">
 				<input type="hidden" value="${post.getPno() }" name="pno">
+				
 				<div class="row">
 					<div class="col">
 						<div class="form-floating">
@@ -21,14 +22,25 @@
 						</div>
 					</div>
 				</div>
+				
 				<div class="row">
 					<div class="col">
 						<div class="form-floating">
-							<input class="form-control" type="text" value="${post.getVideo() }" name="video">
-							<label for="video">동영상ID(유튜브)</label>
+							<input class="form-control" type="text" value="${post.getPoster() }" name="poster">
+							<label for="poster">poster</label>
 						</div>
 					</div>
 				</div>
+				
+				<div class="row">
+					<div class="col">
+						<div class="form-floating">
+							<input class="form-control" type="text" value="${post.getTrailer() }" name="trailer">
+							<label for="trailer">trailer</label>
+						</div>
+					</div>
+				</div>
+				
 				<div class="row">
 					<div class="col">
 						<label for="post-tinyeditor" class="form-label">본문</label>

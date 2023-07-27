@@ -10,7 +10,7 @@
 </head>
 <body class="bg-dark">
 <jsp:include page="header.jsp"></jsp:include>
-	<div class="container shadow p-3 mb-5 bg-body rounded">
+	<div class="container p-3 mt-5 mb-5 bg-light rounded">
 		<form action="insertPost" method="post">
 			<div class="d-grid gap-3">
 				<div class="row">
@@ -21,7 +21,13 @@
 				</div>
 				<div class="row">
 					<div class="col">
-						<label for="trailer" class="form-label">동영상ID(유튜브)</label>
+						<label for="poster" class="form-label">poster</label>
+						<input id="poster" type="text" name="poster" class="form-control">
+					</div>
+				</div>
+				<div class="row">
+					<div class="col">
+						<label for="trailer" class="form-label">trailer</label>
 						<input id="trailer" type="text" name="trailer" class="form-control">
 					</div>
 				</div>

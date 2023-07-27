@@ -50,7 +50,6 @@
 									<li><a class="dropdown-item" href="signOut">로그아웃</a></li>
 								</ul>
 							</li>
-							
 						</core:when>
 						<core:otherwise>
 							<li class="nav-item"><a href="signUpForm.jsp" class="nav-link text-light">
@@ -69,6 +68,21 @@
 							</a></li>
 						</core:otherwise>
 					</core:choose>
+					<core:if test="${not empty userInfo }">					
+						<core:choose>
+							<core:when test="${userInfo.getGrade() eq 'admin' }">
+								<li class="nav-item dropdown">
+									<a href="#" class="nav-link dropdown-toggle text-light" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+										 관리자 메뉴
+									</a>
+									<ul class="dropdown-menu dropdown-menu-dark">
+										<li><a class="dropdown-item" href="videoForm.jsp">영상 정보 등록</a></li>
+										<li><a class="dropdown-item" href="#">회원관리</a></li>
+									</ul>
+								</li>
+							</core:when>
+						</core:choose>
+					</core:if>
 		      	</ul>
 			</div>
 		</div>

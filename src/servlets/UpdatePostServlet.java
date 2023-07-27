@@ -22,9 +22,10 @@ public class UpdatePostServlet extends HttpServlet {
 		int pno = Integer.parseInt(_pno);
 		String title = request.getParameter("title");
 		String content = request.getParameter("content");
-		String video = request.getParameter("video");
+		String poster = request.getParameter("poster");
+		String trailer = request.getParameter("trailer");
 		
-		boolean postIsUpdated = dao.updatePost(pno, title, content, video);
+		boolean postIsUpdated = dao.updatePost(pno, title, content, poster, trailer);
 		if (postIsUpdated) {
 			response.sendRedirect("postDetail?pno="+pno);
 		} else {

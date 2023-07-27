@@ -1,4 +1,4 @@
-	<%@page import="java.util.HashMap"%>
+<%@page import="java.util.HashMap"%>
 <%@page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@taglib prefix="core" uri="http://java.sun.com/jsp/jstl/core" %>
@@ -22,7 +22,7 @@
 </head>
 <body class="bg-dark">
 <jsp:include page="header.jsp"></jsp:include>
-	<div class="container shadow-lg p-5 mb-5 bg-body rounded">
+	<div class="container p-5 mt-5 mb-5 bg-light rounded">
 	
 		<form action="signUp" method="post" id="signup-form" data-duplicateCheck="fail">
 			<div class="d-grid gap-3">
@@ -81,10 +81,11 @@
 						<div class="input-group">
 							<span class="input-group-text">Email</span>
 							<input class="form-control" type="text" name="email">
+							<span class="input-group-text">@</span>
 							<select class="form-select" name="email">
-								<option value="@naver.com">naver.com</option>
-								<option value="@daum.net">daum.net</option>
-								<option value="@gmail.com">gmail.com</option>
+								<option value="naver.com">naver.com</option>
+								<option value="daum.net">daum.net</option>
+								<option value="gmail.com">gmail.com</option>
 							</select>
 						</div>
 					</div>

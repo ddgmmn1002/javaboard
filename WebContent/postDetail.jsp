@@ -1,3 +1,4 @@
+<%@page import="javax.security.auth.message.callback.PrivateKeyCallback.Request"%>
 <%@page import="java.sql.Timestamp"%>
 <%@page import="org.apache.jasper.tagplugins.jstl.core.If"%>
 <%@page import="vo.CommentVO"%>
@@ -18,13 +19,13 @@
 <body class="bg-dark">
 <jsp:include page="header.jsp"></jsp:include>
 <div style="
-	background:url('${post.getImage()}');
+	background:url('${post.getPoster()}');
 	background-size: cover;
 	background-position: center center;
 	background-attachment: fixed;
 ">
 	<div class="d-flex" style="backdrop-filter: blur(10px);">
-		<div class="container shadow-lg mt-5 mb-5 p-4 rounded" style="background-color:black;">
+		<div class="container mt-5 mb-5 p-4 rounded" style="background-color:black;">
 			<div class="shadow-lg p-3 mb-5 rounded">
 				<div class="row">
 					<div class="col text-light">
@@ -51,8 +52,8 @@
 					<div class="col">
 						<div class="d-flex justify-content-center">
 							<core:choose>
-								<core:when test="${not empty post.getVideo() }">
-									<div id="player" data-videoid="${post.getVideo() }"></div>
+								<core:when test="${not empty post.getTrailer() }">
+									<div id="player" data-videoid="${post.getTrailer() }"></div>
 								</core:when>
 							</core:choose>
 						</div>

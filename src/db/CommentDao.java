@@ -97,7 +97,8 @@ public class CommentDao {
 			conn = db.getConnection();
 			String query = "SELECT cno, pno, c.user_id, content, created_at, updated_at, nickname" + 
 					" FROM tbl_comment AS c, tbl_user AS u" + 
-					" WHERE c.user_id = u.user_id AND pno = ?";
+					" WHERE c.user_id = u.user_id AND pno = ?" + 
+					" ORDER BY created_at DESC";
 			stmt = conn.prepareStatement(query);
 			stmt.setInt(1, pno);
 			rs = stmt.executeQuery();

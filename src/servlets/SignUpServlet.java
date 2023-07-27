@@ -8,6 +8,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import db.UserDao;
 import vo.UserVO;
@@ -17,16 +18,14 @@ public class SignUpServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		HttpSession session = request.getSession();
 		UserDao dao = UserDao.getInstance();
 		
 		String name = request.getParameter("name");
-		String[] _birthDate = request.getParameterValues("birth");
-		String birthDate = _birthDate[0] + "-" + _birthDate[1] + "-" + _birthDate[2];
+		String birthDate = String.join("-", request.getParameterValues("birth"));
 		String country = request.getParameter("country");
-		String[] _phone = request.getParameterValues("phone");
-		String phone = _phone[0] + "-" + _phone[1] + "-" + _phone[2];
-		String[] _email = request.getParameterValues("email");
-		String email = _email[0] + _email[1];
+		String phone = String.join("-", request.getParameterValues("phone"));
+		String email = String.join("@", request.getParameterValues("email"));
 		String gender = request.getParameter("gender");
 		String id = request.getParameter("id");
 		String pw = request.getParameter("pw");
@@ -45,7 +44,8 @@ public class SignUpServlet extends HttpServlet {
 		
 		boolean signupSuccess = dao.signUp(user);
 		if (signupSuccess) {
-			response.sendRedirect("signInForm.jsp");
+			session.setAttribute("userInfo", dao.signIn(id, pw));
+			response.sendRedirect("home.jsp");
 		} else {
 			request.getRequestDispatcher("signUpForm.jsp").forward(request, response);
 		}
