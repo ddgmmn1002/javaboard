@@ -9,22 +9,6 @@
 		<welcome-file>default.htm</welcome-file>
 		<welcome-file>default.jsp</welcome-file>
 	</welcome-file-list>
-	<context-param>
-		<param-name>MariaDriver</param-name>
-		<param-value>org.mariadb.jdbc.Driver</param-value>
-	</context-param>
-	<context-param>
-		<param-name>MariaUrl</param-name>
-		<param-value>jdbc:mariadb://localhost:3306/mydb</param-value>
-	</context-param>
-	<context-param>
-		<param-name>MariaId</param-name>
-		<param-value>root</param-value>
-	</context-param>
-		<context-param>
-		<param-name>MariaPw</param-name>
-		<param-value>1234</param-value>
-	</context-param>
 	<servlet-mapping>
 		<servlet-name>default</servlet-name>
 		<url-pattern>*.js</url-pattern>
