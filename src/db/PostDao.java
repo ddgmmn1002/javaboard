@@ -98,6 +98,34 @@ public class PostDao {
 		return list;
 	}
 	
+	public int countTotalRow() {
+		int totalRow = 0;
+		DBcon db = new DBcon();
+		Connection conn = null;
+		PreparedStatement stmt = null;
+		ResultSet rs = null;
+		try {
+			conn = db.getConnection();
+			String query = "SELECT COUNT(*) as totalRow FROM tbl_post";
+			stmt = conn.prepareStatement(query);
+			rs = stmt.executeQuery();
+			if (rs.next()) {
+				totalRow = rs.getInt("totalRow");
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				rs.close();
+				stmt.close();
+				conn.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return totalRow;
+	}
+	
 	public ArrayList<PostVO> selectPostListByPage(int start, int count) {
 		ArrayList<PostVO> list = new ArrayList<>();
 		

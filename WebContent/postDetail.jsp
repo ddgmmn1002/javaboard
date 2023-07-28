@@ -194,6 +194,7 @@
 		  language: 'ko_KR',
 		  height: 200,
 		  menubar: false,
+		  resize: false,
 		  plugins: [
 		    'advlist', 'autolink', 'lists', 'link', 'image', 'charmap', 'preview',
 		    'anchor', 'searchreplace', 'visualblocks', 'code', 'fullscreen',

@@ -61,6 +61,7 @@
 		selector: 'textarea#tiny',
 		  language: 'ko_KR',
 		  height: 700,
+		  resize: false,
 		  plugins: [
 		    'advlist', 'autolink', 'lists', 'link', 'image', 'charmap', 'preview',
 		    'anchor', 'searchreplace', 'visualblocks', 'code', 'fullscreen',
