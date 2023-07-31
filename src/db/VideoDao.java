@@ -90,6 +90,7 @@ public class VideoDao {
 				video.setLanguage(rs.getString("language"));
 				video.setPoster(rs.getString("poster"));
 				video.setCategory(rs.getString("category"));
+				video.setTrailer(rs.getString("trailer"));
 				list.add(video);
 			}
 		} catch (Exception e) {

@@ -1,10 +1,3 @@
-<%@page import="javax.security.auth.message.callback.PrivateKeyCallback.Request"%>
-<%@page import="java.sql.Timestamp"%>
-<%@page import="org.apache.jasper.tagplugins.jstl.core.If"%>
-<%@page import="vo.CommentVO"%>
-<%@page import="java.util.ArrayList"%>
-<%@page import="vo.UserVO"%>
-<%@page import="vo.PostVO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="core" uri="http://java.sun.com/jsp/jstl/core" %>
@@ -14,7 +7,7 @@
 <meta charset="UTF-8">
 <title>view post</title>
 <script src="js/jquery-3.7.0.js"></script>
-<script src="https://cdn.tiny.cloud/1/qin272fijzzkwqe5r2qk9myu4pr5qfybcdh0cmqj8eq5pwvz/tinymce/6/tinymce.min.js" referrerpolicy="origin"></script>
+<script src="https://cdn.tiny.cloud/1/no-api-key/tinymce/6/tinymce.min.js" referrerpolicy="origin"></script>
 </head>
 <body class="bg-dark">
 <jsp:include page="header.jsp"></jsp:include>
