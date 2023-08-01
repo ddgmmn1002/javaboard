@@ -53,8 +53,10 @@ public class InsertVideoServlet extends HttpServlet {
 		
 		if (isInsertedVideo) {
 			System.out.println("영상 정보 등록 완료");
+			response.sendRedirect("videoList");
 		} else {
 			System.out.println("영상 정보 등록 실패");
+			response.sendRedirect("videoForm");
 		}
 	}
 }

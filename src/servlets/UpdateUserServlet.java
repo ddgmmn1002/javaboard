@@ -21,10 +21,8 @@ public class UpdateUserServlet extends HttpServlet {
 		
 		UserVO user = (UserVO) session.getAttribute("userInfo");
 		String id = user.getId();
-		String[] _phone = request.getParameterValues("phone");
-		String phone = _phone[0] + "-" + _phone[1] + "-" + _phone[2];
-		String[] _email = request.getParameterValues("email");
-		String email = _email[0] + _email[1];
+		String phone = String.join("-", request.getParameterValues("phone"));
+		String email = String.join("@", request.getParameterValues("email"));
 		String password = request.getParameter("pw");
 		String nickname = request.getParameter("nickname");
 		

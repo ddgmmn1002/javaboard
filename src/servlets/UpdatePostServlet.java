@@ -18,14 +18,13 @@ public class UpdatePostServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		PostDao dao = PostDao.getInstance();
 		
-		String _pno = request.getParameter("pno");
-		int pno = Integer.parseInt(_pno);
+		String pno = request.getParameter("pno");
 		String title = request.getParameter("title");
 		String content = request.getParameter("content");
 		String poster = request.getParameter("poster");
 		String trailer = request.getParameter("trailer");
 		
-		boolean postIsUpdated = dao.updatePost(pno, title, content, poster, trailer);
+		boolean postIsUpdated = dao.updatePost(Integer.parseInt(pno), title, content, poster, trailer);
 		if (postIsUpdated) {
 			response.sendRedirect("postDetail?pno="+pno);
 		} else {

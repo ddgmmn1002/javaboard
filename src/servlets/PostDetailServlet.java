@@ -30,8 +30,7 @@ public class PostDetailServlet extends HttpServlet {
 		CommentDao commentDao = CommentDao.getInstance();
 		InteractionDao interactionDao = InteractionDao.getInstance();
 		
-		String _pno = request.getParameter("pno");
-		int pno = Integer.parseInt(_pno);
+		int pno = Integer.parseInt(request.getParameter("pno"));
 		UserVO user = (UserVO)session.getAttribute("userInfo");
 		String userId = "";
 		

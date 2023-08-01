@@ -32,12 +32,20 @@
 							  <label class="form-check-label" for="genre-action">액션</label>
 							</div>
 							<div class="form-check">
+							  <input class="form-check-input" type="checkbox" value="adventure" id="genre-adventure" name="genre">
+							  <label class="form-check-label" for="genre-adventure">모험</label>
+							</div>
+							<div class="form-check">
 							  <input class="form-check-input" type="checkbox" value="romance" id="genre-romance" name="genre">
 							  <label class="form-check-label" for="genre-romance">로맨스</label>
 							</div>
 							<div class="form-check">
-							  <input class="form-check-input" type="checkbox" value="animation" id="genre-animation" name="genre">
-							  <label class="form-check-label" for="genre-animation">애니메이션</label>
+							  <input class="form-check-input" type="checkbox" value="family" id="genre-family" name="genre">
+							  <label class="form-check-label" for="genre-family">가족</label>
+							</div>
+							<div class="form-check">
+							  <input class="form-check-input" type="checkbox" value="comedy" id="genre-comedy" name="genre">
+							  <label class="form-check-label" for="genre-comedy">코미디</label>
 							</div>
 							<div class="form-check">
 							  <input class="form-check-input" type="checkbox" value="drama" id="genre-drama" name="genre">
@@ -52,6 +60,10 @@
 							  <label class="form-check-label" for="genre-thriller">스릴러</label>
 							</div>
 							<div class="form-check">
+							  <input class="form-check-input" type="checkbox" value="mystery" id="genre-mystery" name="genre">
+							  <label class="form-check-label" for="genre-mystery">미스터리</label>
+							</div>
+							<div class="form-check">
 							  <input class="form-check-input" type="checkbox" value="sf" id="genre-sf" name="genre">
 							  <label class="form-check-label" for="genre-sf">SF</label>
 							</div>
@@ -60,12 +72,44 @@
 							  <label class="form-check-label" for="genre-fantasy">판타지</label>
 							</div>
 							<div class="form-check">
-							  <input class="form-check-input" type="checkbox" value="documentary" id="genre-documentary" name="genre">
-							  <label class="form-check-label" for="genre-documentary">다큐멘터리</label>
+							  <input class="form-check-input" type="checkbox" value="western" id="genre-western" name="genre">
+							  <label class="form-check-label" for="genre-western">서부</label>
+							</div>
+							<div class="form-check">
+							  <input class="form-check-input" type="checkbox" value="war" id="genre-war" name="genre">
+							  <label class="form-check-label" for="genre-war">전쟁</label>
+							</div>
+							<div class="form-check">
+							  <input class="form-check-input" type="checkbox" value="disaster" id="genre-disaster" name="genre">
+							  <label class="form-check-label" for="genre-disaster">재난</label>
+							</div>
+							<div class="form-check">
+							  <input class="form-check-input" type="checkbox" value="crime" id="genre-crime" name="genre">
+							  <label class="form-check-label" for="genre-crime">범죄</label>
 							</div>
 							<div class="form-check">
 							  <input class="form-check-input" type="checkbox" value="whodunnit" id="genre-whodunnit" name="genre">
 							  <label class="form-check-label" for="genre-whodunnit">추리</label>
+							</div>
+							<div class="form-check">
+							  <input class="form-check-input" type="checkbox" value="sport" id="genre-sport" name="genre">
+							  <label class="form-check-label" for="genre-sport">스포츠</label>
+							</div>
+							<div class="form-check">
+							  <input class="form-check-input" type="checkbox" value="historical" id="genre-historical" name="genre">
+							  <label class="form-check-label" for="genre-historical">역사</label>
+							</div>
+							<div class="form-check">
+							  <input class="form-check-input" type="checkbox" value="animation" id="genre-animation" name="genre">
+							  <label class="form-check-label" for="genre-animation">애니메이션</label>
+							</div>
+							<div class="form-check">
+							  <input class="form-check-input" type="checkbox" value="musical" id="genre-musical" name="genre">
+							  <label class="form-check-label" for="genre-musical">뮤지컬</label>
+							</div>
+							<div class="form-check">
+							  <input class="form-check-input" type="checkbox" value="documentary" id="genre-documentary" name="genre">
+							  <label class="form-check-label" for="genre-documentary">다큐멘터리</label>
 							</div>
 						</div>
 					</div>

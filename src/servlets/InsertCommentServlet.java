@@ -20,13 +20,12 @@ public class InsertCommentServlet extends HttpServlet {
 		HttpSession session = request.getSession();
 		
 		String content = request.getParameter("content");
-		String _pno = request.getParameter("pno");
-		int pno = Integer.parseInt(_pno);
+		String pno = request.getParameter("pno");
 		UserVO user = (UserVO)session.getAttribute("userInfo");
 		String userId = user.getId();
 
 
-		if (dao.insertComment(pno, userId, content)) {
+		if (dao.insertComment(Integer.parseInt(pno), userId, content)) {
 			System.out.println("댓글 삽입 성공");
 		} else {
 			System.out.println("댓글 삽입 실패");

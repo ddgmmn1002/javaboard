@@ -16,16 +16,15 @@ public class DeleteCommentServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		CommentDao dao = CommentDao.getInstance();
 		
-		String _cno = request.getParameter("cno");
-		String _pno = request.getParameter("pno");
-		int cno = Integer.parseInt(_cno);
+		String cno = request.getParameter("cno");
+		String pno = request.getParameter("pno");
 		
-		if (dao.deleteCommentOne(cno)) {
+		if (dao.deleteCommentOne(Integer.parseInt(cno))) {
 			System.out.println("삭제 성공");
 		} else {
 			System.out.println("삭제 실패");
 		}
 		
-		request.getRequestDispatcher("postDetail?pno=" + _pno).forward(request, response);
+		request.getRequestDispatcher("postDetail?pno=" + pno).forward(request, response);
 	}
 }

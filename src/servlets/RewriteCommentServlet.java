@@ -21,10 +21,9 @@ public class RewriteCommentServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		PrintWriter out = response.getWriter();
 		CommentDao dao = CommentDao.getInstance();
-		String _cno = request.getParameter("cno");
-		int cno = Integer.parseInt(_cno);
+		String cno = request.getParameter("cno");
 		
-		CommentVO comment = dao.selectCommentOne(cno);
+		CommentVO comment = dao.selectCommentOne(Integer.parseInt(cno));
 		
 		JSONObject jsonObj = new JSONObject();
 		jsonObj.put("cno", comment.getCno());

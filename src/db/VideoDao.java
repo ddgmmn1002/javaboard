@@ -72,7 +72,7 @@ public class VideoDao {
 		
 		try {
 			conn = db.getConnection();
-			String query = "SELECT * FROM tbl_video";
+			String query = "SELECT * FROM tbl_video ORDER BY vno DESC";
 			stmt = conn.prepareStatement(query);
 			rs = stmt.executeQuery();
 			while (rs.next()) {

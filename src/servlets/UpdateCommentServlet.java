@@ -16,14 +16,13 @@ public class UpdateCommentServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		CommentDao dao = CommentDao.getInstance();
 		
-		String _cno = request.getParameter("cno");
+		String cno = request.getParameter("cno");
 		String content = request.getParameter("content");
-		int cno = Integer.parseInt(_cno);
 		
-		System.out.println(cno);
+		System.out.println(Integer.parseInt(cno));
 		System.out.println(content);
 		
-		boolean commentIsUpdated = dao.updateComment(cno, content);
+		boolean commentIsUpdated = dao.updateComment(Integer.parseInt(cno), content);
 		
 		if (commentIsUpdated) {
 			System.out.println("댓글 업데이트 성공");

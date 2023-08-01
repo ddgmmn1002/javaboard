@@ -17,10 +17,9 @@ public class DeletePostServlet extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		PostDao postDao = PostDao.getInstance();
-		String _pno = request.getParameter("pno");
-		int pno = Integer.parseInt(_pno);
+		String pno = request.getParameter("pno");
 		
-		boolean postIsDeleted = postDao.deletePost(pno);
+		boolean postIsDeleted = postDao.deletePost(Integer.parseInt(pno));
 		if (postIsDeleted) {
 			response.sendRedirect("postList");
 		} else {
