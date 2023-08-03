@@ -9,7 +9,7 @@
 
 		<nav class="navbar navbar-dark navbar-expand-lg bg-dark">
 			<div class="container-fluid m-3">
-				<a class="navbar-brand text-light ms-2 me-5" href="home.jsp">Movie</a>
+				<a class="navbar-brand text-light ms-2 me-5" href="home.jsp"> <h1>Critic</h1> </a>
 				<button class="navbar-toggler" type="button" data-bs-toggle="collapse"
 					data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
 					aria-expanded="false" aria-label="Toggle navigation">
@@ -26,7 +26,7 @@
 									<path
 										d="m8 3.293 6 6V13.5a1.5 1.5 0 0 1-1.5 1.5h-9A1.5 1.5 0 0 1 2 13.5V9.293l6-6Z" />
 								</svg>
-								홈 화면
+								홈으로
 							</a>
 						</li>
 						<li class="nav-item">
@@ -111,7 +111,7 @@
 											<li>
 												<a class="dropdown-item" href="videoList">영상 정보 목록</a>
 											</li>
-											<li><a class="dropdown-item" href="#">회원관리</a></li>
+											<li><a class="dropdown-item" href="userList">회원관리</a></li>
 										</ul>
 									</li>
 								</core:when>

@@ -19,8 +19,6 @@ public class UpdateCommentServlet extends HttpServlet {
 		String cno = request.getParameter("cno");
 		String content = request.getParameter("content");
 		
-		System.out.println(Integer.parseInt(cno));
-		System.out.println(content);
 		
 		boolean commentIsUpdated = dao.updateComment(Integer.parseInt(cno), content);
 		

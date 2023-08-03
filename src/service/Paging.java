@@ -5,7 +5,7 @@ import lombok.Data;
 @Data
 public class Paging {
 	private int currentPage; //현재 위치한 페이지의 번호
-	private int pageSize = 8; //한 페이지당 나타낼 요소의 수
+	private int pageSize; //한 페이지당 나타낼 요소의 수
 	private int startRow; //해당 페이지의 시작 요소 번호
 	private int totalRow; //데이터베이스의 전체 요소 개수
 	private int totalPage; //전체 페이지 수
@@ -15,7 +15,8 @@ public class Paging {
 	private int startPage; //블럭의 시작 페이지 번호
 	private int endPage; //블럭의 마지막 페이지 번호
 	
-	public Paging(int currentPage, int totalRow){
+	public Paging(int pageSize, int currentPage, int totalRow){
+		this.pageSize = pageSize;
 		this.totalRow = totalRow;
 		if (totalRow == 0) { //데이터가 없을 경우 페이지 수 1
 			this.totalPage = 1;

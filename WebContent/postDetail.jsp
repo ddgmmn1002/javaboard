@@ -11,12 +11,19 @@
 </head>
 <body class="bg-dark">
 <jsp:include page="header.jsp"></jsp:include>
-<div style="
-	background:url('${post.getPoster()}');
-	background-size: cover;
-	background-position: center center;
-	background-attachment: fixed;
-">
+<core:choose>
+	<core:when test="${not empty post.getPoster() }">
+		<div style="
+			background:url('${post.getPoster()}');
+			background-size: cover;
+			background-position: center center;
+			background-attachment: fixed;
+		">		
+	</core:when>
+	<core:otherwise>
+		<div>
+	</core:otherwise>
+</core:choose>
 	<div class="d-flex" style="backdrop-filter: blur(10px);">
 		<div class="container mt-5 mb-5 p-4 rounded" style="background-color:black;">
 			<div class="shadow-lg p-3 mb-5 rounded">

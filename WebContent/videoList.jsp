@@ -20,7 +20,7 @@
 				  <div class="col">
 				    <div class="p-3 rounded" style="border:1px solid black; height:500px;">
 				      <h3 style="font-weight: bold;">${video.getTitle() }</h3>
-				      <img src="${video.getPoster() }" width="200px" height="300px">
+				      <img src="${video.getPoster() }" width="200" height="300">
 				    </div>
 				  </div>
 			  <core:if test="${status.last || status.index % colPerRow == colPerRow-1}">

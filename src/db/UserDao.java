@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 import vo.UserVO;
 
@@ -180,4 +181,119 @@ public class UserDao {
 		
 		return result;
 	}
+	
+	public ArrayList<UserVO> selectUserListByPage(int start, int count){
+		DBcon db = new DBcon();
+		
+		Connection conn = null;
+		PreparedStatement stmt = null;
+		ResultSet rs = null;
+		
+		ArrayList<UserVO> userList = new ArrayList<>();
+		try {
+			conn = db.getConnection();
+			String query = "SELECT user_id, nickname, name, grade, signup_date" + 
+					" FROM tbl_user" + 
+					" WHERE grade != 'admin'" + 
+					" ORDER BY signup_date DESC" + 
+					" LIMIT ?, ?";
+			stmt = conn.prepareStatement(query);
+			stmt.setInt(1, start);
+			stmt.setInt(2, count);
+			rs = stmt.executeQuery();
+			while (rs.next()) {
+				UserVO user = new UserVO();
+				user.setId(rs.getString("user_id"));
+				user.setName(rs.getString("name"));
+				user.setSignupDate(rs.getDate("signup_date"));
+				user.setNickname(rs.getString("nickname"));
+				user.setGrade(rs.getString("grade"));
+				
+				userList.add(user);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				stmt.close();
+				rs.close();
+				conn.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		
+		return userList;
+		
+	}
+	
+	public int userListTotalRow(){
+		int totalRow = 0;
+		DBcon db = new DBcon();
+		Connection conn = null;
+		PreparedStatement stmt = null;
+		ResultSet rs = null;
+		try {
+			conn = db.getConnection();
+			String query = "SELECT COUNT(*) as totalRow FROM tbl_user WHERE grade != 'admin'";
+			stmt = conn.prepareStatement(query);
+			rs = stmt.executeQuery();
+			if (rs.next()) {
+				totalRow = rs.getInt("totalRow");
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				stmt.close();
+				rs.close();
+				conn.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return totalRow;
+	}
+	
+	public UserVO selectUserOne(String userId) {
+		DBcon db = new DBcon();
+		Connection conn = null;
+		PreparedStatement stmt = null;
+		ResultSet rs = null;
+		
+		UserVO user = new UserVO();
+		try {
+			conn = db.getConnection();
+			String query = "SELECT user_id, name, birth_date, country, phone, email, gender, signup_date, nickname, grade" + 
+			" FROM tbl_user" +
+			" WHERE user_id = ?";
+			stmt = conn.prepareStatement(query);
+			stmt.setString(1, userId);
+			rs = stmt.executeQuery();
+			if (rs.next()) {
+				user.setId(rs.getString("user_id"));
+				user.setName(rs.getString("name"));
+				user.setBirthDate(rs.getDate("birth_date"));
+				user.setCountry(rs.getString("phone"));
+				user.setEmail(rs.getString("email"));
+				user.setGender(rs.getString("gender"));
+				user.setSignupDate(rs.getDate("signup_date"));
+				user.setNickname(rs.getString("nickname"));
+				user.setGrade(rs.getString("grade"));
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				rs.close();
+				stmt.close();
+				conn.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		
+		return user;
+	}
+	
 }

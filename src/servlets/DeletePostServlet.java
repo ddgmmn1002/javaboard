@@ -16,6 +16,7 @@ public class DeletePostServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		System.out.println("게시글 삭제 서블릿 호출");
 		PostDao postDao = PostDao.getInstance();
 		String pno = request.getParameter("pno");
 		

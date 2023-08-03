@@ -7,20 +7,20 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import db.VideoDao;
-import vo.VideoVO;
+import db.UserDao;
+import vo.UserVO;
 
-@WebServlet("/PrepareUpdateVideoServlet")
-public class PrepareUpdateVideoServlet extends HttpServlet {
+@WebServlet("/userDetail")
+public class UserDetailServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-
+       
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		System.out.println("영상 수정 서블릿 호출");
-		VideoDao dao = VideoDao.getInstance();
+		UserDao dao = UserDao.getInstance();
+		String id = request.getParameter("id");
 		
-		int vno = Integer.parseInt(request.getParameter("vno"));
+		UserVO user = dao.selectUserOne(id);
 		
-		VideoVO video = dao.selectOne(vno);
+		request.setAttribute("user", user);
+		request.getRequestDispatcher("userDetail.jsp").forward(request, response);
 	}
-
 }

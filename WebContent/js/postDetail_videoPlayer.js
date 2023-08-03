@@ -14,7 +14,7 @@ function onYouTubeIframeAPIReady() {
       rel: 0,
       controls: 0,
       autoplay: 1,
-      mute: 1,
+      mute: 0,
       playsinline: 1, //iOS환경에서 전체화면으로 재생하지 않게
     },
   });

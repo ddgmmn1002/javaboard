@@ -17,10 +17,12 @@ public class InsertVideoServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		System.out.println("새 영상 정보 서블릿 호출");
 		VideoDao dao = VideoDao.getInstance();
 		
 		String title = request.getParameter("title");
 		String genre = String.join(" ", request.getParameterValues("genre"));
+		System.out.println(genre);
 		String director = request.getParameter("director");
 		String cast = request.getParameter("cast");
 		String poster = request.getParameter("poster_link");
@@ -32,6 +34,8 @@ public class InsertVideoServlet extends HttpServlet {
 		String country = request.getParameter("country");
 		String language = request.getParameter("language");
 		String category = request.getParameter("category");
+		
+		
 		
 		VideoVO video = new VideoVO();
 		video.setTitle(title);

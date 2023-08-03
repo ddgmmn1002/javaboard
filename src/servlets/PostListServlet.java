@@ -19,8 +19,8 @@ public class PostListServlet extends HttpServlet {
        
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		PostDao dao = PostDao.getInstance();
-		String currentPageStr = request.getParameter("page");
 		int currentPage = 1;
+		String currentPageStr = request.getParameter("page");
 		
 		if (currentPageStr != null) {
 			try {
@@ -30,7 +30,7 @@ public class PostListServlet extends HttpServlet {
 			}
 		}
 		
-		Paging paging = new Paging(currentPage, dao.countTotalRow());
+		Paging paging = new Paging(8, currentPage, dao.postListTotalRow());
 		
 		ArrayList<PostVO> list = dao.selectPostListByPage(paging.getStartRow(), paging.getPageSize());
 		

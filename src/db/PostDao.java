@@ -98,7 +98,7 @@ public class PostDao {
 		return list;
 	}
 	
-	public int countTotalRow() {
+	public int postListTotalRow() {
 		int totalRow = 0;
 		DBcon db = new DBcon();
 		Connection conn = null;
@@ -143,8 +143,10 @@ public class PostDao {
 					" LEFT JOIN tbl_comment AS c ON c.pno = p.pno" + 
 					" GROUP BY p.pno" + 
 					" ORDER BY created_at DESC" +
-					" LIMIT " + start + ", " + count;
+					" LIMIT ?, ?";
 			stmt = conn.prepareStatement(query);
+			stmt.setInt(1, start);
+			stmt.setInt(2, count);
 			rs = stmt.executeQuery();
 			while (rs.next()) {
 				PostVO post = new PostVO();

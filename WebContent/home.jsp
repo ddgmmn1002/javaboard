@@ -9,7 +9,5 @@
 </head>
 <body class="bg-dark">
 	<jsp:include page="header.jsp"></jsp:include>
-	<div class="container p-3 mt-5 mb-5 bg-light rounded">
-	</div>
 </body>
 </html>
