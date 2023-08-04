@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>post list</title>
+<title>user list</title>
 </head>
 <body class="bg-dark">
 	<jsp:include page="header.jsp"></jsp:include>

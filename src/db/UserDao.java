@@ -274,7 +274,8 @@ public class UserDao {
 				user.setId(rs.getString("user_id"));
 				user.setName(rs.getString("name"));
 				user.setBirthDate(rs.getDate("birth_date"));
-				user.setCountry(rs.getString("phone"));
+				user.setCountry(rs.getString("country"));
+				user.setPhone(rs.getString("phone"));
 				user.setEmail(rs.getString("email"));
 				user.setGender(rs.getString("gender"));
 				user.setSignupDate(rs.getDate("signup_date"));

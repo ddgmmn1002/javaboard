@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 import db.VideoDao;
 import vo.VideoVO;
 
-@WebServlet("/PrepareUpdateVideoServlet")
+@WebServlet("/prepareUpdateVideo")
 public class PrepareUpdateVideoServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 

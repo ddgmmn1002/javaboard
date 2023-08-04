@@ -1,15 +1,7 @@
-// 댓글 수정 요청 처리 AJAX
-$(".update-comment").on("click", function (event) {
-  const cno = $(event.target)
-    .parent()
-    .parent()
-    .parent()
-    .siblings()[0].innerText;
-  const content = $(event.target)
-    .parent()
-    .parent()
-    .parent()
-    .siblings()[2].innerHTML;
+
+/*$(".update-comment").on("click", function (event) {
+  const cno = $(event.target).parent().parent().parent().siblings()[0].innerText;
+  const content = $(event.target).parent().parent().parent().siblings()[2].innerHTML;
 
   if ($("#update-div").length) {
     $("#update-div").remove();
@@ -29,6 +21,7 @@ $(".update-comment").on("click", function (event) {
             content: updateContent,
           },
           success: function () {
+			console.log(updateContent);
             updateDiv.parent().siblings()[2].innerHTML = updateContent;
             updateDiv.remove();
           },
@@ -46,4 +39,20 @@ $(".update-comment").on("click", function (event) {
     updateDiv.append(cancelButton);
     $(this).parent().parent().parent().append(updateDiv);
   }
-});
+});*/
+
+
+const updateComments = document.querySelectorAll(".update-comment");
+
+function updateButtonIsClicked(event){
+	const cno = event.target.parentElement.parentElement.parentElement.parentElement.dataset.cno;
+	const content = event.target.parentElement.parentElement.parentElement.parentElement.children[1].children[0].innerHTML.replace(/\t/ig, "").replace("\n","")
+	console.log(cno);
+	console.log(content);	
+}
+
+updateComments.forEach(
+	(updateComment) => {
+		updateComment.addEventListener("click", updateButtonIsClicked);
+	}
+)

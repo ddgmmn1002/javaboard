@@ -115,10 +115,7 @@
 				<div class="col">
 					<core:if test="${commentList.size() ne 0 }">
 						<core:forEach var="comment" items="${commentList }" varStatus="status">
-							<div id="comment-${comment.getCno() } " class="container shadow p-3 mb-1 bg-body rounded d-grid gap-1">
-								<div class="row">
-									${comment.getCno() }
-								</div>
+							<div class="container shadow p-3 mb-1 bg-body rounded d-grid gap-1" data-cno="${comment.getCno() }">
 								<div class="row">
 									<div class="col">
 										[${comment.getNickname()}]
