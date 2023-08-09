@@ -18,16 +18,20 @@
 			    <div class="row gap-3">
 			  </core:if>
 				  <div class="col">
-				    <div class="p-3 rounded" style="border:1px solid black; height:500px;">
-				      <h3 style="font-weight: bold;">${video.getTitle() }</h3>
-				      <img src="${video.getPoster() }" width="200" height="300">
+			  		<a href="videoDetail?vno=${video.getVno() }" style="text-decoration: none;">
+				    <div class="bg-black p-3 rounded" style="border: 1px solid black; height:550px;">
+				      <h3 class="text-light mb-3" style="font-weight: bold;">${video.getTitle() }</h3>
+				      <img class="mb-3" src="${video.getPoster() }" width="200" height="300">
+						<p class="text-light">감독: ${video.getDirector() }</p>
+						<p class="text-light">출연: ${video.getCast() }</p>
+						<p class="text-light">장르: ${video.getGenre() }</p>
 				    </div>
+			  		</a>
 				  </div>
 			  <core:if test="${status.last || status.index % colPerRow == colPerRow-1}">
 			    </div>
 			  </core:if>
 			</core:forEach>
-			
 		</div>
 	</div>
 </body>

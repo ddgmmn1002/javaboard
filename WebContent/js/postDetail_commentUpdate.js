@@ -1,58 +1,80 @@
-
-/*$(".update-comment").on("click", function (event) {
-  const cno = $(event.target).parent().parent().parent().siblings()[0].innerText;
-  const content = $(event.target).parent().parent().parent().siblings()[2].innerHTML;
-
-  if ($("#update-div").length) {
-    $("#update-div").remove();
-  } else {
-    const updateDiv = $("<div>").prop("id", "update-div");
-    const updateInput = $("<input>").prop("id", "update-input").val(content);
-    const updateButton = $("<button>")
-      .prop("id", "update-button")
-      .text("수정")
-      .click(function (event) {
-        const updateContent = $(event.target).siblings()[0].value;
-        $.ajax({
-          url: "updateComment",
-          type: "post",
-          data: {
-            cno: cno,
-            content: updateContent,
-          },
-          success: function () {
-			console.log(updateContent);
-            updateDiv.parent().siblings()[2].innerHTML = updateContent;
-            updateDiv.remove();
-          },
-        });
-      });
-    updateButton.addClass("update-comment btn btn-outline-secondary");
-    const cancelButton = $("<button>")
-      .text("취소")
-      .click(function (event) {
-        updateDiv.remove();
-      });
-    cancelButton.addClass("btn btn-outline-danger");
-    updateDiv.append(updateInput);
-    updateDiv.append(updateButton);
-    updateDiv.append(cancelButton);
-    $(this).parent().parent().parent().append(updateDiv);
-  }
-});*/
-
-
+// 모든 수정 버튼에 이벤트 등록
 const updateComments = document.querySelectorAll(".update-comment");
-
-function updateButtonIsClicked(event){
-	const cno = event.target.parentElement.parentElement.parentElement.parentElement.dataset.cno;
-	const content = event.target.parentElement.parentElement.parentElement.parentElement.children[1].children[0].innerHTML.replace(/\t/ig, "").replace("\n","")
-	console.log(cno);
-	console.log(content);	
-}
-
 updateComments.forEach(
 	(updateComment) => {
 		updateComment.addEventListener("click", updateButtonIsClicked);
 	}
 )
+
+// 수정 버튼 이벤트 함수
+function updateButtonIsClicked(event){
+	// 버튼이 클릭된 댓글의 번호와 내용 선택
+	const cno = event.target.closest(".comment").dataset.cno;
+	const contentElement = event.target.closest(".comment").children[1].children[0]
+	const content = contentElement.innerHTML.replace(/\t/ig, "").replace("\n","");
+	
+	// 댓글 수정 창 생성 (이미 존재하면 삭제)
+	if(document.querySelector("#update-div") != null){
+		document.querySelector("#update-div").remove();
+	} else {
+		const updateDiv = createUpdateDiv(
+			content,
+			() => {
+				const updateContent = document.querySelector("#update-input").value;
+				updateComment(cno, updateContent, contentElement);
+				updateDiv.remove();
+			},
+			() => {updateDiv.remove()}
+		);
+		
+		event.target.parentElement.parentElement.parentElement.parentElement.appendChild(updateDiv);
+	}
+}
+
+// 댓글 수정 div 생성 함수
+function createUpdateDiv(content, confirmButtonFunction, cancelButtonFunction){
+	const updateDiv = document.createElement("div");
+	updateDiv.id = "update-div";
+	
+	const updateInput = document.createElement("input");
+	updateInput.id = "update-input";
+	updateInput.value = content;
+	
+	const confirmButton = document.createElement("button");
+	confirmButton.id = "confirm-button";
+	confirmButton.innerText = "확인";
+	confirmButton.className = "btn btn-outline-secondary";
+	confirmButton.addEventListener("click", confirmButtonFunction);
+		
+	const cancelButton = document.createElement("button");
+	cancelButton.id = "cancel-button";
+	cancelButton.innerText = "취소";
+	cancelButton.className = "btn btn-outline-danger";
+	cancelButton.addEventListener("click", cancelButtonFunction);
+		
+	updateDiv.appendChild(updateInput);
+	updateDiv.appendChild(confirmButton);
+	updateDiv.appendChild(cancelButton);
+	
+	return updateDiv;
+}
+
+// 댓글 수정 요청 함수
+function updateComment(cno, updateContent, contentElement){
+	fetch('updateComment', {
+		method: "POST",
+		headers: {
+			'Content-Type': 'application/json'
+		},
+		body: JSON.stringify({
+			cno: cno,
+			content: updateContent,
+		})
+	})
+	.then(() => {
+		contentElement.innerHTML = updateContent;
+	})
+	.catch(error => {
+        console.error(error);
+    });
+}

@@ -25,24 +25,6 @@
 				
 				<div class="row">
 					<div class="col">
-						<div class="form-floating">
-							<input class="form-control" type="text" value="${post.getPoster() }" name="poster">
-							<label for="poster">poster</label>
-						</div>
-					</div>
-				</div>
-				
-				<div class="row">
-					<div class="col">
-						<div class="form-floating">
-							<input class="form-control" type="text" value="${post.getTrailer() }" name="trailer">
-							<label for="trailer">trailer</label>
-						</div>
-					</div>
-				</div>
-				
-				<div class="row">
-					<div class="col">
 						<label for="post-tinyeditor" class="form-label">본문</label>
 						<textarea id="tiny" name="content">${post.getContent() }</textarea>
 					</div>

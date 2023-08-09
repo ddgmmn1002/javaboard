@@ -111,6 +111,10 @@
 							  <input class="form-check-input" type="checkbox" value="documentary" id="genre-documentary" name="genre">
 							  <label class="form-check-label" for="genre-documentary">다큐멘터리</label>
 							</div>
+							<div class="form-check">
+							  <input class="form-check-input" type="checkbox" value="variety" id="genre-variety" name="genre">
+							  <label class="form-check-label" for="genre-variety">예능</label>
+							</div>
 						</div>
 					</div>
 				</div>
@@ -191,21 +195,6 @@
 								<label class="form-check-label" for="film-rating-19">19세</label>
 							</div>
 						</div>
-					</div>
-				</div>
-				
-				<div class="row mb-4">
-					<div class="col">
-						<label class="form-label" for="country">국가</label>
-						<select class="form-select" name="country" id="country">
-							<option disabled="disabled" selected="selected">국가 선택</option>
-							<option value="KR">한국</option>
-							<option value="US">미국</option>
-							<option value="CN">중국</option>
-							<option value="JP">일본</option>
-							<option value="GB">영국</option>
-							<option value="FR">프랑스</option>
-						</select>
 					</div>
 				</div>
 				

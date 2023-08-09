@@ -19,7 +19,6 @@ public class VideoVO {
 	private Date releaseDate;
 	private int runtime;
 	private String filmRating;
-	private String country;
 	private String language;
 	private String category;
 	private String poster;

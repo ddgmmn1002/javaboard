@@ -29,8 +29,8 @@ public class VideoDao {
 		try {
 			conn = db.getConnection();
 			String query = "INSERT INTO tbl_video (title, genre, director, cast, plot, release_date,"
-					+ " runtime, film_rating, country, language, poster, category, trailer)" + 
-					" VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+					+ " runtime, film_rating, language, poster, category, trailer)" + 
+					" VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 			stmt = conn.prepareStatement(query);
 			stmt.setString(1, video.getTitle());
 			stmt.setString(2, video.getGenre());
@@ -40,11 +40,10 @@ public class VideoDao {
 			stmt.setDate(6, video.getReleaseDate());
 			stmt.setInt(7, video.getRuntime());
 			stmt.setString(8, video.getFilmRating());
-			stmt.setString(9, video.getCountry());
-			stmt.setString(10, video.getLanguage());
-			stmt.setString(11, video.getPoster());
-			stmt.setString(12, video.getCategory());
-			stmt.setString(13, video.getTrailer());
+			stmt.setString(9, video.getLanguage());
+			stmt.setString(10, video.getPoster());
+			stmt.setString(11, video.getCategory());
+			stmt.setString(12, video.getTrailer());
 			
 			if (stmt.executeUpdate() == 1) {
 				result = true;
@@ -86,7 +85,6 @@ public class VideoDao {
 				video.setReleaseDate(rs.getDate("release_date"));
 				video.setRuntime(rs.getInt("runtime"));
 				video.setFilmRating(rs.getString("film_rating"));
-				video.setCountry(rs.getString("country"));
 				video.setLanguage(rs.getString("language"));
 				video.setPoster(rs.getString("poster"));
 				video.setCategory(rs.getString("category"));
@@ -123,7 +121,7 @@ public class VideoDao {
 			rs = stmt.executeQuery();
 			rs.next();
 			
-			video.setVno(rs.getInt("vno"));
+			video.setVno(vno);
 			video.setTitle(rs.getString("title"));
 			video.setGenre(rs.getString("genre"));
 			video.setDirector(rs.getString("director"));
@@ -132,10 +130,10 @@ public class VideoDao {
 			video.setReleaseDate(rs.getDate("release_date"));
 			video.setRuntime(rs.getInt("runtime"));
 			video.setFilmRating(rs.getString("film_rating"));
-			video.setCountry(rs.getString("country"));
 			video.setLanguage(rs.getString("language"));
-			video.setPoster(rs.getString("poster"));
 			video.setCategory(rs.getString("category"));
+			video.setPoster(rs.getString("poster"));
+			video.setTrailer(rs.getString("trailer"));
 			
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -151,4 +149,5 @@ public class VideoDao {
 		
 		return video;
 	}
+	
 }

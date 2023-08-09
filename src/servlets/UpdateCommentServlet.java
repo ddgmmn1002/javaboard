@@ -7,6 +7,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
 import db.CommentDao;
 
 @WebServlet("/updateComment")
@@ -16,17 +19,18 @@ public class UpdateCommentServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		CommentDao dao = CommentDao.getInstance();
 		
-		String cno = request.getParameter("cno");
-		String content = request.getParameter("content");
-		
-		
-		boolean commentIsUpdated = dao.updateComment(Integer.parseInt(cno), content);
-		
-		if (commentIsUpdated) {
-			System.out.println("댓글 업데이트 성공");
-		} else {
-			System.out.println("댓글 업데이트 실패");
-		}
+        ObjectMapper objectMapper = new ObjectMapper();
+        JsonNode jsonNode = objectMapper.readTree(request.getInputStream());
+
+        int cno = jsonNode.get("cno").asInt();
+        String content = jsonNode.get("content").asText();
+        System.out.println(cno);
+        System.out.println(content);
+        
+        boolean commentIsUpdated = dao.updateComment(cno, content);
+
+		if (commentIsUpdated) { System.out.println("댓글 업데이트 성공"); }
+		else {System.out.println("댓글 업데이트 실패"); }
 	}
 
 }

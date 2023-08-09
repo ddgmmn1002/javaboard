@@ -25,16 +25,13 @@ public class InsertPostServlet extends HttpServlet {
 		String userId = user.getId();
 		String title = request.getParameter("title");
 		String content = request.getParameter("content");
-		String poster = request.getParameter("poster");
-		String trailer = request.getParameter("trailer");
+		String vno = request.getParameter("vno");
 		
 		PostVO post = new PostVO();
 		post.setUserId(userId);
 		post.setTitle(title);
 		post.setContent(content);
-		post.setPoster(poster);
-		post.setTrailer(trailer);
-		
+		post.setVno(Integer.parseInt(vno));
 		
 		boolean postIsInserted = dao.insertPost(post);
 		

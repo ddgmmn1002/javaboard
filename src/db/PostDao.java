@@ -25,14 +25,13 @@ public class PostDao {
 		boolean result = false;
 		try {
 			conn = db.getConnection();
-			String query = "INSERT INTO tbl_post(user_id, title, created_at, content, trailer, poster)"
-					+ " VALUES (?, ?, CURRENT_TIMESTAMP(), ?, ?, ?)";
+			String query = "INSERT INTO tbl_post(user_id, title, created_at, content, vno)"
+					+ " VALUES (?, ?, CURRENT_TIMESTAMP(), ?, ?)";
 			stmt = conn.prepareStatement(query);
 			stmt.setString(1, post.getUserId());
 			stmt.setString(2, post.getTitle());
 			stmt.setString(3, post.getContent());
-			stmt.setString(4, post.getTrailer());
-			stmt.setString(5, post.getPoster());
+			stmt.setInt(4, post.getVno());
 			if (stmt.executeUpdate() == 1) {
 				result = true;
 			}
@@ -261,8 +260,7 @@ public class PostDao {
 			post.setViewCount(rs.getInt("view_count"));
 			post.setLikeCount(rs.getInt("like_count"));
 			post.setDislikeCount(rs.getInt("dislike_count"));
-			post.setTrailer(rs.getString("trailer"));
-			post.setPoster(rs.getString("poster"));
+			post.setVno(rs.getInt("vno"));
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
@@ -307,7 +305,7 @@ public class PostDao {
 		return result;
 	}
 	
-	public boolean updatePost(int pno, String title, String content, String poster, String trailer) {
+	public boolean updatePost(int pno, String title, String content) {
 		DBcon db = new DBcon();
 		boolean result = false;
 		
@@ -317,14 +315,12 @@ public class PostDao {
 		try {
 			conn = db.getConnection();
 			String query = "UPDATE tbl_post"
-					+ " SET title = ?, content = ?, updated_at = CURRENT_TIMESTAMP(), poster = ?, trailer = ?"
+					+ " SET title = ?, content = ?, updated_at = CURRENT_TIMESTAMP()"
 					+ " WHERE pno = ?";
 			stmt = conn.prepareStatement(query);
 			stmt.setString(1, title);
 			stmt.setString(2, content);
-			stmt.setString(3, poster);
-			stmt.setString(4, trailer);
-			stmt.setInt(5, pno);
+			stmt.setInt(3, pno);
 			if (stmt.executeUpdate() == 1) {
 				result = true;
 			}

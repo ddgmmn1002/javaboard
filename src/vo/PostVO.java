@@ -18,6 +18,5 @@ public class PostVO {
 	private int commentCount;
 	private int likeCount;
 	private int dislikeCount;
-	private String poster;
-	private String trailer;
+	private int vno;
 }

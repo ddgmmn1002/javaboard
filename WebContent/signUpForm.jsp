@@ -2,17 +2,7 @@
 <%@page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@taglib prefix="core" uri="http://java.sun.com/jsp/jstl/core" %>
-<%
-	HashMap<String, String> countries = new HashMap<>();
-	countries.put("KR", "한국");
-	countries.put("US", "미국");
-	countries.put("CN", "중국");
-	countries.put("JP", "일본");
-	countries.put("GB", "영국");
-	countries.put("FR", "프랑스");
-	
-	pageContext.setAttribute("countries", countries);
-%>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -43,19 +33,6 @@
 							<input class="form-control" type="text" name="birth" placeholder="연도">
 							<input class="form-control" type="text" name="birth" placeholder="월">
 							<input class="form-control" type="text" name="birth" placeholder="일">
-						</div>
-					</div>
-				</div>
-				
-				<div class="row">
-					<div class="col">
-						<div>
-							<select class="form-select" name="country" id="country">
-								<option disabled="disabled" selected="selected">국가 선택</option>
-								<core:forEach var="country" items="${countries}">
-									<option value="${country.key}">${country.value}</option>
-								</core:forEach>
-							</select>
 						</div>
 					</div>
 				</div>

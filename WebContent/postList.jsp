@@ -14,7 +14,7 @@
 			<div class="col">
 				<core:if test="${not empty userInfo }">
 					<div class="d-flex mb-3 justify-content-end">
-						<a class="btn btn-primary" href="postForm.jsp">게시글 작성</a>
+						<a class="btn btn-primary" href="prepareInsertPost">게시글 작성</a>
 					</div>
 				</core:if>			
 			</div>

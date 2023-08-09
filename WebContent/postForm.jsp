@@ -1,6 +1,7 @@
 <%@page import="vo.UserVO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="core" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -21,16 +22,14 @@
 				</div>
 				<div class="row">
 					<div class="col">
-						<label for="poster" class="form-label">poster</label>
-						<input id="poster" type="text" name="poster" class="form-control">
+						<select name="vno">
+							<core:forEach var="video" items="${videos }">
+								<option value="${video.getVno() }">${video.getTitle()}</option>
+							</core:forEach>
+						</select>
 					</div>
 				</div>
-				<div class="row">
-					<div class="col">
-						<label for="trailer" class="form-label">trailer</label>
-						<input id="trailer" type="text" name="trailer" class="form-control">
-					</div>
-				</div>
+				
 				<div class="row">
 					<div class="col">
 						<label for="post-tinyeditor" class="form-label">본문</label>

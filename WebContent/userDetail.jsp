@@ -10,27 +10,17 @@
 <body class="bg-dark">
 	<jsp:include page="header.jsp"></jsp:include>
 	<div class="container p-5 mt-5 mb-5 bg-light rounded">
-		<div class="row">
-			<div class="col">
-				<form action="updateUser" method="post">
-					<table class="table table-bordered rounded">
+		<form action="adminUpdateUser" method="post">
+			<div class="row">
+				<div class="col">
+					<table class="table align-middle table-bordered rounded">
 						<tr>
 							<td colspan="2">
-								회원 정보 상세보기
+								<h3 id="user-id" class="ms-3">
+									${user.getId() }
+								</h3>
 							</td>
 						</tr>
-						<tr>
-							<td style="width:20%;">
-								<div class="d-flex justify-content-center">
-									ID
-								</div>
-							</td>
-							<td>
-								<div id="user-id" class="ms-3">
-									${user.getId() }
-								</div>
-							</td>
-						<tr>
 						<tr>
 							<td style="width:20%;">
 								<div class="d-flex justify-content-center">
@@ -42,7 +32,7 @@
 									${user.getName() }
 								</div>
 							</td>
-						<tr>
+						</tr>
 						<tr>
 							<td>
 								<div class="d-flex justify-content-center">
@@ -54,7 +44,7 @@
 									${user.getBirthDate() }
 								</div>
 							</td>
-						<tr>
+						</tr>
 						<tr>
 							<td>
 								<div class="d-flex justify-content-center">
@@ -66,7 +56,7 @@
 									${user.getPhone() }
 								</div>
 							</td>
-						<tr>
+						</tr>
 						<tr>
 							<td>
 								<div class="d-flex justify-content-center">
@@ -78,7 +68,7 @@
 									${user.getEmail() }
 								</div>
 							</td>
-						<tr>
+						</tr>
 						<tr>
 							<td>
 								<div class="d-flex justify-content-center">
@@ -88,7 +78,7 @@
 							<td>
 								<div id="user-gender" class="ms-3">
 									<core:choose>
-										<core:when test='${user.getGender() == "f"}'>
+										<core:when test='${user.getGender() == "m"}'>
 											남성
 										</core:when>
 										<core:otherwise>
@@ -97,7 +87,7 @@
 									</core:choose>
 								</div>
 							</td>
-						<tr>
+						</tr>
 						<tr>
 							<td>
 								<div class="d-flex justify-content-center">
@@ -109,7 +99,7 @@
 									${user.getSignupDate() }
 								</div>
 							</td>
-						<tr>
+						</tr>
 						<tr>
 							<td>
 								<div class="d-flex justify-content-center">
@@ -121,7 +111,7 @@
 									${user.getNickname() }
 								</div>
 							</td>
-						<tr>
+						</tr>
 						<tr>
 							<td>
 								<div class="d-flex justify-content-center">
@@ -135,23 +125,18 @@
 							</td>
 						<tr>
 					</table>
-				</form>
-			</div>
-		</div>
-		<div class="row">
-			<div class="col">
-				<div class="d-flex justify-content-end">
-					<button id="updateButton" class="btn btn-outline-secondary">회원 정보 수정</button>
 				</div>
 			</div>
-		</div>
+			<div class="row">
+				<div class="col">
+					<div class="d-flex justify-content-end">
+						<button id="updateButton" class="btn btn-outline-secondary">회원 정보 수정</button>
+					</div>
+				</div>
+			</div>
+		</form>
 	</div>
 
-<script>
-	const updateButtonIsClicked = () => {
-		console.log($("#user-id").text().trim());
-	}
-	$("#updateButton").on("click", updateButtonIsClicked);
-</script>
+<script src="js/userDetail_update.js"></script>
 </body>
 </html>

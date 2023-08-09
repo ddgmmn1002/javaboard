@@ -13,11 +13,13 @@ import javax.servlet.http.HttpSession;
 import db.CommentDao;
 import db.InteractionDao;
 import db.PostDao;
+import db.VideoDao;
 import service.IpAddress;
 import vo.CommentVO;
 import vo.InteractionVO;
 import vo.PostVO;
 import vo.UserVO;
+import vo.VideoVO;
 
 @WebServlet("/postDetail")
 public class PostDetailServlet extends HttpServlet {
@@ -29,6 +31,7 @@ public class PostDetailServlet extends HttpServlet {
         PostDao postDao = PostDao.getInstance();
         CommentDao commentDao = CommentDao.getInstance();
         InteractionDao interactionDao = InteractionDao.getInstance();
+        VideoDao videoDao = VideoDao.getInstance();
         
         int pno = Integer.parseInt(request.getParameter("pno"));
         UserVO user = (UserVO)session.getAttribute("userInfo");
@@ -61,9 +64,11 @@ public class PostDetailServlet extends HttpServlet {
         }
         
         PostVO post = postDao.selectPostOne(pno);
+        VideoVO video = videoDao.selectOne(post.getVno());
         ArrayList<CommentVO> commentList = commentDao.selectCommentList(pno);
         
         request.setAttribute("post", post);
+        request.setAttribute("video", video);
         request.setAttribute("commentList", commentList);
         request.getRequestDispatcher("postDetail.jsp").forward(request, response);
 		

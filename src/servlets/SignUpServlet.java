@@ -23,7 +23,6 @@ public class SignUpServlet extends HttpServlet {
 		
 		String name = request.getParameter("name");
 		String birthDate = String.join("-", request.getParameterValues("birth"));
-		String country = request.getParameter("country");
 		String phone = String.join("-", request.getParameterValues("phone"));
 		String email = String.join("@", request.getParameterValues("email"));
 		String gender = request.getParameter("gender");
@@ -34,7 +33,6 @@ public class SignUpServlet extends HttpServlet {
 		UserVO user = new UserVO();
 		user.setName(name);
 		user.setBirthDate(Date.valueOf(birthDate));
-		user.setCountry(country);
 		user.setPhone(phone);
 		user.setEmail(email);
 		user.setGender(gender);

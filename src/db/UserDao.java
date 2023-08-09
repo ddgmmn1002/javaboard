@@ -29,18 +29,17 @@ public class UserDao {
 		try {
 			conn = db.getConnection();
 			String query = "INSERT INTO tbl_user"
-					+ " (user_id, user_pw, name, birth_date, country, phone, email, gender, signup_date, nickname, grade)"
-					+ " VALUES (?, ?, ?, ?, ?, ?, ?, ?, CURDATE(), ?, 'regular')";
+					+ " (user_id, user_pw, name, birth_date, phone, email, gender, signup_date, nickname, grade)"
+					+ " VALUES (?, ?, ?, ?, ?, ?, ?, CURDATE(), ?, 'regular')";
 			stmt = conn.prepareStatement(query);
 			stmt.setString(1, user.getId());
 			stmt.setString(2, user.getPw());
 			stmt.setString(3, user.getName());
 			stmt.setDate(4, user.getBirthDate());
-			stmt.setString(5, user.getCountry());
-			stmt.setString(6, user.getPhone());
-			stmt.setString(7, user.getEmail());
-			stmt.setString(8, user.getGender());
-			stmt.setString(9, user.getNickname());
+			stmt.setString(5, user.getPhone());
+			stmt.setString(6, user.getEmail());
+			stmt.setString(7, user.getGender());
+			stmt.setString(8, user.getNickname());
 			if (stmt.executeUpdate() == 1) {
 				result = true;
 			}
@@ -80,7 +79,6 @@ public class UserDao {
 				user.setPw(pw);
 				user.setName(rs.getString("name"));
 				user.setBirthDate(rs.getDate("birth_date"));
-				user.setCountry(rs.getString("country"));
 				user.setPhone(rs.getString("phone"));
 				user.setEmail(rs.getString("email"));
 				user.setGender(rs.getString("gender"));
@@ -264,7 +262,7 @@ public class UserDao {
 		UserVO user = new UserVO();
 		try {
 			conn = db.getConnection();
-			String query = "SELECT user_id, name, birth_date, country, phone, email, gender, signup_date, nickname, grade" + 
+			String query = "SELECT user_id, name, birth_date, phone, email, gender, signup_date, nickname, grade" + 
 			" FROM tbl_user" +
 			" WHERE user_id = ?";
 			stmt = conn.prepareStatement(query);
@@ -274,7 +272,6 @@ public class UserDao {
 				user.setId(rs.getString("user_id"));
 				user.setName(rs.getString("name"));
 				user.setBirthDate(rs.getDate("birth_date"));
-				user.setCountry(rs.getString("country"));
 				user.setPhone(rs.getString("phone"));
 				user.setEmail(rs.getString("email"));
 				user.setGender(rs.getString("gender"));
@@ -297,4 +294,43 @@ public class UserDao {
 		return user;
 	}
 	
+	public boolean updateUserByAdmin(UserVO user) {
+		DBcon db = new DBcon();
+		Connection conn = null;
+		PreparedStatement stmt = null;
+		boolean result = false;
+		
+		
+		try {
+			conn = db.getConnection();
+			String query = "UPDATE tbl_user" + 
+					" SET NAME = ?, birth_date = ?, phone = ?, email = ?, gender = ?, signup_date = ?, nickname = ?, grade = ?" + 
+					" WHERE user_id = ?";
+			stmt = conn.prepareStatement(query);
+			stmt.setString(1, user.getName());
+			stmt.setDate(2, user.getBirthDate());
+			stmt.setString(3, user.getPhone());
+			stmt.setString(4, user.getEmail());
+			stmt.setString(5, user.getGender());
+			stmt.setDate(6, user.getSignupDate());
+			stmt.setString(7, user.getNickname());
+			stmt.setString(8, user.getGrade());
+			stmt.setString(9, user.getId());
+			if (stmt.executeUpdate() == 1) {
+				result = true;
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				stmt.close();
+				conn.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		
+		
+		return result;
+	}
 }

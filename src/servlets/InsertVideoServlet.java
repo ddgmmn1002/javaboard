@@ -22,7 +22,6 @@ public class InsertVideoServlet extends HttpServlet {
 		
 		String title = request.getParameter("title");
 		String genre = String.join(" ", request.getParameterValues("genre"));
-		System.out.println(genre);
 		String director = request.getParameter("director");
 		String cast = request.getParameter("cast");
 		String poster = request.getParameter("poster_link");
@@ -31,11 +30,8 @@ public class InsertVideoServlet extends HttpServlet {
 		String releaseDate = String.join("-", request.getParameterValues("release_date"));
 		String runtime = request.getParameter("runtime");
 		String filmRating = request.getParameter("film-rating");
-		String country = request.getParameter("country");
 		String language = request.getParameter("language");
 		String category = request.getParameter("category");
-		
-		
 		
 		VideoVO video = new VideoVO();
 		video.setTitle(title);
@@ -48,10 +44,8 @@ public class InsertVideoServlet extends HttpServlet {
 		video.setReleaseDate(Date.valueOf(releaseDate));
 		video.setRuntime(Integer.parseInt(runtime));
 		video.setFilmRating(filmRating);
-		video.setCountry(country);
 		video.setLanguage(language);
 		video.setCategory(category);
-		
 		
 		boolean isInsertedVideo = dao.insertVideoInfo(video);
 		
