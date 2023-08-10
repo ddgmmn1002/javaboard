@@ -9,5 +9,7 @@
 </head>
 <body class="bg-dark">
 	<jsp:include page="header.jsp"></jsp:include>
+	<div class="container">
+	</div>
 </body>
 </html>

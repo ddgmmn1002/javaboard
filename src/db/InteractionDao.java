@@ -254,4 +254,182 @@ public class InteractionDao {
 		
 		return interaction;
 	}
+	
+	public boolean like(int interactionId) {
+		DBcon db = new DBcon();
+		Connection conn = null;
+		PreparedStatement stmt = null;
+		
+		boolean result = false;
+		try {
+			conn = db.getConnection();
+			String query = "UPDATE tbl_interaction" + 
+					" SET like_status = 1, dislike_status = 0 " +
+					" WHERE interaction_id = ?";
+			stmt = conn.prepareStatement(query);
+			stmt.setInt(1, interactionId);
+			if (stmt.executeUpdate() == 1) {
+				result = true;
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				stmt.close();
+				conn.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return result;
+	}
+	
+	public boolean cancelLike (int interactionId) {
+		DBcon db = new DBcon();
+		Connection conn = null;
+		PreparedStatement stmt = null;
+		
+		boolean result = false;
+		try {
+			conn = db.getConnection();
+			String query = "UPDATE tbl_interaction" + 
+					" SET like_status = 0" +
+					" WHERE interaction_id = ?";
+			stmt = conn.prepareStatement(query);
+			stmt.setInt(1, interactionId);
+			if (stmt.executeUpdate() == 1) {
+				result = true;
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				stmt.close();
+				conn.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return result;
+	}
+	
+	public boolean dislike(int interactionId) {
+		DBcon db = new DBcon();
+		Connection conn = null;
+		PreparedStatement stmt = null;
+		
+		boolean result = false;
+		try {
+			conn = db.getConnection();
+			String query = "UPDATE tbl_interaction" + 
+					" SET like_status = 0, dislike_status = 1" +
+					" WHERE interaction_id = ?";
+			stmt = conn.prepareStatement(query);
+			stmt.setInt(1, interactionId);
+			if (stmt.executeUpdate() == 1) {
+				result = true;
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				stmt.close();
+				conn.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return result;
+	}
+	
+	public boolean canceldislike (int interactionId) {
+		DBcon db = new DBcon();
+		Connection conn = null;
+		PreparedStatement stmt = null;
+		
+		boolean result = false;
+		try {
+			conn = db.getConnection();
+			String query = "UPDATE tbl_interaction" + 
+					" SET dislike_status = 0" +
+					" WHERE interaction_id = ?";
+			stmt = conn.prepareStatement(query);
+			stmt.setInt(1, interactionId);
+			if (stmt.executeUpdate() == 1) {
+				result = true;
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				stmt.close();
+				conn.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return result;
+	}
+	
+	public int getTotalLikeCount(int pno) {
+		DBcon db = new DBcon();
+		Connection conn = null;
+		PreparedStatement stmt = null;
+		ResultSet rs = null;
+		int totalCount = 0;
+		try {
+			conn = db.getConnection();
+			String query = "SELECT SUM(like_status) as total_like FROM tbl_interaction" + 
+					" WHERE pno = ?";
+			stmt = conn.prepareStatement(query);
+			stmt.setInt(1, pno);
+			rs = stmt.executeQuery();
+			if (rs.next()) {
+				totalCount = rs.getInt("total_like");
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				conn.close();
+				stmt.close();
+				rs.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return totalCount;
+	}
+	
+	public int getTotalDislikeCount(int pno) {
+		DBcon db = new DBcon();
+		Connection conn = null;
+		PreparedStatement stmt = null;
+		ResultSet rs = null;
+		int totalCount = 0;
+		try {
+			conn = db.getConnection();
+			String query = "SELECT SUM(dislike_status) as total_dislike FROM tbl_interaction" + 
+					" WHERE pno = ?";
+			stmt = conn.prepareStatement(query);
+			stmt.setInt(1, pno);
+			rs = stmt.executeQuery();
+			if (rs.next()) {
+				totalCount = rs.getInt("total_dislike");
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				conn.close();
+				stmt.close();
+				rs.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return totalCount;
+	}
+	
+	
 }

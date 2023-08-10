@@ -9,7 +9,7 @@
 
 		<nav class="navbar navbar-dark navbar-expand-lg bg-dark">
 			<div class="container-fluid m-3">
-				<a class="navbar-brand text-light ms-2 me-5" href="home.jsp"> <h1>Critic</h1> </a>
+				<a class="navbar-brand text-light ms-2 me-5" href="home.jsp"> <h1>CRITIC</h1> </a>
 				<button class="navbar-toggler" type="button" data-bs-toggle="collapse"
 					data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
 					aria-expanded="false" aria-label="Toggle navigation">

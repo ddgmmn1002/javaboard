@@ -11,12 +11,6 @@
 <body class="bg-dark">
 	<jsp:include page="header.jsp"></jsp:include>
 	<div class="container p-3 mt-5 mb-5 bg-light rounded">
-		<div class="row">
-			<div class="col d-flex justify-content-center mb-3">
-				<h1>회원 정보 업데이트</h1>
-			</div>
-		</div>
-		
 		<form action="updateUser" method="post">
 			<div class="d-grid gap-3">
 				

@@ -18,7 +18,7 @@
 			background-size: cover;
 			background-position: center center;
 			background-attachment: fixed;
-		">		
+		">
 	</core:when>
 	<core:otherwise>
 		<div>
@@ -69,7 +69,7 @@
 							<p>출연: ${video.getCast()}</p>
 							<p>장르: ${video.getGenre()}</p>
 						<core:if test="${video.getRuntime() != 0}">
-							<p>러닝타임: ${video.getRuntime() }</p>
+							<p>러닝타임: ${video.getRuntime() } (분)</p>
 						</core:if>
 							<p>관람제한연령: ${video.getFilmRating() }</p>
 							<p>주요사용언어: ${video.getLanguage() }</p>
@@ -78,7 +78,7 @@
 					</div>
 					<div class="row">
 						<div class="col p-5 m-3 text-light">
-							<p>줄거리: ${video.getPlot()}</p>
+							<p>${video.getPlot()}</p>
 						</div>
 					</div>
 				</div>
@@ -92,7 +92,37 @@
 					</div>
 				</div>		
 			
-
+				<div class="row justify-content-center">
+				
+					<div class="col d-flex justify-content-end">
+						<a href="likePost?pno=${post.getPno() }&isLike=true">좋아요</a>
+						<label for="like-button">좋아요</label>
+						<core:choose>
+							<core:when test="${interaction.isLikeStatus() }">
+								<input type="checkbox" checked id="like-button">
+							</core:when>
+							<core:otherwise>
+								<input type="checkbox" id="like-button">
+							</core:otherwise>
+						</core:choose>
+						<p id="total-like-count" class="text-light">${post.getLikeCount() }</p>
+					</div>
+					
+					<div class="col d-flex justify-content-start">
+						<p id="total-dislike-count" class="text-light">${post.getDislikeCount() }</p>
+						<core:choose>
+							<core:when test="${interaction.isDislikeStatus() }">
+								<input type="checkbox" checked id="dislike-button">
+							</core:when>
+							<core:otherwise>
+								<input type="checkbox" id="dislike-button">
+							</core:otherwise>
+						</core:choose>
+						<label for="dislike-button">싫어요</label>
+						<a href="likePost?pno=${post.getPno() }&isLike=false">싫어요</a>
+					</div>
+					
+				</div>
 			
 				<div class="row">
 					<div class="col mt-5 d-flex justify-content-end">
@@ -182,5 +212,23 @@
 <script src="js/postDetail_videoPlayer.js"></script>
 <script src="js/postDetail_editor.js"></script>
 <script src="js/postDetail_commentUpdate.js"></script>
+
+<script>
+	const likeButton = document.querySelector("#like-button");
+	const dislikeButton = document.querySelector("#dislike-button");
+	
+	const totalLikeCount = document.querySelector("#total-like-count");
+	const totalDislikeCount = document.querySelector("#total-dislike-count");
+	
+	likeButton.addEventListener("click", likeButtonClick);
+	
+	function likeButtonClick() {
+		fetch("likePost?pno=${post.getPno() }&isLike=true")
+		.then((resp) => resp.text())
+		.then((data) => {
+			console.log(data);
+		});
+	}
+</script>
 </body>
 </html>
