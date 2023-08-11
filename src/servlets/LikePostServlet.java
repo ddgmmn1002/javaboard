@@ -1,5 +1,6 @@
 package servlets;
 
+import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.PrintWriter;
 
@@ -10,6 +11,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.json.JSONObject;
+
 import db.InteractionDao;
 import vo.InteractionVO;
 import vo.UserVO;
@@ -18,13 +21,16 @@ import vo.UserVO;
 public class LikePostServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		BufferedReader br = request.getReader();
 		PrintWriter out = response.getWriter();
 		HttpSession session = request.getSession();
 		InteractionDao dao = InteractionDao.getInstance();
 		
-		boolean isLike = Boolean.parseBoolean(request.getParameter("isLike"));
-		int pno = Integer.parseInt(request.getParameter("pno"));
+		JSONObject reqData = new JSONObject(br.readLine());
+		
+		boolean isLike = reqData.getBoolean("isLike");
+		int pno = reqData.getInt("pno");
 		UserVO user = (UserVO) session.getAttribute("userInfo");
 		String userId = user.getId();
 		
@@ -37,7 +43,7 @@ public class LikePostServlet extends HttpServlet {
 			} else {
 				dao.like(interactionId);
 			}
-			
+		
 		} else {
 			if (interaction.isDislikeStatus()) {
 				dao.canceldislike(interactionId);
@@ -46,14 +52,22 @@ public class LikePostServlet extends HttpServlet {
 			}
 		}
 		
+		interaction = dao.selectInteractionOne(userId, pno);
+		JSONObject interactionJson = new JSONObject();
+		interactionJson.put("likeStatus", interaction.isLikeStatus());
+		interactionJson.put("dislikeStatus", interaction.isDislikeStatus());
 		
 		int totalLikeCount = dao.getTotalLikeCount(pno);
 		int totalDislikeCount = dao.getTotalDislikeCount(pno);
+		
+		JSONObject resData = new JSONObject();
+		resData.put("userInteraction", interactionJson.toString());
+        resData.put("totalLikeCount", totalLikeCount);
+        resData.put("totalDislikeCount", totalDislikeCount);
+        
+        out.print(resData.toString());
+        out.flush();
 		out.close();
-	}
-
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		doGet(request, response);
 	}
 
 }

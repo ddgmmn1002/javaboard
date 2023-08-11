@@ -31,14 +31,7 @@
 								<td>${user.getId() }</td>
 								<td>${user.getNickname() }</td>
 								<td>${user.getName() }</td>
-								<core:choose>
-									<core:when test='${user.getGrade() eq "critic"}'>
-										<td>평론가</td>										
-									</core:when>
-									<core:otherwise>
-										<td>일반 이용자</td>
-									</core:otherwise>
-								</core:choose>
+								<td>${user.getGrade() eq "critic" ? "평론가" : "일반 이용자"}</td>										
 								<td>${user.getSignupDate() }</td>
 							</tr>
 						</core:forEach>

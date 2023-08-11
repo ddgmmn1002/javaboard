@@ -148,7 +148,7 @@
 				<div class="row mb-4">
 					<div class="col">
 						<label class="form-label" for="plot">줄거리</label>
-						<textarea class="form-control" placeholder="줄거리를 입력해주세요." id="plot" name="plot" style="height: 200px"></textarea>
+						<textarea class="form-control" placeholder="줄거리를 입력해주세요." id="plot" name="plot" style="height: 200px; resize:none;"></textarea>
 					</div>
 				</div>
 				

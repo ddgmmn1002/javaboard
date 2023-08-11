@@ -22,7 +22,7 @@
 				</div>
 				<div class="row">
 					<div class="col">
-						<select name="vno">
+						<select name="vno" class="form-select">
 							<core:forEach var="video" items="${videos }">
 								<option value="${video.getVno() }">${video.getTitle()}</option>
 							</core:forEach>

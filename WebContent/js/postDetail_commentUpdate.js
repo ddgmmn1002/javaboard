@@ -13,22 +13,65 @@ function updateButtonIsClicked(event){
 	const contentElement = event.target.closest(".comment").children[1].children[0]
 	const content = contentElement.innerHTML.replace(/\t/ig, "").replace("\n","");
 	
+	let updateEditor = null;
+	
 	// 댓글 수정 창 생성 (이미 존재하면 삭제)
 	if(document.querySelector("#update-div") != null){
+		updateEditor = null;
+		tinymce.remove(updateEditor);
 		document.querySelector("#update-div").remove();
-	} else {
-		const updateDiv = createUpdateDiv(
-			content,
-			() => {
-				const updateContent = document.querySelector("#update-input").value;
-				updateComment(cno, updateContent, contentElement);
-				updateDiv.remove();
-			},
-			() => {updateDiv.remove()}
-		);
-		
-		event.target.parentElement.parentElement.parentElement.parentElement.appendChild(updateDiv);
+		return;
 	}
+	const updateDiv = createUpdateDiv(
+		content,
+		() => {
+			const updateContent = tinymce.get("update-input").getContent();;
+			updateComment(cno, updateContent, contentElement);
+			updateEditor = null;
+			tinymce.remove(updateEditor);
+			updateDiv.remove();
+		},
+		() => {
+			updateEditor = null;
+			tinymce.remove(updateEditor);
+			updateDiv.remove();
+		}
+	);
+	
+	event.target.parentElement.parentElement.parentElement.parentElement.appendChild(updateDiv);
+	
+	updateEditor = tinymce.init({
+		selector: "#update-input",
+		language: "ko_KR",
+		height: 200,
+		menubar: false,
+		resize: false,
+		plugins: [
+			"advlist",
+			"autolink",
+			"lists",
+			"link",
+			"image",
+			"charmap",
+			"preview",
+			"anchor",
+			"searchreplace",
+			"visualblocks",
+			"code",
+			"fullscreen",
+			"insertdatetime",
+			"media",
+			"table",
+			"help",
+			"wordcount",
+			"emoticons",
+		],
+		toolbar:
+			"bold italic underline strikethrough | forecolor backcolor | bullist numlist | outdent indent | charmap emoticons",
+		content_style:
+			"body { font-family:Helvetica,Arial,sans-serif; font-size:16px }",
+	});
+	
 }
 
 // 댓글 수정 div 생성 함수
@@ -36,20 +79,21 @@ function createUpdateDiv(content, confirmButtonFunction, cancelButtonFunction){
 	const updateDiv = document.createElement("div");
 	updateDiv.id = "update-div";
 	
-	const updateInput = document.createElement("input");
+	const updateInput = document.createElement("textarea");
 	updateInput.id = "update-input";
 	updateInput.value = content;
+	
 	
 	const confirmButton = document.createElement("button");
 	confirmButton.id = "confirm-button";
 	confirmButton.innerText = "확인";
-	confirmButton.className = "btn btn-outline-secondary";
+	confirmButton.className = "btn btn-sm btn-outline-secondary";
 	confirmButton.addEventListener("click", confirmButtonFunction);
 		
 	const cancelButton = document.createElement("button");
 	cancelButton.id = "cancel-button";
 	cancelButton.innerText = "취소";
-	cancelButton.className = "btn btn-outline-danger";
+	cancelButton.className = "btn btn-sm btn-outline-danger";
 	cancelButton.addEventListener("click", cancelButtonFunction);
 		
 	updateDiv.appendChild(updateInput);

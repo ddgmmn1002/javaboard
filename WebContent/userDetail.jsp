@@ -77,14 +77,7 @@
 							</td>
 							<td>
 								<div id="user-gender" class="ms-3">
-									<core:choose>
-										<core:when test='${user.getGender() == "m"}'>
-											남성
-										</core:when>
-										<core:otherwise>
-											여성
-										</core:otherwise>
-									</core:choose>
+									${(user.getGender() == "m") ? "남성" : "여성"}
 								</div>
 							</td>
 						</tr>
