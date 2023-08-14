@@ -20,21 +20,24 @@ function updateButtonIsClicked(event){
 		updateEditor = null;
 		tinymce.remove(updateEditor);
 		document.querySelector("#update-div").remove();
+		initCommentEditor();
 		return;
 	}
 	const updateDiv = createUpdateDiv(
 		content,
 		() => {
-			const updateContent = tinymce.get("update-input").getContent();;
+			const updateContent = tinymce.get("update-input").getContent();
 			updateComment(cno, updateContent, contentElement);
 			updateEditor = null;
 			tinymce.remove(updateEditor);
 			updateDiv.remove();
+			initCommentEditor();
 		},
 		() => {
 			updateEditor = null;
 			tinymce.remove(updateEditor);
 			updateDiv.remove();
+			initCommentEditor();
 		}
 	);
 	
@@ -47,24 +50,11 @@ function updateButtonIsClicked(event){
 		menubar: false,
 		resize: false,
 		plugins: [
-			"advlist",
-			"autolink",
-			"lists",
-			"link",
-			"image",
-			"charmap",
-			"preview",
-			"anchor",
-			"searchreplace",
-			"visualblocks",
-			"code",
-			"fullscreen",
-			"insertdatetime",
-			"media",
-			"table",
-			"help",
-			"wordcount",
-			"emoticons",
+			"advlist", "autolink", "lists", "link",
+			"image", "charmap", "preview", "anchor",
+			"searchreplace", "visualblocks", "code", "fullscreen",
+			"insertdatetime", "media", "table", "help",
+			"wordcount", "emoticons",
 		],
 		toolbar:
 			"bold italic underline strikethrough | forecolor backcolor | bullist numlist | outdent indent | charmap emoticons",
@@ -121,4 +111,26 @@ function updateComment(cno, updateContent, contentElement){
 	.catch(error => {
         console.error(error);
     });
+}
+
+// 댓글 추가 함수
+function initCommentEditor() {
+	return tinymce.init({
+		selector: ".comment-tinyeditor",
+		language: "ko_KR",
+		height: 200,
+		menubar: false,
+		resize: false,
+		plugins: [
+    		"advlist", "autolink", "lists", "link",
+    		"image",  "charmap", "preview", "anchor",
+    		"searchreplace", "visualblocks", "code", "fullscreen",
+    		"insertdatetime", "media", "table", "help",
+    		"wordcount", "emoticons",
+  		],
+		toolbar:
+			"bold italic underline strikethrough | forecolor backcolor | bullist numlist | outdent indent | charmap emoticons",
+		content_style:
+			"body { font-family:Helvetica,Arial,sans-serif; font-size:16px }",
+		});
 }

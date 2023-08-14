@@ -262,7 +262,7 @@ public class UserDao {
 		UserVO user = new UserVO();
 		try {
 			conn = db.getConnection();
-			String query = "SELECT user_id, name, birth_date, phone, email, gender, signup_date, nickname, grade" + 
+			String query = "SELECT user_id, name, birth_date, phone, email, gender, signup_date, nickname, grade, memo, blocked" + 
 			" FROM tbl_user" +
 			" WHERE user_id = ?";
 			stmt = conn.prepareStatement(query);
@@ -278,6 +278,8 @@ public class UserDao {
 				user.setSignupDate(rs.getDate("signup_date"));
 				user.setNickname(rs.getString("nickname"));
 				user.setGrade(rs.getString("grade"));
+				user.setMemo(rs.getString("memo"));
+				user.setBlocked(rs.getBoolean("blocked"));
 			}
 		} catch (Exception e) {
 			e.printStackTrace();

@@ -1,3 +1,4 @@
+<%@page import="vo.UserVO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="core" uri="http://java.sun.com/jsp/jstl/core" %>
@@ -77,7 +78,7 @@
 							</td>
 							<td>
 								<div id="user-gender" class="ms-3">
-									${(user.getGender() == "m") ? "남성" : "여성"}
+									${ user.getGender().equals("m") ? "남성" : "여성"}
 								</div>
 							</td>
 						</tr>
@@ -117,6 +118,16 @@
 								</div>
 							</td>
 						<tr>
+						<tr>
+							<td>
+								<div class="d-flex justify-content-center">차단 여부</div>
+							</td>
+							<td>
+								<div id="user-blocked" class="ms-3">
+									${ user.isBlocked() ? "차단된 이용자" : "X" }
+								</div>
+							</td>
+						</tr>
 					</table>
 				</div>
 			</div>

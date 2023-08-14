@@ -19,7 +19,6 @@ public class AdminUpdateUserServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		UserDao dao = UserDao.getInstance();
 		
-		
 		String id = request.getParameter("id");
 		String name = request.getParameter("name");
 		String birth = request.getParameter("birth");
@@ -46,8 +45,11 @@ public class AdminUpdateUserServlet extends HttpServlet {
 		
 		if (updateSuccess) {
 			System.out.println("유저 정보 수정 성공 (관리자 권한)");
+			response.sendRedirect("userDetail?id=" + id);
 		} else {
-			System.out.println("유저 정보 수정 실패");
+			System.out.println("유저 정보 수정 실패 (관리자 권한)");
+			request.getRequestDispatcher("userDetail").forward(request, response);
+			response.sendRedirect("userDetail?id=" + id);
 		}
 	}
 

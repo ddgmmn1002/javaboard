@@ -24,13 +24,12 @@ public class UpdateCommentServlet extends HttpServlet {
 
         int cno = jsonNode.get("cno").asInt();
         String content = jsonNode.get("content").asText();
-        System.out.println(cno);
-        System.out.println(content);
         
         boolean commentIsUpdated = dao.updateComment(cno, content);
 
 		if (commentIsUpdated) { System.out.println("댓글 업데이트 성공"); }
 		else {System.out.println("댓글 업데이트 실패"); }
+		
 	}
 
 }

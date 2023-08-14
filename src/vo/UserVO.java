@@ -20,4 +20,6 @@ public class UserVO {
 	private Date signupDate;
 	private String nickname;
 	private String grade;
+	private String memo;
+	private boolean blocked;
 }
