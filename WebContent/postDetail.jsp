@@ -1,4 +1,3 @@
-<%@page import="vo.PostVO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="core" uri="http://java.sun.com/jsp/jstl/core" %>
@@ -136,9 +135,9 @@
 					<div class="col mt-5 d-flex justify-content-end">
 						<div>
 							<core:if test="${not empty userInfo}">
-								<core:if test="${userInfo.getId().equals(post.getUserId()) }">				
-										<a class="btn btn-outline-secondary" href="prepareUpdatePost?pno=${post.getPno() }">수정</a>
-										<a class="btn btn-outline-danger" href="deletePost?pno=${post.getPno() }">삭제</a>		
+								<core:if test="${userInfo.getId().equals(post.getUserId()) and !userInfo.isBlocked()}">				
+									<a class="btn btn-outline-secondary" href="prepareUpdatePost?pno=${post.getPno() }">수정</a>
+									<a class="btn btn-outline-danger" href="deletePost?pno=${post.getPno() }">삭제</a>		
 								</core:if>
 							</core:if>
 						</div>
@@ -149,15 +148,17 @@
 			<div class="row mb-2">
 				<div class="col">
 					<core:if test="${not empty userInfo }">
-						<form action="insertComment" method="post" class="form-floating">
-							<div class="d-flex flex-column gap-2 shadow p-3 bg-body rounded">
-								<input type="hidden" name="pno" value="${post.getPno() }">
-								<input id="comment-tinyeditor" type="text" name="content" class="form-control comment-tinyeditor">
-								<div class="d-flex justify-content-end">
-									<button type="submit" class="btn btn-primary btn-sm">댓글 추가</button>
+						<core:if test="${!userInfo.isBlocked() }">							
+							<form action="insertComment" method="post" class="form-floating">
+								<div class="d-flex flex-column gap-2 shadow p-3 bg-body rounded">
+									<input type="hidden" name="pno" value="${post.getPno() }">
+									<input id="comment-tinyeditor" type="text" name="content" class="form-control comment-tinyeditor">
+									<div class="d-flex justify-content-end">
+										<button type="submit" class="btn btn-primary btn-sm">댓글 추가</button>
+									</div>
 								</div>
-							</div>
-						</form>
+							</form>
+						</core:if>
 					</core:if>
 				</div>
 			</div>			
@@ -200,7 +201,7 @@
 									</div>
 									<div class="col d-flex justify-content-end">
 										<div>
-											<core:if test="${comment.getUserId() eq userInfo.getId() }">
+											<core:if test="${ comment.getUserId() eq userInfo.getId() and !userInfo.isBlocked() }">
 												<a class="update-comment btn btn-outline-secondary" style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;">수정</a>
 												<a class="btn btn-outline-danger" href="deleteComment?cno=${comment.getCno() }&pno=${post.getPno() }" style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;">삭제</a>													
 											</core:if>
@@ -216,8 +217,7 @@
 	</div>
 </div>
 <script src="js/postDetail_videoPlayer.js"></script>
-<script src="js/postDetail_editor.js"></script>
-<script src="js/postDetail_commentUpdate.js"></script>
+<script src="js/postDetail_comment.js"></script>
 <script>
 	const likeButton = document.querySelector("#like-button");
 	const dislikeButton = document.querySelector("#dislike-button");
@@ -248,7 +248,7 @@
 				"Content-Type": "application/json"
 			},
 			body: JSON.stringify({
-				pno: ${post.getPno()},
+				pno: '${post.getPno()}',
 				isLike: isLike
 			})
 		})

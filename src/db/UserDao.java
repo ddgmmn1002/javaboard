@@ -73,7 +73,6 @@ public class UserDao {
 			stmt.setString(1, id);
 			stmt.setString(2, pw);
 			rs = stmt.executeQuery();
-			
 			if (rs.next()) {
 				user.setId(id);
 				user.setPw(pw);
@@ -85,8 +84,8 @@ public class UserDao {
 				user.setSignupDate(rs.getDate("signup_date"));
 				user.setNickname(rs.getString("nickname"));
 				user.setGrade(rs.getString("grade"));
+				user.setBlocked(rs.getBoolean("blocked"));
 			}
-			
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
@@ -98,8 +97,6 @@ public class UserDao {
 				e.printStackTrace();
 			}
 		}
-		
-		
 		return user;
 	}
 	
@@ -302,11 +299,12 @@ public class UserDao {
 		PreparedStatement stmt = null;
 		boolean result = false;
 		
-		
 		try {
 			conn = db.getConnection();
 			String query = "UPDATE tbl_user" + 
-					" SET NAME = ?, birth_date = ?, phone = ?, email = ?, gender = ?, signup_date = ?, nickname = ?, grade = ?" + 
+					" SET NAME = ?, birth_date = ?, phone = ?, email = ?," + 
+					" gender = ?, signup_date = ?, nickname = ?, grade = ?," + 
+					" blocked = ?" + 
 					" WHERE user_id = ?";
 			stmt = conn.prepareStatement(query);
 			stmt.setString(1, user.getName());
@@ -317,7 +315,8 @@ public class UserDao {
 			stmt.setDate(6, user.getSignupDate());
 			stmt.setString(7, user.getNickname());
 			stmt.setString(8, user.getGrade());
-			stmt.setString(9, user.getId());
+			stmt.setBoolean(9, user.isBlocked());
+			stmt.setString(10, user.getId());
 			if (stmt.executeUpdate() == 1) {
 				result = true;
 			}
@@ -331,7 +330,6 @@ public class UserDao {
 				e.printStackTrace();
 			}
 		}
-		
 		
 		return result;
 	}

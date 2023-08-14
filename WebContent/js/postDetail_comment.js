@@ -1,3 +1,5 @@
+initCommentEditor(".comment-tinyeditor");
+
 // 모든 수정 버튼에 이벤트 등록
 const updateComments = document.querySelectorAll(".update-comment");
 updateComments.forEach(
@@ -20,7 +22,7 @@ function updateButtonIsClicked(event){
 		updateEditor = null;
 		tinymce.remove(updateEditor);
 		document.querySelector("#update-div").remove();
-		initCommentEditor();
+		initCommentEditor(".comment-tinyeditor");
 		return;
 	}
 	const updateDiv = createUpdateDiv(
@@ -31,36 +33,19 @@ function updateButtonIsClicked(event){
 			updateEditor = null;
 			tinymce.remove(updateEditor);
 			updateDiv.remove();
-			initCommentEditor();
+			initCommentEditor(".comment-tinyeditor");
 		},
 		() => {
 			updateEditor = null;
 			tinymce.remove(updateEditor);
 			updateDiv.remove();
-			initCommentEditor();
+			initCommentEditor(".comment-tinyeditor");
 		}
 	);
 	
 	event.target.parentElement.parentElement.parentElement.parentElement.appendChild(updateDiv);
 	
-	updateEditor = tinymce.init({
-		selector: "#update-input",
-		language: "ko_KR",
-		height: 200,
-		menubar: false,
-		resize: false,
-		plugins: [
-			"advlist", "autolink", "lists", "link",
-			"image", "charmap", "preview", "anchor",
-			"searchreplace", "visualblocks", "code", "fullscreen",
-			"insertdatetime", "media", "table", "help",
-			"wordcount", "emoticons",
-		],
-		toolbar:
-			"bold italic underline strikethrough | forecolor backcolor | bullist numlist | outdent indent | charmap emoticons",
-		content_style:
-			"body { font-family:Helvetica,Arial,sans-serif; font-size:16px }",
-	});
+	updateEditor = initCommentEditor("#update-input");
 	
 }
 
@@ -114,9 +99,9 @@ function updateComment(cno, updateContent, contentElement){
 }
 
 // 댓글 추가 함수
-function initCommentEditor() {
+function initCommentEditor(id) {
 	return tinymce.init({
-		selector: ".comment-tinyeditor",
+		selector: id,
 		language: "ko_KR",
 		height: 200,
 		menubar: false,

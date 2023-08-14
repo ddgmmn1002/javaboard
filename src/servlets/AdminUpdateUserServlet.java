@@ -28,7 +28,7 @@ public class AdminUpdateUserServlet extends HttpServlet {
 		String signupDate = request.getParameter("signupdate");
 		String nickname = request.getParameter("nickname");
 		String grade = request.getParameter("grade");
-		
+		String blocked = request.getParameter("blocked");
 		
 		UserVO user = new UserVO();
 		user.setId(id);
@@ -40,6 +40,11 @@ public class AdminUpdateUserServlet extends HttpServlet {
 		user.setSignupDate(Date.valueOf(signupDate));
 		user.setNickname(nickname);
 		user.setGrade(grade);
+		if (Boolean.parseBoolean(blocked)) {
+			user.setBlocked(true);
+		} else {
+			user.setBlocked(false);
+		}
 		
 		boolean updateSuccess = dao.updateUserByAdmin(user);
 		

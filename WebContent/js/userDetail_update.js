@@ -109,6 +109,12 @@ updateButton.addEventListener("click", function (event) {
 	const optionCritic = document.createElement("option");
 	optionCritic.value = "critic";
 	optionCritic.innerText = "평론가";
+	console.log(userGrade.innerText);
+	if(userGrade.innerText == "critic"){
+		optionCritic.setAttribute("selected", "selected");
+	} else {
+		optionRegular.setAttribute("selected", "selected");
+	}
 	
 	userGradeSelect.appendChild(optionRegular);
 	userGradeSelect.appendChild(optionCritic);
@@ -122,13 +128,16 @@ updateButton.addEventListener("click", function (event) {
 	userBlockedDiv.classList.add("form-switch");
 	
 	const userBlockedToggle = document.createElement("input");
+	userBlockedToggle.setAttribute("name", "blocked");
 	userBlockedToggle.setAttribute("type", "checkbox");
 	userBlockedToggle.setAttribute("role", "switch");
 	userBlockedToggle.classList.add("form-check-input");
+	userBlockedToggle.value = "true";
 	
 	if (userBlocked.innerText != "X") {
 		userBlockedToggle.setAttribute("checked", "checked")
 	}
+	
 	
 	userBlockedDiv.appendChild(userBlockedToggle);
 	userBlocked.parentElement.appendChild(userBlockedDiv);
