@@ -9,7 +9,7 @@
 
 		<nav class="navbar navbar-dark navbar-expand-lg bg-dark">
 			<div class="container-fluid m-3">
-				<a class="navbar-brand text-light ms-2 me-5" href="home.jsp"> <h1>CRITIC</h1> </a>
+				<a class="navbar-brand text-light ms-2 me-5" href="videoList"> <h1>CRITIC</h1> </a>
 				<button class="navbar-toggler" type="button" data-bs-toggle="collapse"
 					data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
 					aria-expanded="false" aria-label="Toggle navigation">
@@ -18,7 +18,7 @@
 				<div class="collapse navbar-collapse" id="navbarSupportedContent">
 					<ul class="navbar-nav me-auto mb-2 mb-lg-0 gap-4">
 						<li class="nav-item">
-							<a class="nav-link text-light" aria-current="page" href="home.jsp">
+							<a class="nav-link text-light" aria-current="page" href="videoList">
 								<div class="d-flex align-items-center gap-2">
 									<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor"
 										class="bi bi-house-fill" viewBox="0 0 16 16">
@@ -28,17 +28,6 @@
 											d="m8 3.293 6 6V13.5a1.5 1.5 0 0 1-1.5 1.5h-9A1.5 1.5 0 0 1 2 13.5V9.293l6-6Z" />
 									</svg>
 									홈으로
-								</div>
-							</a>
-						</li>
-						<li class="nav-item">
-							<a class="nav-link text-light" href="videoList">
-								<div class="d-flex align-items-center gap-2">
-									<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-play-btn" viewBox="0 0 16 16">
-										<path d="M6.79 5.093A.5.5 0 0 0 6 5.5v5a.5.5 0 0 0 .79.407l3.5-2.5a.5.5 0 0 0 0-.814l-3.5-2.5z"/>
-										<path d="M0 4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V4zm15 0a1 1 0 0 0-1-1H2a1 1 0 0 0-1 1v8a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V4z"/>
-									</svg>  
-									영상 정보 목록
 								</div>
 							</a>
 						</li>

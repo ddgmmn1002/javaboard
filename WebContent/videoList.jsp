@@ -12,17 +12,19 @@
 	<div class="container bg-light p-5 mt-5 mb-5 rounded">
 		<div class="row row-cols-3">
 			<core:forEach var="video" items="${list}" varStatus="status">
-				<div class="col">
-					<a href="videoDetail?vno=${video.getVno() }" style="text-decoration: none;">
-						<div class="bg-black p-3 mb-4 rounded" style="border: 1px solid black; height:600px;">
-							<img class="mb-3" src="${video.getPoster() }" width="60%" height="60%">
-							<h3 class="text-light mb-3" style="font-weight: bold;">${video.getTitle() }</h3>
-							<p class="text-light">감독: ${video.getDirector() }</p>
-							<p class="text-light">출연: ${video.getCast() }</p>
-							<p class="text-light">장르: ${video.getGenre() }</p>
-					    </div>
-			  		</a>
-				</div>
+				<core:if test="${video.getVno() ne 19}">
+					<div class="col">
+						<a href="videoDetail?vno=${video.getVno() }" style="text-decoration: none;">
+							<div class="bg-black p-3 mb-4 rounded" style="border: 1px solid black; height:600px;">
+								<img class="mb-3" src="${video.getPoster() }" width="60%" height="60%">
+								<h3 class="text-light mb-3" style="font-weight: bold;">${video.getTitle() }</h3>
+								<p class="text-light">감독: ${video.getDirector() }</p>
+								<p class="text-light">출연: ${video.getCast() }</p>
+								<p class="text-light">장르: ${video.getGenre() }</p>
+						    </div>
+				  		</a>
+					</div>
+				</core:if>
 			</core:forEach>
 		</div>
 	</div>

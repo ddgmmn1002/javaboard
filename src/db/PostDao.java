@@ -58,7 +58,7 @@ public class PostDao {
 		ResultSet rs = null;
 		try {
 			conn = db.getConnection();
-			String query = "SELECT p.pno, p.user_id, u.nickname, p.title, p.created_at, p.updated_at, u.grade," + 
+			String query = "SELECT p.pno, p.user_id, u.nickname, p.title, p.created_at, p.updated_at, u.grade, u.blocked," + 
 					" COUNT(DISTINCT i.interaction_id) AS view_count, COUNT(DISTINCT c.cno) AS comment_count," + 
 					" COUNT(DISTINCT case when i.like_status = 1 then i.interaction_id END) AS like_count" + 
 					" FROM tbl_post AS p JOIN tbl_user AS u ON p.user_id = u.user_id" + 
@@ -80,6 +80,7 @@ public class PostDao {
 				post.setCommentCount(rs.getInt("comment_count"));
 				post.setLikeCount(rs.getInt("like_count"));
 				post.setGrade(rs.getString("grade"));
+				post.setBlocked(rs.getBoolean("blocked"));
 				list.add(post);
 			}
 		} catch (SQLException e) {
@@ -134,12 +135,13 @@ public class PostDao {
 		ResultSet rs = null;
 		try {
 			conn = db.getConnection();
-			String query = "SELECT p.pno, p.user_id, u.nickname, p.title, p.created_at, p.updated_at, u.grade," + 
+			String query = "SELECT p.pno, p.user_id, u.nickname, p.title, p.created_at, p.updated_at, p.vno, u.grade, u.blocked, v.title as video_title," + 
 					" COUNT(DISTINCT i.interaction_id) AS view_count, COUNT(DISTINCT c.cno) AS comment_count," + 
 					" COUNT(DISTINCT case when i.like_status = 1 then i.interaction_id END) AS like_count" + 
 					" FROM tbl_post AS p JOIN tbl_user AS u ON p.user_id = u.user_id" + 
 					" LEFT JOIN tbl_interaction AS i ON p.pno = i.pno" + 
 					" LEFT JOIN tbl_comment AS c ON c.pno = p.pno" + 
+					" LEFT JOIN tbl_video AS v ON v.vno = p.vno" + 
 					" GROUP BY p.pno" + 
 					" ORDER BY created_at DESC" +
 					" LIMIT ?, ?";
@@ -159,6 +161,9 @@ public class PostDao {
 				post.setCommentCount(rs.getInt("comment_count"));
 				post.setLikeCount(rs.getInt("like_count"));
 				post.setGrade(rs.getString("grade"));
+				post.setVno(rs.getInt("vno"));
+				post.setBlocked(rs.getBoolean("blocked"));
+				post.setVideoTitle(rs.getString("video_title"));
 				list.add(post);
 			}
 		} catch (SQLException e) {
@@ -237,7 +242,7 @@ public class PostDao {
 		ResultSet rs = null;
 		try {
 			conn = db.getConnection();
-			String query = "SELECT p.*, u.nickname, u.grade," + 
+			String query = "SELECT p.*, u.nickname, u.grade, u.blocked," + 
 					" COUNT(DISTINCT i.interaction_id) AS view_count," + 
 					" COUNT(DISTINCT case when i.like_status = 1 then i.interaction_id END) AS like_count," + 
 					" COUNT(DISTINCT case when i.dislike_status = 1 then i.interaction_id END) AS dislike_count" + 
@@ -261,6 +266,7 @@ public class PostDao {
 			post.setLikeCount(rs.getInt("like_count"));
 			post.setDislikeCount(rs.getInt("dislike_count"));
 			post.setVno(rs.getInt("vno"));
+			post.setBlocked(rs.getBoolean("blocked"));
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
@@ -279,10 +285,8 @@ public class PostDao {
 	public boolean deletePost(int pno) {
 		DBcon db = new DBcon();
 		boolean result = false;
-		
 		Connection conn = null;
 		PreparedStatement stmt = null;
-		
 		try {
 			conn = db.getConnection();
 			String query = "DELETE FROM tbl_post WHERE pno = ?";
@@ -301,7 +305,6 @@ public class PostDao {
 				e.printStackTrace();
 			}
 		}
-		
 		return result;
 	}
 	
@@ -340,13 +343,10 @@ public class PostDao {
 	
 	public int findPno(String user, String title) {
 		int result = -1;
-		
 		DBcon db = new DBcon();
-		
 		Connection conn = null;
 		PreparedStatement stmt = null;
 		ResultSet rs = null;
-		
 		try {
 			conn = db.getConnection();
 			String query = "SELECT pno from tbl_post"
@@ -371,7 +371,6 @@ public class PostDao {
 				e.printStackTrace();
 			}
 		}
-		
 		return result;
 	}
 	

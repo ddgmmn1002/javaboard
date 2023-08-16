@@ -15,4 +15,6 @@ public class CommentVO {
 	private Timestamp createdAt;
 	private Timestamp updatedAt;
 	private String nickname;
+	private String grade;
+	private Boolean blocked;
 }

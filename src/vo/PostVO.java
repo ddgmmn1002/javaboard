@@ -19,4 +19,6 @@ public class PostVO {
 	private int likeCount;
 	private int dislikeCount;
 	private int vno;
+	private Boolean blocked;
+	private String videoTitle;
 }

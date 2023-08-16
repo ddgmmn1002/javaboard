@@ -14,7 +14,7 @@
 			<div class="col">
 				<div class="rounded p-3">
 					<h3><span class="badge bg-secondary mb-1">내 게시글</span></h3>
-					<table class="table table-sm table-hover shadow-sm rounded">
+					<table class="table table-sm table-hover shadow-sm rounded" style="border:1px solid gray;">
 						<thead>
 							<tr>
 								<td style="width:15%"></td>
@@ -52,7 +52,7 @@
 			<div class="col">
 				<div class="rounded p-3">
 					<h3><span class="badge bg-secondary mb-1">내 댓글</span></h3>
-					<table class="table table-sm table-hover mb-5 shadow-sm rounded">
+					<table class="table table-sm table-hover mb-5 shadow-sm rounded" style="border:1px solid gray;">
 						<thead>
 							<tr>
 								<td style="width:15%"></td>
@@ -88,7 +88,7 @@
 			<div class="col">
 				<div class="rounded p-3">
 					<h3><span class="badge bg-secondary mb-1">조회한 게시글</span></h3>
-					<table class="table table-sm table-hover mb-5 shadow-sm rounded">
+					<table class="table table-sm table-hover mb-5 shadow-sm rounded" style="border:1px solid gray;">
 						<thead>
 							<tr>
 								<td style="width:15%"></td>
@@ -124,7 +124,7 @@
 			<div class="col">
 				<div class="rounded p-3">
 					<h3><span class="badge bg-secondary mb-1">좋아요 누른 게시글</span></h3>
-					<table class="table table-sm table-hover mb-5 shadow-sm rounded">
+					<table class="table table-sm table-hover mb-5 shadow-sm rounded" style="border:1px solid gray;">
 						<thead>
 							<tr>
 								<td style="width:15%"></td>

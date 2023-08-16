@@ -95,7 +95,7 @@ public class CommentDao {
 		
 		try {
 			conn = db.getConnection();
-			String query = "SELECT cno, pno, c.user_id, content, created_at, updated_at, nickname" + 
+			String query = "SELECT cno, pno, c.user_id, content, created_at, updated_at, nickname, u.grade, u.blocked" + 
 					" FROM tbl_comment AS c, tbl_user AS u" + 
 					" WHERE c.user_id = u.user_id AND pno = ?" + 
 					" ORDER BY created_at DESC";
@@ -112,6 +112,8 @@ public class CommentDao {
 				comment.setCreatedAt(rs.getTimestamp("created_at"));
 				comment.setUpdatedAt(rs.getTimestamp("updated_at"));
 				comment.setNickname(rs.getString("nickname"));
+				comment.setGrade(rs.getString("grade"));
+				comment.setBlocked(rs.getBoolean("blocked"));
 				list.add(comment);
 			}
 		} catch (Exception e) {
@@ -256,4 +258,5 @@ public class CommentDao {
 		}
 		return result;
 	}
+	
 }
