@@ -23,7 +23,6 @@ public class InteractionDao {
 	public boolean insertInteraction(int pno, String id) {
 		DBcon db = new DBcon();
 		boolean result = false;
-		
 		Connection conn = null;
 		PreparedStatement stmt = null;
 		try {
@@ -46,14 +45,12 @@ public class InteractionDao {
 				e.printStackTrace();
 			}
 		}
-		
 		return result;
 	}
 	
 	public boolean insertInteractionWithIp(int pno, String addr) {
 		DBcon db = new DBcon();
 		boolean result = false;
-		
 		Connection conn = null;
 		PreparedStatement stmt = null;
 		try {
@@ -76,14 +73,12 @@ public class InteractionDao {
 				e.printStackTrace();
 			}
 		}
-		
 		return result;
 	}
 	
 	public boolean isAlreadyViewed(int pno, String id) {
 		DBcon db = new DBcon();
 		boolean result = false;
-		
 		Connection conn = null;
 		PreparedStatement stmt = null;
 		ResultSet rs = null;
@@ -95,7 +90,6 @@ public class InteractionDao {
 			stmt.setInt(1, pno);
 			stmt.setString(2, id);
 			rs = stmt.executeQuery();
-			
 			if (rs.next()) {
 				result = true;
 			} 
@@ -116,7 +110,6 @@ public class InteractionDao {
 	public boolean isAlreadyViewedWithIp(int pno, String addr) {
 		DBcon db = new DBcon();
 		boolean result = false;
-		
 		Connection conn = null;
 		PreparedStatement stmt = null;
 		ResultSet rs = null;
@@ -149,10 +142,8 @@ public class InteractionDao {
 	public boolean deleteInteractionAll(int pno) {
 		DBcon db = new DBcon();
 		boolean result = false;
-		
 		Connection conn = null;
 		PreparedStatement stmt = null;
-		
 		try {
 			conn = db.getConnection();
 			String query = "DELETE FROM tbl_interaction WHERE pno = ?";
@@ -171,7 +162,6 @@ public class InteractionDao {
 				e.printStackTrace();
 			}
 		}
-		
 		return result;
 	}
 	
@@ -180,7 +170,6 @@ public class InteractionDao {
 		Connection conn = null;
 		PreparedStatement stmt = null;
 		ResultSet rs = null;
-		
 		ArrayList<InteractionVO> list = new ArrayList<>();
 		try {
 			conn = db.getConnection();
@@ -191,7 +180,6 @@ public class InteractionDao {
 			stmt = conn.prepareStatement(query);
 			stmt.setString(1, userId);
 			rs = stmt.executeQuery();
-			
 			while (rs.next()) {
 				InteractionVO interaction = new InteractionVO();
 				interaction.setInteractionId(rs.getInt("interaction_id"));
@@ -199,7 +187,6 @@ public class InteractionDao {
 				interaction.setInteractedAt(rs.getTimestamp("interacted_at"));
 				interaction.setPno(rs.getInt("pno"));
 				interaction.setTitle(rs.getString("title"));
-				
 				list.add(interaction);
 			}
 		} catch (Exception e) {
@@ -213,7 +200,6 @@ public class InteractionDao {
 				e.printStackTrace();
 			}
 		}
-		
 		return list;
 	}
 	
@@ -222,7 +208,6 @@ public class InteractionDao {
 		Connection conn = null;
 		PreparedStatement stmt = null;
 		ResultSet rs = null;
-		
 		InteractionVO interaction = new InteractionVO();
 		try {
 			conn = db.getConnection();
@@ -251,7 +236,6 @@ public class InteractionDao {
 				e.printStackTrace();
 			}
 		}
-		
 		return interaction;
 	}
 	
@@ -259,7 +243,6 @@ public class InteractionDao {
 		DBcon db = new DBcon();
 		Connection conn = null;
 		PreparedStatement stmt = null;
-		
 		boolean result = false;
 		try {
 			conn = db.getConnection();
@@ -288,7 +271,6 @@ public class InteractionDao {
 		DBcon db = new DBcon();
 		Connection conn = null;
 		PreparedStatement stmt = null;
-		
 		boolean result = false;
 		try {
 			conn = db.getConnection();
@@ -317,7 +299,6 @@ public class InteractionDao {
 		DBcon db = new DBcon();
 		Connection conn = null;
 		PreparedStatement stmt = null;
-		
 		boolean result = false;
 		try {
 			conn = db.getConnection();
@@ -346,7 +327,6 @@ public class InteractionDao {
 		DBcon db = new DBcon();
 		Connection conn = null;
 		PreparedStatement stmt = null;
-		
 		boolean result = false;
 		try {
 			conn = db.getConnection();
