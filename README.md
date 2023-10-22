@@ -21,4 +21,5 @@
 - MariaDB
 
 **API**
--TinyMCE (WYSIWYG editor)
+- TinyMCE (WYSIWYG editor)
+- Youtube (video player)
