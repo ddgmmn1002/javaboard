@@ -21,4 +21,4 @@
 - MariaDB
 
 **API**
--TinyMCE (WYSIWYG editor) <img src="https://github.com/ddgmmn1002/movie/assets/33245033/d14f7da4-0e11-411b-bf9e-3c0389fd76e5" />
+-TinyMCE (WYSIWYG editor)
