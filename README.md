@@ -6,3 +6,19 @@
 
 <img src="https://github.com/ddgmmn1002/movie/assets/33245033/b655170e-fb59-42d2-9ec7-42b1118bedc3">
 </img>
+
+## 2. 기술 스택
+
+- JSP
+- Servlet
+- Tomcat 9
+- jQuery
+
+**Style**
+- Bootstrap 5
+
+**Database**
+- MariaDB
+
+**API**
+-TinyMCE (WYSIWYG editor) <img src="https://github.com/ddgmmn1002/movie/assets/33245033/d14f7da4-0e11-411b-bf9e-3c0389fd76e5" />
