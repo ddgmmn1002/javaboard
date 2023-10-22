@@ -1,4 +1,4 @@
-## 1. 프로젝트 소개
+# 1. 프로젝트 소개
 
 **영화 정보 커뮤니티**
 
@@ -7,7 +7,7 @@
 <img src="https://github.com/ddgmmn1002/movie/assets/33245033/b655170e-fb59-42d2-9ec7-42b1118bedc3">
 </img>
 
-## 2. 기술 스택
+# 2. 기술 스택
 
 - JSP
 - Servlet
@@ -24,7 +24,28 @@
 - TinyMCE (WYSIWYG editor)
 - Youtube (video player)
 
-## 3. 기능
+# 3. 기능
 
-**회원가입과 로그인, 로그아웃**
-- 사용자들은 로그인 기능을 통해 비회원 이용자와 회원 이용자로 구분됩니다.
+### 회원가입과 로그인, 로그아웃
+- 회원가입을 통해 신규 회원 등록이 가능하며 ID와 비밀번호로 로그인할 수 있습니다.
+- 비회원 이용자는 게시물, 컨텐츠 정보 열람 외의 기능이 제한됩니다.
+
+<img height="200px" width="400px" src="https://github.com/ddgmmn1002/movie/assets/33245033/c2cfb31a-e2b8-4ac1-aed3-76fe63715bc1" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
