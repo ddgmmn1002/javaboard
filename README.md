@@ -35,13 +35,16 @@
 <img height="250px" width="500px" src="https://github.com/ddgmmn1002/movie/assets/33245033/838d1a93-5fc0-4a10-aaf2-ef32fda48f42" />
 <img height="250px" width="350px" src="https://github.com/ddgmmn1002/movie/assets/33245033/5c84e5c6-f995-4e61-a9ae-f5d5feba2d4e" />
 
-<p>
-  <img height="250px" width="600px" src="https://github.com/ddgmmn1002/movie/assets/33245033/a1fabc6c-1d33-4397-926f-089bd3bb89df" />
-</p>
+<p style="border:solid black 1px;">마이페이지</p>
+<img height="250px" width="600px" src="https://github.com/ddgmmn1002/movie/assets/33245033/a1fabc6c-1d33-4397-926f-089bd3bb89df" />
+<img height="400px" width="400px" src="https://github.com/ddgmmn1002/movie/assets/33245033/5a5f3632-3f6e-4479-9a18-3bc5f0a2899c" />
 
 
-
-
+<img height="" width="" src="" />
+<img height="" width="" src="" />
+<img height="" width="" src="" />
+<img height="" width="" src="" />
+<img height="" width="" src="" />
 
 
 
